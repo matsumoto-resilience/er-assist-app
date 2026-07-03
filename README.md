@@ -32,13 +32,16 @@ ANTHROPIC_API_KEY=sk-ant-api03-...
 
 # LLM_PROVIDER=gemini のとき必要
 GEMINI_API_KEY=...
+
+# アプリ全体を保護する共通パスワード(Basic認証)。未設定だと誰でもアクセスできてしまう。
+APP_ACCESS_PASSWORD=十分に長いランダム文字列
 ```
 
 ```bash
 npm run dev
 ```
 
-[http://localhost:3000](http://localhost:3000) を開いて動作確認できます。
+[http://localhost:3000](http://localhost:3000) を開き、`APP_ACCESS_PASSWORD`で設定したパスワードを入力してください(ユーザー名は任意の文字列でよい)。
 
 ### プロバイダーの違い
 
@@ -74,7 +77,29 @@ lib/
     retrieve.ts                    # キーワードマッチによる簡易RAG
 data/
   audit-log.jsonl                # 実行時に生成される監査ログ(gitignore対象)
+proxy.ts                        # アプリ全体のBasic認証(Next.js Proxy)
 ```
+
+## セキュリティ対策
+
+複数人での共有・将来のデプロイを見据え、以下の対策を実装しています。
+
+| 対策 | 内容 | 実装箇所 |
+| --- | --- | --- |
+| アクセス制限 | 共通パスワードによるBasic認証。全ページ・全APIが対象 | `proxy.ts` |
+| レート制限 | IPごとに1分間あたり10リクエストまで(APIコスト濫用・DoS対策) | `lib/rate-limit.ts` |
+| 入力検証 | 主訴・フリーテキストの文字数上限、バイタルサインの数値範囲チェック | `lib/validate.ts` |
+| リクエストサイズ制限 | 20KBを超えるリクエストボディを拒否 | `app/api/generate/route.ts` |
+| セキュリティヘッダー | CSP・X-Frame-Options・Permissions-Policy等(本番時はより厳格) | `next.config.ts` |
+| プロンプトインジェクション対策 | ユーザー入力を`<patient_data>`タグで明示的に区切り、指示ではなく臨床データとして扱うようシステムプロンプトで指示 | `lib/prompt.ts` |
+| 秘密情報の管理 | APIキー・監査ログはサーバー側のみで扱い、`.gitignore`でリポジトリから除外 | `.gitignore` |
+
+### 既知の制約・今後の課題
+
+- **パスワードは共通の1つ**であり、利用者ごとの個別アカウント・権限管理はない。人数が増える場合は個別認証(NextAuth等)への移行を推奨。
+- **レート制限はプロセス内メモリ実装**のため、Vercel等の複数インスタンスにスケールする環境では機能しない。本番運用時はUpstash Redis等の共有ストアに置き換えること。
+- **監査ログはローカルファイル**(`data/audit-log.jsonl`)。患者由来の情報を含むため、実運用時はアクセス制御されたデータベース・暗号化ストレージへの移行が必須。
+- Basic認証はパスワードを毎リクエスト送信するため、**本番環境では必ずHTTPSを使用**すること(HTTP環境での運用は認証情報の盗聴リスクがある)。
 
 ## 今後の拡張候補
 

@@ -7,12 +7,40 @@ import {
   getActiveProviderId,
   getGenerateFn,
 } from "@/lib/providers";
+import { checkRateLimit, getClientKey } from "@/lib/rate-limit";
+import { validatePatientInput } from "@/lib/validate";
 import type { PatientInput } from "@/lib/types";
+
+const MAX_BODY_BYTES = 20_000; // フォーム入力を大きく超える異常なペイロードを弾く
 
 export async function POST(req: NextRequest) {
   const startedAt = Date.now();
-  let input: PatientInput;
 
+  // レート制限(APIコスト濫用・DoS対策)
+  const clientKey = getClientKey(req.headers);
+  const rateLimitResult = checkRateLimit(clientKey);
+  if (!rateLimitResult.allowed) {
+    return NextResponse.json(
+      { error: "リクエストが多すぎます。しばらく待ってから再試行してください。" },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": String(rateLimitResult.retryAfterSeconds ?? 60),
+        },
+      }
+    );
+  }
+
+  // リクエストサイズ上限チェック
+  const contentLength = Number(req.headers.get("content-length") ?? "0");
+  if (contentLength > MAX_BODY_BYTES) {
+    return NextResponse.json(
+      { error: "リクエストのサイズが大きすぎます。" },
+      { status: 413 }
+    );
+  }
+
+  let input: PatientInput;
   try {
     input = await req.json();
   } catch {
@@ -22,11 +50,9 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  if (!input.chiefComplaint || input.chiefComplaint.trim() === "") {
-    return NextResponse.json(
-      { error: "主訴を入力してください。" },
-      { status: 400 }
-    );
+  const validationError = validatePatientInput(input);
+  if (validationError) {
+    return NextResponse.json({ error: validationError }, { status: 400 });
   }
 
   const kbEntries = retrieveRelevantEntries(
