@@ -42,8 +42,18 @@ export default function PatientForm({ onSubmit, loading }: Props) {
     onSubmit(input);
   }
 
+  function handleFormKeyDown(e: React.KeyboardEvent<HTMLFormElement>) {
+    const target = e.target as HTMLElement;
+    // 一行入力欄でのEnter(IME変換確定・次項目への移動を含む)は、
+    // ブラウザ標準のフォーム自動送信を引き起こすため、
+    // ボタンクリックによる明示的な送信のみを許可する。
+    if (e.key === "Enter" && target.tagName !== "TEXTAREA" && target.tagName !== "BUTTON") {
+      e.preventDefault();
+    }
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} onKeyDown={handleFormKeyDown} className="space-y-5">
       <div>
         <label className="block text-sm font-medium text-gray-700">
           主訴 <span className="text-red-600">*</span>
