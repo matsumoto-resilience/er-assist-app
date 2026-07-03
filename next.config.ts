@@ -8,7 +8,12 @@ const isProd = process.env.NODE_ENV === "production";
 const contentSecurityPolicy = isProd
   ? [
       "default-src 'self'",
-      "script-src 'self'",
+      // Next.jsはハイドレーション用データをインラインscriptで埋め込むため、
+      // nonceを使わない静的CSP構成ではscript-srcにも'unsafe-inline'が必要
+      // (公式ドキュメント node_modules/next/dist/docs/01-app/02-guides/content-security-policy.md の
+      // "Without Nonces" 参照)。これが無いとハイドレーションが全て失敗し、
+      // フォームがJSで一切反応しなくなる。
+      "script-src 'self' 'unsafe-inline'",
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data:",
       "font-src 'self'",
