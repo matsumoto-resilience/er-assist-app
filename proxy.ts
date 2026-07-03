@@ -1,27 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyPassword } from "@/lib/password-hash";
+import { constantTimeStringEqual, verifyPassword } from "@/lib/password-hash";
 
-// アプリ全体を共通パスワードで保護するBasic認証。
+// アプリ全体を共通ユーザー名・パスワードで保護するBasic認証。
 // パスワードはPBKDF2ハッシュ(APP_ACCESS_PASSWORD_HASH)として保存し、平文は保持しない。
 // npm run hash-password -- "パスワード" でハッシュを生成できる。
-// APP_ACCESS_PASSWORD_HASH が未設定の場合は認証をスキップする(ローカル初期開発向け)。
+// APP_ACCESS_USERNAME / APP_ACCESS_PASSWORD_HASH が未設定の場合は認証をスキップする(ローカル初期開発向け)。
 // 本番/共有環境にデプロイする前には必ず環境変数を設定すること。
 const REALM = 'Basic realm="ER Assist", charset="UTF-8"';
 
 export async function proxy(request: NextRequest): Promise<NextResponse> {
+  const expectedUsername = process.env.APP_ACCESS_USERNAME;
   const passwordHash = process.env.APP_ACCESS_PASSWORD_HASH;
 
-  if (!passwordHash) {
+  if (!expectedUsername || !passwordHash) {
     return NextResponse.next();
   }
 
   const authHeader = request.headers.get("authorization");
 
   if (authHeader) {
-    const suppliedPassword = parseBasicAuthPassword(authHeader);
+    const credentials = parseBasicAuthCredentials(authHeader);
     if (
-      suppliedPassword !== null &&
-      (await verifyPassword(suppliedPassword, passwordHash))
+      credentials !== null &&
+      constantTimeStringEqual(credentials.username, expectedUsername) &&
+      (await verifyPassword(credentials.password, passwordHash))
     ) {
       return NextResponse.next();
     }
@@ -33,13 +35,18 @@ export async function proxy(request: NextRequest): Promise<NextResponse> {
   });
 }
 
-function parseBasicAuthPassword(authHeader: string): string | null {
+function parseBasicAuthCredentials(
+  authHeader: string
+): { username: string; password: string } | null {
   if (!authHeader.startsWith("Basic ")) return null;
   try {
     const decoded = atob(authHeader.slice("Basic ".length));
     const separatorIndex = decoded.indexOf(":");
     if (separatorIndex < 0) return null;
-    return decoded.slice(separatorIndex + 1);
+    return {
+      username: decoded.slice(0, separatorIndex),
+      password: decoded.slice(separatorIndex + 1),
+    };
   } catch {
     return null;
   }

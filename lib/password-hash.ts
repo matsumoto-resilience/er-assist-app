@@ -72,6 +72,11 @@ export async function hashPassword(password: string): Promise<string> {
   ].join(".");
 }
 
+export function constantTimeStringEqual(a: string, b: string): boolean {
+  const encoder = new TextEncoder();
+  return constantTimeEqual(encoder.encode(a), encoder.encode(b));
+}
+
 export async function verifyPassword(
   password: string,
   stored: string

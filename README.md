@@ -33,15 +33,17 @@ ANTHROPIC_API_KEY=sk-ant-api03-...
 # LLM_PROVIDER=gemini のとき必要
 GEMINI_API_KEY=...
 
-# アプリ全体を保護する共通パスワード(Basic認証)。未設定だと誰でもアクセスできてしまう。
-APP_ACCESS_PASSWORD=十分に長いランダム文字列
+# アプリ全体を保護する共通ユーザー名・パスワード(Basic認証)。未設定だと誰でもアクセスできてしまう。
+# パスワードは平文ではなくPBKDF2ハッシュを設定する(生成方法: npm run hash-password -- "パスワード")。
+APP_ACCESS_USERNAME=ユーザー名
+APP_ACCESS_PASSWORD_HASH=pbkdf2.210000....
 ```
 
 ```bash
 npm run dev
 ```
 
-[http://localhost:3000](http://localhost:3000) を開き、`APP_ACCESS_PASSWORD`で設定したパスワードを入力してください(ユーザー名は任意の文字列でよい)。
+[http://localhost:3000](http://localhost:3000) を開き、`APP_ACCESS_USERNAME`と`APP_ACCESS_PASSWORD_HASH`で設定したユーザー名・パスワードを入力してください。
 
 ### プロバイダーの違い
 

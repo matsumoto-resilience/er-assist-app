@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { PatientInput } from "@/lib/types";
 
 interface Props {
@@ -18,6 +18,8 @@ const emptyInput: PatientInput = {
 
 export default function PatientForm({ onSubmit, loading }: Props) {
   const [input, setInput] = useState<PatientInput>(emptyInput);
+  const [chiefComplaintError, setChiefComplaintError] = useState(false);
+  const chiefComplaintRef = useRef<HTMLInputElement>(null);
 
   function updateVital(key: keyof PatientInput["vitals"], value: string) {
     setInput((prev) => ({
@@ -31,7 +33,12 @@ export default function PatientForm({ onSubmit, loading }: Props) {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!input.chiefComplaint.trim()) return;
+    if (!input.chiefComplaint.trim()) {
+      setChiefComplaintError(true);
+      chiefComplaintRef.current?.focus();
+      return;
+    }
+    setChiefComplaintError(false);
     onSubmit(input);
   }
 
@@ -42,15 +49,26 @@ export default function PatientForm({ onSubmit, loading }: Props) {
           主訴 <span className="text-red-600">*</span>
         </label>
         <input
+          ref={chiefComplaintRef}
           type="text"
-          required
           value={input.chiefComplaint}
-          onChange={(e) =>
-            setInput((prev) => ({ ...prev, chiefComplaint: e.target.value }))
-          }
+          onChange={(e) => {
+            setInput((prev) => ({ ...prev, chiefComplaint: e.target.value }));
+            if (chiefComplaintError && e.target.value.trim()) {
+              setChiefComplaintError(false);
+            }
+          }}
           placeholder="例: 胸痛"
-          className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          aria-invalid={chiefComplaintError}
+          className={`mt-1 w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-1 ${
+            chiefComplaintError
+              ? "border-red-400 focus:border-red-500 focus:ring-red-500"
+              : "border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+          }`}
         />
+        {chiefComplaintError && (
+          <p className="mt-1 text-xs text-red-600">主訴を入力してください。</p>
+        )}
       </div>
 
       <div className="grid grid-cols-2 gap-4">
@@ -130,7 +148,7 @@ export default function PatientForm({ onSubmit, loading }: Props) {
 
       <button
         type="submit"
-        disabled={loading || !input.chiefComplaint.trim()}
+        disabled={loading}
         className="w-full rounded-md bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
       >
         {loading ? "生成中..." : "診療方針を生成する"}
