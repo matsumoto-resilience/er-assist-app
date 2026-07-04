@@ -5,6 +5,14 @@ import PatientForm from "@/components/PatientForm";
 import ResultPanel from "@/components/ResultPanel";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
 import RoleGate from "@/components/RoleGate";
+import HistoryPanel from "@/components/HistoryPanel";
+import {
+  addCaseHistoryEntry,
+  clearCaseHistory,
+  loadCaseHistory,
+  removeCaseHistoryEntry,
+  type CaseHistoryEntry,
+} from "@/lib/case-history";
 import type {
   AssistOutput,
   KnowledgeBaseEntry,
@@ -22,10 +30,13 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [role, setRole] = useState<UserRole | null | undefined>(undefined);
+  const [history, setHistory] = useState<CaseHistoryEntry[]>([]);
+  const [showHistory, setShowHistory] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem(ROLE_STORAGE_KEY);
     setRole(saved === "student" || saved === "doctor" ? saved : null);
+    setHistory(loadCaseHistory());
   }, []);
 
   function selectRole(next: UserRole) {
@@ -59,11 +70,28 @@ export default function Home() {
       setOutput(data.output);
       setKnowledgeBase(data.knowledgeBase ?? []);
       setAuditId(data.auditId ?? null);
+      setHistory(
+        addCaseHistoryEntry({
+          input: inputWithRole,
+          output: data.output,
+          knowledgeBase: data.knowledgeBase ?? [],
+          auditId: data.auditId ?? null,
+        })
+      );
     } catch {
       setError("通信エラーが発生しました。ネットワーク接続を確認してください。");
     } finally {
       setLoading(false);
     }
+  }
+
+  function viewHistoryEntry(entry: CaseHistoryEntry) {
+    setError(null);
+    setLastInput(entry.input);
+    setOutput(entry.output);
+    setKnowledgeBase(entry.knowledgeBase);
+    setAuditId(entry.auditId);
+    setShowHistory(false);
   }
 
   if (role === undefined) {
@@ -96,8 +124,24 @@ export default function Home() {
           >
             切り替える
           </button>
+          <button
+            type="button"
+            onClick={() => setShowHistory((prev) => !prev)}
+            className="mt-1 block underline hover:text-gray-700"
+          >
+            履歴を{showHistory ? "隠す" : "見る"}({history.length})
+          </button>
         </div>
       </header>
+
+      {showHistory && (
+        <HistoryPanel
+          entries={history}
+          onSelect={viewHistoryEntry}
+          onRemove={(id) => setHistory(removeCaseHistoryEntry(id))}
+          onClear={() => setHistory(clearCaseHistory())}
+        />
+      )}
 
       <div className="mb-6">
         <DisclaimerBanner />
