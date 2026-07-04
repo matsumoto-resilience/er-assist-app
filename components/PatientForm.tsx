@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DialPicker from "@/components/DialPicker";
 import type { PatientInput } from "@/lib/types";
 
@@ -9,19 +9,52 @@ interface Props {
   loading: boolean;
 }
 
+const DRAFT_STORAGE_KEY = "erAssistDraftInput";
+
+// バイタル未変更時の初期値(正常値)。入力の手間を減らすため、異常値のみ変更してもらう想定。
+const NORMAL_VITALS: PatientInput["vitals"] = {
+  systolicBP: 120,
+  diastolicBP: 80,
+  heartRate: 75,
+  respiratoryRate: 16,
+  spo2: 98,
+  bodyTemp: 36.5,
+  gcs: 15,
+};
+
 const emptyInput: PatientInput = {
   chiefComplaint: "",
   freeText: "",
   focusQuestion: "",
   age: undefined,
   sex: "unknown",
-  vitals: {},
+  vitals: { ...NORMAL_VITALS },
 };
 
+function loadInitialInput(): PatientInput {
+  if (typeof window === "undefined") return emptyInput;
+  try {
+    const raw = localStorage.getItem(DRAFT_STORAGE_KEY);
+    if (!raw) return emptyInput;
+    const parsed = JSON.parse(raw);
+    return {
+      ...emptyInput,
+      ...parsed,
+      vitals: { ...NORMAL_VITALS, ...parsed.vitals },
+    };
+  } catch {
+    return emptyInput;
+  }
+}
+
 export default function PatientForm({ onSubmit, loading }: Props) {
-  const [input, setInput] = useState<PatientInput>(emptyInput);
+  const [input, setInput] = useState<PatientInput>(loadInitialInput);
   const [chiefComplaintError, setChiefComplaintError] = useState(false);
   const chiefComplaintRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(input));
+  }, [input]);
 
   function updateVital(key: keyof PatientInput["vitals"], value: string) {
     setInput((prev) => ({
@@ -156,13 +189,16 @@ export default function PatientForm({ onSubmit, loading }: Props) {
         <legend className="px-1 text-sm font-medium text-gray-700">
           バイタルサイン(任意)
         </legend>
-        <p className="mb-3 text-xs text-gray-500">指でスクロールして値を選択してください。</p>
+        <p className="mb-3 text-xs text-gray-500">
+          指でスクロールして値を選択してください。初期値は正常値です。異常があれば変更してください(「-」で未測定に戻せます)。
+        </p>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
           <DialPicker
             label="収縮期血圧 (mmHg)"
             min={40}
             max={260}
             step={2}
+            defaultValue={input.vitals.systolicBP}
             onChange={(v) => updateVital("systolicBP", v)}
           />
           <DialPicker
@@ -170,6 +206,7 @@ export default function PatientForm({ onSubmit, loading }: Props) {
             min={20}
             max={160}
             step={2}
+            defaultValue={input.vitals.diastolicBP}
             onChange={(v) => updateVital("diastolicBP", v)}
           />
           <DialPicker
@@ -177,6 +214,7 @@ export default function PatientForm({ onSubmit, loading }: Props) {
             min={20}
             max={250}
             step={1}
+            defaultValue={input.vitals.heartRate}
             onChange={(v) => updateVital("heartRate", v)}
           />
           <DialPicker
@@ -184,6 +222,7 @@ export default function PatientForm({ onSubmit, loading }: Props) {
             min={5}
             max={60}
             step={1}
+            defaultValue={input.vitals.respiratoryRate}
             onChange={(v) => updateVital("respiratoryRate", v)}
           />
           <DialPicker
@@ -191,6 +230,7 @@ export default function PatientForm({ onSubmit, loading }: Props) {
             min={50}
             max={100}
             step={1}
+            defaultValue={input.vitals.spo2}
             onChange={(v) => updateVital("spo2", v)}
           />
           <DialPicker
@@ -198,6 +238,7 @@ export default function PatientForm({ onSubmit, loading }: Props) {
             min={30}
             max={42}
             step={0.1}
+            defaultValue={input.vitals.bodyTemp}
             onChange={(v) => updateVital("bodyTemp", v)}
           />
           <DialPicker
@@ -205,6 +246,7 @@ export default function PatientForm({ onSubmit, loading }: Props) {
             min={3}
             max={15}
             step={1}
+            defaultValue={input.vitals.gcs}
             onChange={(v) => updateVital("gcs", v)}
           />
         </div>

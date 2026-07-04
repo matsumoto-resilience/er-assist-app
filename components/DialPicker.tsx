@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 const ROW_HEIGHT = 32; // px, matches Tailwind h-8 / top-8
 
@@ -13,23 +13,45 @@ function buildOptionLabels(min: number, max: number, step: number): string[] {
   );
 }
 
+function indexForValue(
+  value: number | undefined,
+  min: number,
+  step: number,
+  optionsLength: number
+): number {
+  if (value == null) return 0;
+  const idx = 1 + Math.round((value - min) / step);
+  return Math.max(0, Math.min(optionsLength - 1, idx));
+}
+
 export default function DialPicker({
   label,
   min,
   max,
   step,
+  defaultValue,
   onChange,
 }: {
   label: string;
   min: number;
   max: number;
   step: number;
+  defaultValue?: number;
   onChange: (value: string) => void;
 }) {
   const values = ["-", ...buildOptionLabels(min, max, step)];
   const containerRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(() =>
+    indexForValue(defaultValue, min, step, values.length)
+  );
+
+  // 初期表示位置をマウント前(ペイント前)に合わせ、"-"から正常値へ飛ぶ見た目のチラつきを防ぐ
+  useLayoutEffect(() => {
+    const el = containerRef.current;
+    if (el) el.scrollTop = selectedIndex * ROW_HEIGHT;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function commitIndex(index: number) {
     const clamped = Math.max(0, Math.min(values.length - 1, index));
