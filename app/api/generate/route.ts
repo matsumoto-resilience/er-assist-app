@@ -78,7 +78,12 @@ export async function POST(req: NextRequest) {
       latencyMs: Date.now() - startedAt,
     });
 
-    return NextResponse.json({ output, auditId, provider: providerId });
+    return NextResponse.json({
+      output,
+      auditId,
+      provider: providerId,
+      knowledgeBase: kbEntries,
+    });
   } catch (err) {
     if (err instanceof GenerationRefusedError) {
       await appendAuditLog({

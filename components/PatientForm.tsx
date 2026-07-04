@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import DialPicker from "@/components/DialPicker";
 import type { PatientInput } from "@/lib/types";
 
 interface Props {
@@ -155,38 +156,57 @@ export default function PatientForm({ onSubmit, loading }: Props) {
         <legend className="px-1 text-sm font-medium text-gray-700">
           バイタルサイン(任意)
         </legend>
+        <p className="mb-3 text-xs text-gray-500">指でスクロールして値を選択してください。</p>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-          <VitalField
+          <DialPicker
             label="収縮期血圧 (mmHg)"
-            step={5}
+            min={40}
+            max={260}
+            step={2}
             onChange={(v) => updateVital("systolicBP", v)}
           />
-          <VitalField
+          <DialPicker
             label="拡張期血圧 (mmHg)"
-            step={5}
+            min={20}
+            max={160}
+            step={2}
             onChange={(v) => updateVital("diastolicBP", v)}
           />
-          <VitalField
+          <DialPicker
             label="心拍数 (/分)"
-            step={5}
+            min={20}
+            max={250}
+            step={1}
             onChange={(v) => updateVital("heartRate", v)}
           />
-          <VitalField
+          <DialPicker
             label="呼吸数 (/分)"
+            min={5}
+            max={60}
             step={1}
             onChange={(v) => updateVital("respiratoryRate", v)}
           />
-          <VitalField
+          <DialPicker
             label="SpO2 (%)"
+            min={50}
+            max={100}
             step={1}
             onChange={(v) => updateVital("spo2", v)}
           />
-          <VitalField
+          <DialPicker
             label="体温 (℃)"
+            min={30}
+            max={42}
             step={0.1}
             onChange={(v) => updateVital("bodyTemp", v)}
           />
-          <VitalField label="GCS" step={1} onChange={(v) => updateVital("gcs", v)} />
+          <DialPicker
+            label="GCS"
+            min={3}
+            max={15}
+            step={1}
+            onChange={(v) => updateVital("gcs", v)}
+          />
         </div>
       </fieldset>
 
@@ -198,60 +218,5 @@ export default function PatientForm({ onSubmit, loading }: Props) {
         {loading ? "生成中..." : "診療方針を生成する"}
       </button>
     </form>
-  );
-}
-
-function VitalField({
-  label,
-  step,
-  onChange,
-}: {
-  label: string;
-  step: number;
-  onChange: (value: string) => void;
-}) {
-  const [value, setValue] = useState("");
-
-  function commit(next: string) {
-    setValue(next);
-    onChange(next);
-  }
-
-  function adjust(delta: number) {
-    const current = value === "" ? 0 : Number(value);
-    const decimals = String(step).split(".")[1]?.length ?? 0;
-    const next = (current + delta).toFixed(decimals);
-    commit(next);
-  }
-
-  return (
-    <div>
-      <label className="block text-xs font-medium text-gray-600">{label}</label>
-      <div className="mt-1 flex items-stretch overflow-hidden rounded-md border border-gray-300 bg-white focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500">
-        <button
-          type="button"
-          onClick={() => adjust(-step)}
-          aria-label={`${label}を減らす`}
-          className="w-8 shrink-0 text-lg leading-none text-gray-500 hover:bg-gray-100 active:bg-gray-200"
-        >
-          −
-        </button>
-        <input
-          type="number"
-          inputMode="decimal"
-          value={value}
-          onChange={(e) => commit(e.target.value)}
-          className="w-full border-0 bg-transparent px-1 py-1.5 text-center text-sm text-gray-900 focus:outline-none focus:ring-0"
-        />
-        <button
-          type="button"
-          onClick={() => adjust(step)}
-          aria-label={`${label}を増やす`}
-          className="w-8 shrink-0 text-lg leading-none text-gray-500 hover:bg-gray-100 active:bg-gray-200"
-        >
-          +
-        </button>
-      </div>
-    </div>
   );
 }

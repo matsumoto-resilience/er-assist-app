@@ -5,13 +5,20 @@ import PatientForm from "@/components/PatientForm";
 import ResultPanel from "@/components/ResultPanel";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
 import RoleGate from "@/components/RoleGate";
-import type { AssistOutput, PatientInput, UserRole } from "@/lib/types";
+import type {
+  AssistOutput,
+  KnowledgeBaseEntry,
+  PatientInput,
+  UserRole,
+} from "@/lib/types";
 
 const ROLE_STORAGE_KEY = "erAssistUserRole";
 
 export default function Home() {
   const [output, setOutput] = useState<AssistOutput | null>(null);
   const [lastInput, setLastInput] = useState<PatientInput | null>(null);
+  const [knowledgeBase, setKnowledgeBase] = useState<KnowledgeBaseEntry[]>([]);
+  const [auditId, setAuditId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [role, setRole] = useState<UserRole | null | undefined>(undefined);
@@ -30,6 +37,8 @@ export default function Home() {
     setLoading(true);
     setError(null);
     setOutput(null);
+    setKnowledgeBase([]);
+    setAuditId(null);
     const inputWithRole = { ...input, userRole: role ?? undefined };
     setLastInput(inputWithRole);
 
@@ -48,6 +57,8 @@ export default function Home() {
       }
 
       setOutput(data.output);
+      setKnowledgeBase(data.knowledgeBase ?? []);
+      setAuditId(data.auditId ?? null);
     } catch {
       setError("通信エラーが発生しました。ネットワーク接続を確認してください。");
     } finally {
@@ -114,7 +125,12 @@ export default function Home() {
             </div>
           )}
           {output && lastInput && (
-            <ResultPanel output={output} input={lastInput} />
+            <ResultPanel
+              output={output}
+              input={lastInput}
+              knowledgeBase={knowledgeBase}
+              auditId={auditId}
+            />
           )}
         </div>
       </div>
