@@ -1,7 +1,11 @@
 // 患者情報の入力データ
+export type UserRole = "student" | "doctor";
+
 export interface PatientInput {
   chiefComplaint: string; // 主訴
   freeText: string; // フリーテキスト(現病歴・既往歴など)
+  focusQuestion?: string; // 特に確認したいポイント(任意、出力を絞り込むため)
+  userRole?: UserRole; // 利用者区分(学生=教育的な解説を厚めに、医師=簡潔な臨床情報を優先)
   age?: number;
   sex?: "male" | "female" | "unknown";
   vitals: {
@@ -34,6 +38,7 @@ export interface TreatmentPlan {
 
 // AI生成結果全体
 export interface AssistOutput {
+  keyPoints: string[]; // 最も重要な要点(3〜5個、画面上部に強調表示)
   assessmentPlan: string; // 診療方針
   differentialDiagnosis: DifferentialDiagnosis[]; // 鑑別疾患
   treatmentPlan: TreatmentPlan; // 治療方針

@@ -36,7 +36,7 @@ export const generateWithGemini: GenerateFn = async (input, kbEntries) => {
       responseMimeType: "application/json",
       responseJsonSchema: OUTPUT_JSON_SCHEMA,
       maxOutputTokens: 8000,
-      thinkingConfig: { thinkingLevel: ThinkingLevel.HIGH },
+      thinkingConfig: { thinkingLevel: ThinkingLevel.MEDIUM },
     },
   });
 

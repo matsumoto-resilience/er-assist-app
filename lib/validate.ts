@@ -4,6 +4,7 @@ import type { PatientInput } from "./types";
 const LIMITS = {
   chiefComplaint: 200,
   freeText: 4000,
+  focusQuestion: 300,
   age: { min: 0, max: 120 },
   vitals: {
     systolicBP: { min: 0, max: 400 },
@@ -17,6 +18,7 @@ const LIMITS = {
 } as const;
 
 const VALID_SEX_VALUES = new Set(["male", "female", "unknown"]);
+const VALID_USER_ROLES = new Set(["student", "doctor"]);
 
 export function validatePatientInput(input: unknown): string | null {
   if (typeof input !== "object" || input === null) {
@@ -44,6 +46,15 @@ export function validatePatientInput(input: unknown): string | null {
     }
   }
 
+  if (candidate.focusQuestion != null) {
+    if (typeof candidate.focusQuestion !== "string") {
+      return "確認したいポイントの形式が不正です。";
+    }
+    if (candidate.focusQuestion.length > LIMITS.focusQuestion) {
+      return `確認したいポイントは${LIMITS.focusQuestion}文字以内で入力してください。`;
+    }
+  }
+
   if (candidate.age != null) {
     if (
       typeof candidate.age !== "number" ||
@@ -57,6 +68,10 @@ export function validatePatientInput(input: unknown): string | null {
 
   if (candidate.sex != null && !VALID_SEX_VALUES.has(candidate.sex)) {
     return "性別の値が不正です。";
+  }
+
+  if (candidate.userRole != null && !VALID_USER_ROLES.has(candidate.userRole)) {
+    return "利用者区分の値が不正です。";
   }
 
   if (candidate.vitals != null) {

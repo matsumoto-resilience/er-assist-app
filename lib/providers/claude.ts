@@ -10,7 +10,7 @@ export const generateWithClaude: GenerateFn = async (input, kbEntries) => {
     max_tokens: 8000,
     thinking: { type: "adaptive" },
     output_config: {
-      effort: "high",
+      effort: "medium",
       format: buildOutputSchema(),
     },
     system: [
