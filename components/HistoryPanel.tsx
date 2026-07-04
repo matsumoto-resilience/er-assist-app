@@ -11,14 +11,16 @@ function formatTimestamp(iso: string): string {
   });
 }
 
-export default function HistoryPanel({
+export default function HistoryPanel<TInput, TOutput, TKnowledgeBase = unknown>({
   entries,
+  getLabel,
   onSelect,
   onRemove,
   onClear,
 }: {
-  entries: CaseHistoryEntry[];
-  onSelect: (entry: CaseHistoryEntry) => void;
+  entries: CaseHistoryEntry<TInput, TOutput, TKnowledgeBase>[];
+  getLabel: (entry: CaseHistoryEntry<TInput, TOutput, TKnowledgeBase>) => string;
+  onSelect: (entry: CaseHistoryEntry<TInput, TOutput, TKnowledgeBase>) => void;
   onRemove: (id: string) => void;
   onClear: () => void;
 }) {
@@ -60,7 +62,7 @@ export default function HistoryPanel({
                 className="min-w-0 flex-1 text-left"
               >
                 <span className="block truncate text-sm font-medium text-gray-900">
-                  {entry.input.chiefComplaint || "(主訴未入力)"}
+                  {getLabel(entry) || "(情報未入力)"}
                 </span>
                 <span className="block text-xs text-gray-500">
                   {formatTimestamp(entry.timestamp)}

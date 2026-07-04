@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import PatientForm from "@/components/PatientForm";
-import ResultPanel from "@/components/ResultPanel";
+import InpatientForm from "@/components/InpatientForm";
+import InpatientResultPanel from "@/components/InpatientResultPanel";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
 import RoleGate from "@/components/RoleGate";
 import HistoryPanel from "@/components/HistoryPanel";
@@ -13,27 +13,32 @@ import {
   removeCaseHistoryEntry,
   type CaseHistoryEntry,
 } from "@/lib/case-history";
+import { INPATIENT_DEPARTMENT_LABELS } from "@/lib/inpatient/types";
 import type {
-  AssistOutput,
-  KnowledgeBaseEntry,
-  PatientInput,
-  UserRole,
-} from "@/lib/types";
+  InpatientInput,
+  InpatientKnowledgeBaseEntry,
+  InpatientOutput,
+} from "@/lib/inpatient/types";
+import type { UserRole } from "@/lib/types";
 
 const ROLE_STORAGE_KEY = "erAssistUserRole";
-const HISTORY_STORAGE_KEY = "erAssistCaseHistory";
+const HISTORY_STORAGE_KEY = "erAssistInpatientCaseHistory";
 
-type ErHistoryEntry = CaseHistoryEntry<PatientInput, AssistOutput, KnowledgeBaseEntry>;
+type InpatientHistoryEntry = CaseHistoryEntry<
+  InpatientInput,
+  InpatientOutput,
+  InpatientKnowledgeBaseEntry
+>;
 
-export default function Home() {
-  const [output, setOutput] = useState<AssistOutput | null>(null);
-  const [lastInput, setLastInput] = useState<PatientInput | null>(null);
-  const [knowledgeBase, setKnowledgeBase] = useState<KnowledgeBaseEntry[]>([]);
+export default function InpatientPage() {
+  const [output, setOutput] = useState<InpatientOutput | null>(null);
+  const [lastInput, setLastInput] = useState<InpatientInput | null>(null);
+  const [knowledgeBase, setKnowledgeBase] = useState<InpatientKnowledgeBaseEntry[]>([]);
   const [auditId, setAuditId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [role, setRole] = useState<UserRole | null | undefined>(undefined);
-  const [history, setHistory] = useState<ErHistoryEntry[]>([]);
+  const [history, setHistory] = useState<InpatientHistoryEntry[]>([]);
   const [showHistory, setShowHistory] = useState(false);
 
   useEffect(() => {
@@ -47,7 +52,7 @@ export default function Home() {
     setRole(next);
   }
 
-  async function handleSubmit(input: PatientInput) {
+  async function handleSubmit(input: InpatientInput) {
     setLoading(true);
     setError(null);
     setOutput(null);
@@ -57,7 +62,7 @@ export default function Home() {
     setLastInput(inputWithRole);
 
     try {
-      const res = await fetch("/api/generate", {
+      const res = await fetch("/api/inpatient/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(inputWithRole),
@@ -74,7 +79,7 @@ export default function Home() {
       setKnowledgeBase(data.knowledgeBase ?? []);
       setAuditId(data.auditId ?? null);
       setHistory(
-        addCaseHistoryEntry<PatientInput, AssistOutput, KnowledgeBaseEntry>(
+        addCaseHistoryEntry<InpatientInput, InpatientOutput, InpatientKnowledgeBaseEntry>(
           HISTORY_STORAGE_KEY,
           {
             input: inputWithRole,
@@ -91,7 +96,7 @@ export default function Home() {
     }
   }
 
-  function viewHistoryEntry(entry: ErHistoryEntry) {
+  function viewHistoryEntry(entry: InpatientHistoryEntry) {
     setError(null);
     setLastInput(entry.input);
     setOutput(entry.output);
@@ -112,11 +117,9 @@ export default function Home() {
     <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-6 lg:px-8">
       <header className="mb-6 flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">
-            ER Assist — 救急外来 臨床意思決定支援
-          </h1>
+          <h1 className="text-2xl font-bold text-gray-900">入院 臨床意思決定支援</h1>
           <p className="mt-1 text-sm text-gray-600">
-            主訴と患者情報から、診療方針・鑑別疾患・治療方針の参考情報を生成します。
+            入院時診断・経過から、科別の内科的治療方針の参考情報を生成します(循環器内科・呼吸器内科・消化器内科)。
           </p>
         </div>
         <div className="shrink-0 text-right text-xs text-gray-500">
@@ -143,14 +146,17 @@ export default function Home() {
       {showHistory && (
         <HistoryPanel
           entries={history}
-          getLabel={(entry) => entry.input.chiefComplaint}
+          getLabel={(entry) =>
+            `${INPATIENT_DEPARTMENT_LABELS[entry.input.department]} / ${entry.input.admissionDiagnosis}`
+          }
           onSelect={viewHistoryEntry}
           onRemove={(id) =>
             setHistory(
-              removeCaseHistoryEntry<PatientInput, AssistOutput, KnowledgeBaseEntry>(
-                HISTORY_STORAGE_KEY,
-                id
-              )
+              removeCaseHistoryEntry<
+                InpatientInput,
+                InpatientOutput,
+                InpatientKnowledgeBaseEntry
+              >(HISTORY_STORAGE_KEY, id)
             )
           }
           onClear={() => setHistory(clearCaseHistory(HISTORY_STORAGE_KEY))}
@@ -163,7 +169,7 @@ export default function Home() {
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
-          <PatientForm onSubmit={handleSubmit} loading={loading} />
+          <InpatientForm onSubmit={handleSubmit} loading={loading} />
         </div>
 
         <div>
@@ -174,16 +180,16 @@ export default function Home() {
           )}
           {!error && !output && !loading && (
             <div className="flex h-full items-center justify-center rounded-lg border border-dashed border-gray-300 p-8 text-center text-sm text-gray-400">
-              患者情報を入力し「診療方針を生成する」を押してください
+              入院患者情報を入力し「治療方針を生成する」を押してください
             </div>
           )}
           {loading && (
             <div className="flex h-full items-center justify-center rounded-lg border border-dashed border-gray-300 p-8 text-center text-sm text-gray-500">
-              AIが診療方針・鑑別疾患・治療方針を検討しています...
+              AIが現状評価・治療方針を検討しています...
             </div>
           )}
           {output && lastInput && (
-            <ResultPanel
+            <InpatientResultPanel
               output={output}
               input={lastInput}
               knowledgeBase={knowledgeBase}

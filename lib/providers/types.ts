@@ -1,5 +1,3 @@
-import type { AssistOutput, KnowledgeBaseEntry, PatientInput } from "../types";
-
 export class GenerationRefusedError extends Error {
   constructor(message = "AIが安全性の観点から生成を見送りました。") {
     super(message);
@@ -7,12 +5,15 @@ export class GenerationRefusedError extends Error {
   }
 }
 
+export interface GenerateParams {
+  systemPrompt: string;
+  outputSchema: Record<string, unknown>;
+  userMessage: string;
+}
+
 export interface GenerateResult {
-  output: AssistOutput;
+  output: unknown;
   modelId: string;
 }
 
-export type GenerateFn = (
-  input: PatientInput,
-  kbEntries: KnowledgeBaseEntry[]
-) => Promise<GenerateResult>;
+export type GenerateFn = (params: GenerateParams) => Promise<GenerateResult>;

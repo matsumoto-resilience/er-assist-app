@@ -6,19 +6,41 @@ const LIMITS = {
   freeText: 4000,
   focusQuestion: 300,
   age: { min: 0, max: 120 },
-  vitals: {
-    systolicBP: { min: 0, max: 400 },
-    diastolicBP: { min: 0, max: 300 },
-    heartRate: { min: 0, max: 400 },
-    respiratoryRate: { min: 0, max: 200 },
-    spo2: { min: 0, max: 100 },
-    bodyTemp: { min: 20, max: 45 },
-    gcs: { min: 3, max: 15 },
-  },
 } as const;
 
-const VALID_SEX_VALUES = new Set(["male", "female", "unknown"]);
-const VALID_USER_ROLES = new Set(["student", "doctor"]);
+// ER・外来・入院で共通のバイタルサイン値域(入院向けvalidateでも再利用する)
+export const VITALS_LIMITS = {
+  systolicBP: { min: 0, max: 400 },
+  diastolicBP: { min: 0, max: 300 },
+  heartRate: { min: 0, max: 400 },
+  respiratoryRate: { min: 0, max: 200 },
+  spo2: { min: 0, max: 100 },
+  bodyTemp: { min: 20, max: 45 },
+  gcs: { min: 3, max: 15 },
+} as const;
+
+export function validateVitals(vitals: unknown): string | null {
+  if (vitals == null) return null;
+  if (typeof vitals !== "object") {
+    return "バイタルサインの形式が不正です。";
+  }
+  for (const [key, range] of Object.entries(VITALS_LIMITS)) {
+    const value = (vitals as Record<string, unknown>)[key];
+    if (value == null) continue;
+    if (
+      typeof value !== "number" ||
+      !Number.isFinite(value) ||
+      value < range.min ||
+      value > range.max
+    ) {
+      return `バイタルサイン(${key})の値が不正です。`;
+    }
+  }
+  return null;
+}
+
+export const VALID_SEX_VALUES = new Set(["male", "female", "unknown"]);
+export const VALID_USER_ROLES = new Set(["student", "doctor"]);
 
 export function validatePatientInput(input: unknown): string | null {
   if (typeof input !== "object" || input === null) {
@@ -74,23 +96,8 @@ export function validatePatientInput(input: unknown): string | null {
     return "利用者区分の値が不正です。";
   }
 
-  if (candidate.vitals != null) {
-    if (typeof candidate.vitals !== "object") {
-      return "バイタルサインの形式が不正です。";
-    }
-    for (const [key, range] of Object.entries(LIMITS.vitals)) {
-      const value = (candidate.vitals as Record<string, unknown>)[key];
-      if (value == null) continue;
-      if (
-        typeof value !== "number" ||
-        !Number.isFinite(value) ||
-        value < range.min ||
-        value > range.max
-      ) {
-        return `バイタルサイン(${key})の値が不正です。`;
-      }
-    }
-  }
+  const vitalsError = validateVitals(candidate.vitals);
+  if (vitalsError) return vitalsError;
 
   return null;
 }

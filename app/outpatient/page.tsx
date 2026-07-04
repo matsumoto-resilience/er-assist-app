@@ -21,11 +21,11 @@ import type {
 } from "@/lib/types";
 
 const ROLE_STORAGE_KEY = "erAssistUserRole";
-const HISTORY_STORAGE_KEY = "erAssistCaseHistory";
+const HISTORY_STORAGE_KEY = "erAssistOutpatientCaseHistory";
 
-type ErHistoryEntry = CaseHistoryEntry<PatientInput, AssistOutput, KnowledgeBaseEntry>;
+type OutpatientHistoryEntry = CaseHistoryEntry<PatientInput, AssistOutput, KnowledgeBaseEntry>;
 
-export default function Home() {
+export default function OutpatientPage() {
   const [output, setOutput] = useState<AssistOutput | null>(null);
   const [lastInput, setLastInput] = useState<PatientInput | null>(null);
   const [knowledgeBase, setKnowledgeBase] = useState<KnowledgeBaseEntry[]>([]);
@@ -33,7 +33,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [role, setRole] = useState<UserRole | null | undefined>(undefined);
-  const [history, setHistory] = useState<ErHistoryEntry[]>([]);
+  const [history, setHistory] = useState<OutpatientHistoryEntry[]>([]);
   const [showHistory, setShowHistory] = useState(false);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export default function Home() {
     setLastInput(inputWithRole);
 
     try {
-      const res = await fetch("/api/generate", {
+      const res = await fetch("/api/outpatient/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(inputWithRole),
@@ -91,7 +91,7 @@ export default function Home() {
     }
   }
 
-  function viewHistoryEntry(entry: ErHistoryEntry) {
+  function viewHistoryEntry(entry: OutpatientHistoryEntry) {
     setError(null);
     setLastInput(entry.input);
     setOutput(entry.output);
@@ -112,11 +112,9 @@ export default function Home() {
     <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-6 lg:px-8">
       <header className="mb-6 flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">
-            ER Assist — 救急外来 臨床意思決定支援
-          </h1>
+          <h1 className="text-2xl font-bold text-gray-900">外来 臨床意思決定支援</h1>
           <p className="mt-1 text-sm text-gray-600">
-            主訴と患者情報から、診療方針・鑑別疾患・治療方針の参考情報を生成します。
+            主訴と患者情報から、一般外来向けの診療方針・鑑別疾患・治療方針の参考情報を生成します。
           </p>
         </div>
         <div className="shrink-0 text-right text-xs text-gray-500">

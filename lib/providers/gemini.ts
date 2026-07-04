@@ -1,5 +1,4 @@
 import { GoogleGenAI, ThinkingLevel } from "@google/genai";
-import { OUTPUT_JSON_SCHEMA, buildUserMessage, SYSTEM_PROMPT } from "../prompt";
 import { GenerationRefusedError, type GenerateFn } from "./types";
 
 // 2026-07時点でのGemini 3.1 pro preview モデル。
@@ -25,16 +24,20 @@ const REFUSAL_FINISH_REASONS = new Set([
   "RECITATION",
 ]);
 
-export const generateWithGemini: GenerateFn = async (input, kbEntries) => {
+export const generateWithGemini: GenerateFn = async ({
+  systemPrompt,
+  outputSchema,
+  userMessage,
+}) => {
   const ai = getGeminiClient();
 
   const response = await ai.models.generateContent({
     model: GEMINI_MODEL_ID,
-    contents: buildUserMessage(input, kbEntries),
+    contents: userMessage,
     config: {
-      systemInstruction: SYSTEM_PROMPT,
+      systemInstruction: systemPrompt,
       responseMimeType: "application/json",
-      responseJsonSchema: OUTPUT_JSON_SCHEMA,
+      responseJsonSchema: outputSchema,
       maxOutputTokens: 8000,
       thinkingConfig: { thinkingLevel: ThinkingLevel.MEDIUM },
     },

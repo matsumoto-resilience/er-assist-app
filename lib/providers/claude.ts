@@ -1,8 +1,11 @@
 import { CLAUDE_MODEL_ID, getAnthropicClient } from "../anthropic";
-import { buildOutputSchema, buildUserMessage, SYSTEM_PROMPT } from "../prompt";
 import { GenerationRefusedError, type GenerateFn } from "./types";
 
-export const generateWithClaude: GenerateFn = async (input, kbEntries) => {
+export const generateWithClaude: GenerateFn = async ({
+  systemPrompt,
+  outputSchema,
+  userMessage,
+}) => {
   const client = getAnthropicClient();
 
   const response = await client.messages.create({
@@ -11,19 +14,19 @@ export const generateWithClaude: GenerateFn = async (input, kbEntries) => {
     thinking: { type: "adaptive" },
     output_config: {
       effort: "medium",
-      format: buildOutputSchema(),
+      format: { type: "json_schema", schema: outputSchema },
     },
     system: [
       {
         type: "text",
-        text: SYSTEM_PROMPT,
+        text: systemPrompt,
         cache_control: { type: "ephemeral" },
       },
     ],
     messages: [
       {
         role: "user",
-        content: buildUserMessage(input, kbEntries),
+        content: userMessage,
       },
     ],
   });
