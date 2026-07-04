@@ -50,11 +50,19 @@ function loadInitialInput(): PatientInput {
 export default function PatientForm({ onSubmit, loading }: Props) {
   const [input, setInput] = useState<PatientInput>(loadInitialInput);
   const [chiefComplaintError, setChiefComplaintError] = useState(false);
+  const [resetCount, setResetCount] = useState(0);
   const chiefComplaintRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(input));
   }, [input]);
+
+  function handleReset() {
+    if (!confirm("入力内容をリセットしますか?")) return;
+    setInput({ ...emptyInput, vitals: { ...NORMAL_VITALS } });
+    setChiefComplaintError(false);
+    setResetCount((n) => n + 1); // バイタルのダイヤル表示を正常値に戻すため再マウントさせる
+  }
 
   function updateVital(key: keyof PatientInput["vitals"], value: string) {
     setInput((prev) => ({
@@ -194,6 +202,7 @@ export default function PatientForm({ onSubmit, loading }: Props) {
         </p>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
           <DialPicker
+            key={`systolicBP-${resetCount}`}
             label="収縮期血圧 (mmHg)"
             min={40}
             max={260}
@@ -202,6 +211,7 @@ export default function PatientForm({ onSubmit, loading }: Props) {
             onChange={(v) => updateVital("systolicBP", v)}
           />
           <DialPicker
+            key={`diastolicBP-${resetCount}`}
             label="拡張期血圧 (mmHg)"
             min={20}
             max={160}
@@ -210,6 +220,7 @@ export default function PatientForm({ onSubmit, loading }: Props) {
             onChange={(v) => updateVital("diastolicBP", v)}
           />
           <DialPicker
+            key={`heartRate-${resetCount}`}
             label="心拍数 (/分)"
             min={20}
             max={250}
@@ -218,6 +229,7 @@ export default function PatientForm({ onSubmit, loading }: Props) {
             onChange={(v) => updateVital("heartRate", v)}
           />
           <DialPicker
+            key={`respiratoryRate-${resetCount}`}
             label="呼吸数 (/分)"
             min={5}
             max={60}
@@ -226,6 +238,7 @@ export default function PatientForm({ onSubmit, loading }: Props) {
             onChange={(v) => updateVital("respiratoryRate", v)}
           />
           <DialPicker
+            key={`spo2-${resetCount}`}
             label="SpO2 (%)"
             min={50}
             max={100}
@@ -234,6 +247,7 @@ export default function PatientForm({ onSubmit, loading }: Props) {
             onChange={(v) => updateVital("spo2", v)}
           />
           <DialPicker
+            key={`bodyTemp-${resetCount}`}
             label="体温 (℃)"
             min={30}
             max={42}
@@ -242,6 +256,7 @@ export default function PatientForm({ onSubmit, loading }: Props) {
             onChange={(v) => updateVital("bodyTemp", v)}
           />
           <DialPicker
+            key={`gcs-${resetCount}`}
             label="GCS"
             min={3}
             max={15}
@@ -252,13 +267,23 @@ export default function PatientForm({ onSubmit, loading }: Props) {
         </div>
       </fieldset>
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full rounded-md bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
-      >
-        {loading ? "生成中..." : "診療方針を生成する"}
-      </button>
+      <div className="flex gap-2">
+        <button
+          type="submit"
+          disabled={loading}
+          className="flex-1 rounded-md bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+        >
+          {loading ? "生成中..." : "診療方針を生成する"}
+        </button>
+        <button
+          type="button"
+          onClick={handleReset}
+          disabled={loading}
+          className="shrink-0 rounded-md border border-gray-300 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:text-gray-300"
+        >
+          リセット
+        </button>
+      </div>
     </form>
   );
 }
