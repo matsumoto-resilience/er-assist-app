@@ -199,8 +199,8 @@ ${kbSection}
 ${
     input.userRole === "student"
       ? "利用者は学生(教育目的での利用)です。各鑑別疾患の根拠(rationale)には、なぜその疾患を考えるのかという臨床推論の考え方を教育的に補足してください。"
-      : input.userRole === "doctor"
-        ? "利用者は医師(実臨床の参考としての利用)です。教育的な解説は最小限にし、要点(keyActions/keyWorkup)と治療方針を簡潔かつ実践的にまとめてください。"
+      : input.userRole === "doctor" || input.userRole === "comedical"
+        ? "利用者は医療者(実臨床の参考としての利用)です。教育的な解説は最小限にし、要点(keyActions/keyWorkup)と治療方針を簡潔かつ実践的にまとめてください。"
         : "利用者区分は未指定です。標準的な詳細さで回答してください。"
   }
 

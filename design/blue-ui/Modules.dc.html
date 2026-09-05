@@ -1,0 +1,281 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+  <style>
+    *{box-sizing:border-box;}
+    body{margin:0;background:#0a5eb0;color:#fff;
+      font-family:'Geist',system-ui,-apple-system,'Hiragino Sans','Hiragino Kaku Gothic ProN',Meiryo,sans-serif;
+      -webkit-font-smoothing:antialiased;}
+    a{color:#fff;text-underline-offset:2px;}
+    .wrap{min-height:844px;padding-bottom:26px;}
+    .bar{position:sticky;top:0;z-index:6;display:flex;align-items:center;justify-content:space-between;
+      padding:12px 16px 10px;background:#0a5eb0;border-bottom:1px solid rgba(255,255,255,0.14);}
+    .mark{display:flex;align-items:baseline;gap:7px;}
+    .mark b{font-weight:700;font-size:19px;letter-spacing:0.03em;}
+    .mark i{font-style:normal;font-weight:600;font-size:9.5px;letter-spacing:0.22em;color:rgba(255,255,255,0.68);}
+    .avatar{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.16);
+      border:1px solid rgba(255,255,255,0.42);}
+    .tabs{display:flex;gap:6px;padding:10px 12px 12px;background:#0a5eb0;overflow-x:auto;
+      position:sticky;top:47px;z-index:5;}
+    .tab{flex:0 0 auto;padding:7px 15px;border-radius:999px;font-size:13px;font-weight:600;
+      color:rgba(255,255,255,0.72);background:transparent;border:1px solid transparent;
+      cursor:pointer;white-space:nowrap;}
+    .tab[data-active="true"]{background:#fff;color:#0a5eb0;}
+    .page{padding:12px 16px 0;}
+    h1.title{margin:6px 0 4px;font-size:20px;font-weight:700;line-height:1.34;}
+    p.sub{margin:0 0 13px;font-size:12.5px;line-height:1.62;color:rgba(255,255,255,0.82);}
+    .searchrow{display:flex;gap:8px;margin-bottom:10px;}
+    .inp{flex:1;width:100%;border:1px solid rgba(255,255,255,0.45);border-radius:9px;
+      background:rgba(255,255,255,0.92);padding:9px 11px;font:inherit;font-size:13px;color:#0f172a;}
+    .inp::placeholder{color:#64748b;}
+    .inp:focus{outline:none;border-color:#fff;background:#fff;}
+    .btn-search{flex:0 0 auto;border:0;border-radius:9px;background:#fff;color:#0a5eb0;
+      font-weight:700;font-size:13px;padding:9px 16px;cursor:pointer;}
+    .recent{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-bottom:14px;font-size:11px;
+      color:rgba(255,255,255,0.75);}
+    .recent button{border:1px solid rgba(255,255,255,0.4);background:rgba(255,255,255,0.1);
+      color:#fff;border-radius:999px;padding:3px 10px;font:inherit;font-size:11px;cursor:pointer;}
+    .grouplabel{margin:0 0 7px;font-size:11px;font-weight:700;letter-spacing:0.02em;
+      color:rgba(255,255,255,0.7);}
+    .list{background:#fff;border-radius:13px;overflow:hidden;box-shadow:0 12px 28px rgba(3,34,68,0.28);
+      margin-bottom:16px;}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:10px;
+      padding:12px 14px;border-bottom:1px solid #eef2f7;cursor:pointer;background:#fff;}
+    .row:last-child{border-bottom:0;}
+    .row:hover{background:#f5f8fc;}
+    .row .rl{font-weight:600;font-size:13px;color:#0f172a;}
+    .row .rr{flex:0 0 auto;font-size:10.5px;color:#94a3b8;}
+    .sho{display:inline-flex;align-items:center;gap:4px;margin-left:7px;font-size:9.5px;
+      font-weight:700;border-radius:999px;padding:1px 7px;}
+    .aiprompt{border:1.5px dashed rgba(233,213,255,0.9);background:rgba(250,245,255,0.16);
+      border-radius:13px;padding:16px;text-align:center;margin-bottom:16px;}
+    .aiprompt p{margin:0 0 11px;font-size:12.5px;color:#f5ecff;}
+    .btn-ai{border:0;border-radius:9px;background:#a855f7;color:#fff;font-weight:700;
+      font-size:12.5px;padding:9px 16px;cursor:pointer;}
+    .aicard{background:rgba(250,245,255,0.14);border:1.5px dashed rgba(216,180,254,0.85);
+      border-radius:13px;padding:14px;margin-bottom:16px;}
+    .aitag{display:inline-block;background:#9333ea;color:#fff;font-weight:700;font-size:10px;
+      border-radius:999px;padding:2px 9px;margin-right:7px;}
+    .aisub{background:#fff;color:#0f172a;border-radius:10px;padding:11px 12px;margin-top:10px;}
+    .aisub h4{margin:0 0 4px;font-size:11.5px;font-weight:700;}
+    .aisub p{margin:0;font-size:11.5px;line-height:1.6;color:#334155;}
+    .ercard{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.5);
+      border-radius:13px;padding:16px;}
+    .btn-primary{border:0;border-radius:9px;background:#fff;color:#0a5eb0;font-weight:700;
+      font-size:13px;padding:10px 18px;cursor:pointer;margin-top:12px;}
+    .foot{margin:14px 4px 0;font-size:10px;line-height:1.6;color:rgba(255,255,255,0.62);text-align:center;}
+  </style>
+</helmet>
+
+<div class="wrap">
+  <div class="bar">
+    <div class="mark"><b>ER</b><i>ASSISTANT</i></div>
+    <div class="avatar"></div>
+  </div>
+
+  <div class="tabs">
+    <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+      <button class="tab" data-active="{{t.active}}" onClick="{{t.pick}}">{{t.label}}</button>
+    </sc-for>
+  </div>
+
+  <div class="page">
+    <h1 class="title">{{title}}</h1>
+    <p class="sub">{{sub}}</p>
+
+    <sc-if value="{{isEr}}" hint-placeholder-val="{{false}}">
+      <div class="ercard">
+        <p style="margin:0;font-size:12.5px;line-height:1.6;color:rgba(255,255,255,0.9)">
+          救急外来モジュールは、主訴・バイタル・現病歴から診療方針／鑑別／治療方針を生成します。
+        </p>
+        <button class="btn-primary">患者情報を入力する →</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isGuide}}" hint-placeholder-val="{{true}}">
+      <div>
+        <div class="searchrow">
+          <input class="inp" placeholder="{{searchPlaceholder}}" value="{{query}}" onInput="{{onQuery}}">
+          <button class="btn-search">検索</button>
+        </div>
+
+        <div class="recent">
+          <span>最近の検索:</span>
+          <sc-for list="{{recents}}" as="r" hint-placeholder-count="2">
+            <button onClick="{{r.pick}}">{{r.label}}</button>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{showList}}" hint-placeholder-val="{{true}}">
+          <div>
+            <sc-for list="{{groups}}" as="g" hint-placeholder-count="2">
+              <div style="margin-bottom:16px">
+                <p class="grouplabel">{{g.label}}</p>
+                <div class="list">
+                  <sc-for list="{{g.rows}}" as="row" hint-placeholder-count="4">
+                    <div class="row">
+                      <span class="rl">{{row.label}}<span class="sho" style="display: {{row.shoDisplay}}; background: {{row.shoBg}}; color: {{row.shoFg}}">{{row.sho}}</span></span>
+                      <span class="rr">詳しく見る →</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{noMatch}}" hint-placeholder-val="{{false}}">
+          <div class="aiprompt">
+            <p>「{{query}}」は現在の一覧にありません。</p>
+            <button class="btn-ai" onClick="{{genAi}}">AIに生成してもらう</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{showAi}}" hint-placeholder-val="{{false}}">
+          <div class="aicard">
+            <div><span class="aitag">AI生成・未検証</span>
+              <span style="font-size:12.5px;font-weight:700;color:#f5ecff">「{{query}}」についてのAI生成結果</span></div>
+            <p style="margin:8px 0 0;font-size:10.5px;color:#e9d5ff;line-height:1.55">
+              既存の検証済みカテゴリとは異なり、AIがその場で生成したものです。内容の正確性は保証されません。必ず一次資料・指導医に確認してください。
+            </p>
+            <div class="aisub">
+              <h4>概要・考え方</h4>
+              <p>まず緊急性のある病態を除外し、頻度・重症度・患者背景を踏まえて対応方針を整理します。</p>
+            </div>
+            <div class="aisub">
+              <h4>注意点</h4>
+              <p>薬剤名・用量など具体的な薬理情報は誤りのリスクを避けるため含めていません。</p>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{showHint}}" hint-placeholder-val="{{true}}">
+          <div style="border:1px dashed rgba(255,255,255,0.4);border-radius:12px;padding:18px;
+            text-align:center;font-size:11.5px;color:rgba(255,255,255,0.7);margin-bottom:16px">
+            症状をタップすると、詳細ページに移動します
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <p class="foot">本アプリは医療従事者向けの臨床意思決定支援ツールです。最終判断は医療従事者ご自身の責任で行ってください。</p>
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const mod = st.mod ?? "outpatient";
+    const query = st.query ?? "";
+    const showAi = !!st.showAi;
+
+    const MODS = {
+      er: { label: "救急外来" },
+      outpatient: { label: "外来" },
+      inpatient: { label: "入院" },
+      kampo: { label: "漢方" },
+    };
+    const tabs = Object.keys(MODS).map((id) => ({
+      label: MODS[id].label,
+      active: mod === id,
+      pick: () => this.setState({ mod: id, query: "", showAi: false }),
+    }));
+
+    const META = {
+      er: {
+        title: "救急外来 臨床意思決定支援",
+        sub: "主訴と患者情報から、診療方針・鑑別疾患・治療方針の参考情報を生成します。",
+      },
+      outpatient: {
+        title: "外来 薬剤選択ガイド",
+        sub: "一般外来でよく管理する症状・慢性疾患について、薬剤選択の考え方・効果・副作用をまとめた学習用リファレンスです。",
+        searchPlaceholder: "例: 高血圧、感冒、不眠...",
+        groups: [
+          { label: "症状から選ぶ", rows: ["感冒症状", "不眠", "便秘", "アレルギー性鼻炎"] },
+          { label: "慢性疾患から選ぶ", rows: ["高血圧", "2型糖尿病", "脂質異常症", "骨粗鬆症"] },
+        ],
+      },
+      inpatient: {
+        title: "入院 症候対応ガイド",
+        sub: "入院患者で遭遇しやすい症候・病態について、初期対応とモニタリングの考え方をまとめた学習用リファレンスです。",
+        searchPlaceholder: "例: 発熱、せん妄、低ナトリウム...",
+        groups: [
+          { label: "症候から選ぶ", rows: ["院内発熱", "せん妄", "低酸素血症", "急性腎障害"] },
+          { label: "病態から選ぶ", rows: ["心不全増悪", "電解質異常", "消化管出血", "血糖コントロール"] },
+        ],
+      },
+      kampo: {
+        title: "漢方薬 処方選択ガイド",
+        sub: "よくある症状・体調不良について、証（体力・体質）を踏まえた漢方処方選択の考え方をまとめた学習用リファレンスです。",
+        searchPlaceholder: "例: 冷え症、かぜ、更年期障害...",
+        groups: [
+          { label: "全身・一般", rows: [
+            { label: "かぜ・感冒", sho: "実証" },
+            { label: "冷え症", sho: "虚証" },
+            { label: "倦怠感・食欲不振", sho: "虚証" },
+          ] },
+          { label: "婦人科・その他", rows: [
+            { label: "更年期障害", sho: "中間証" },
+            { label: "月経随伴症状", sho: "中間証" },
+          ] },
+        ],
+      },
+    };
+
+    const m = META[mod];
+    const isEr = mod === "er";
+    const isGuide = !isEr;
+
+    const SHO = {
+      "実証": { bg: "#fee2e2", fg: "#991b1b" },
+      "中間証": { bg: "#fef3c7", fg: "#92400e" },
+      "虚証": { bg: "#dbeafe", fg: "#1e40af" },
+    };
+    const groups = (m.groups || []).map((g) => ({
+      label: g.label,
+      rows: g.rows.map((r) => {
+        const label = typeof r === "string" ? r : r.label;
+        const sho = typeof r === "string" ? "" : r.sho;
+        const s = sho ? SHO[sho] : null;
+        return {
+          label, sho,
+          shoDisplay: sho ? "inline-flex" : "none",
+          shoBg: s ? s.bg : "transparent",
+          shoFg: s ? s.fg : "transparent",
+        };
+      }),
+    }));
+
+    const q = query.trim();
+    const allLabels = groups.flatMap((g) => g.rows.map((r) => r.label));
+    const noMatch = isGuide && q !== "" && !allLabels.some((l) => l.includes(q)) && !showAi;
+    const showList = isGuide && !noMatch && !showAi;
+    const showHint = isGuide && !showAi && !noMatch;
+
+    const recents = ["高血圧", "不眠"].map((label) => ({
+      label, pick: () => this.setState({ query: label, showAi: false }),
+    }));
+
+    return {
+      tabs, isEr, isGuide,
+      title: m.title, sub: m.sub,
+      searchPlaceholder: m.searchPlaceholder ?? "",
+      query, groups, recents,
+      noMatch, showList, showHint, showAi,
+      onQuery: (e) => this.setState({ query: e.target.value, showAi: false }),
+      genAi: () => this.setState({ showAi: true }),
+    };
+  }
+}
+</script>
+</body>
+</html>

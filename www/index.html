@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>ER Assist</title>
+<style>
+  :root { color-scheme: light dark; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 28px; padding: 32px 24px calc(32px + env(safe-area-inset-bottom));
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif;
+    background: #0a5eb0; color: #ffffff;
+  }
+
+  .brand { display: flex; flex-direction: column; align-items: center; }
+  .brand .er {
+    font-size: 84px; font-weight: 700; line-height: 0.9; letter-spacing: 0.02em;
+    opacity: 0; animation: glow-in 1.7s ease-out forwards; animation-delay: 0.15s;
+  }
+  .brand .assistant {
+    font-size: 26px; font-weight: 600; letter-spacing: 0.18em; margin-top: 8px;
+    padding-left: 0.18em;
+    opacity: 0; animation: glow-in 1.7s ease-out forwards; animation-delay: 0.6s;
+  }
+
+  @keyframes glow-in {
+    0%   { opacity: 0; filter: blur(14px);
+           text-shadow: 0 0 26px rgba(255,255,255,0.95), 0 0 52px rgba(255,255,255,0.75); }
+    55%  { opacity: 1; filter: blur(0);
+           text-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 40px rgba(255,255,255,0.6); }
+    100% { opacity: 1; filter: blur(0);
+           text-shadow: 0 0 8px rgba(255,255,255,0.4); }
+  }
+
+  .frame {
+    width: 100%; max-width: 420px;
+    border: 1px solid rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.12);
+    border-radius: 16px; padding: 16px 18px; text-align: left;
+    opacity: 0; animation: frame-in 0.9s ease-out forwards; animation-delay: 1.2s;
+  }
+  @keyframes frame-in {
+    from { opacity: 0; transform: translateY(14px) scale(0.97); }
+    to   { opacity: 1; transform: none; }
+  }
+  .frame p { margin: 0; font-size: 13px; line-height: 1.7; color: #ffffff; }
+  .frame p + p { margin-top: 8px; color: rgba(255,255,255,0.9); }
+  .frame .lead { font-weight: 600; }
+
+  #error { font-size: 13px; color: #ffe0e0; margin: 0; min-height: 1.2em; }
+  .hidden { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .brand .er, .brand .assistant, .frame {
+      animation-duration: 0.01ms; animation-delay: 0ms; opacity: 1;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="brand">
+    <div class="er">ER</div>
+    <div class="assistant">ASSISTANT</div>
+  </div>
+
+  <div class="frame">
+    <p class="lead">本ツールは臨床意思決定を支援する参考情報を提供するものであり、診断・治療を確定するものではありません。</p>
+    <p>出力内容は必ず指導医・担当医が確認し、最終的な診断・治療方針は医師の責任において決定してください。本ツールは医療機器として承認されたものではありません。</p>
+  </div>
+
+  <p id="error" class="hidden"></p>
+
+  <script>
+    var APP_URL = "https://er-assist-app.vercel.app";
+    // 起動スプラッシュ(ブランド表示+免責事項)をしばらく見せてから本体アプリへ遷移する。
+    var SPLASH_MS = 4200;
+
+    function enterApp() {
+      window.location.replace(APP_URL);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      setTimeout(enterApp, SPLASH_MS);
+    });
+
+    // 遷移に失敗した場合のフォールバック表示(通常は表示されない)。
+    setTimeout(function () {
+      var el = document.getElementById("error");
+      el.textContent = "接続を確認しています…";
+      el.classList.remove("hidden");
+    }, SPLASH_MS + 8000);
+  </script>
+</body>
+</html>

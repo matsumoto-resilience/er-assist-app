@@ -1,0 +1,1526 @@
+[
+  {
+    "category": "insomnia",
+    "categoryLabel": "不眠",
+    "group": "symptom",
+    "overview": "非薬物的アプローチ(睡眠衛生指導)を優先したうえで、薬物療法を行う場合は依存性・ふらつき・転倒リスクの少ない薬剤から検討する。不眠のタイプ(入眠困難・中途覚醒・早朝覚醒)に応じて作用時間の異なる薬剤を選択する。",
+    "visualOverview": {
+      "kind": "scale",
+      "caption": "不眠は症状が現れるタイミング・性質によって4タイプに分類される。",
+      "segments": [
+        { "label": "就寝時", "sublabel": "入眠困難", "colorClass": "bg-blue-200" },
+        { "label": "夜間", "sublabel": "中途覚醒", "colorClass": "bg-blue-400" },
+        { "label": "起床前", "sublabel": "早朝覚醒", "colorClass": "bg-blue-600" },
+        { "label": "睡眠全体", "sublabel": "熟眠障害", "colorClass": "bg-indigo-600" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "不眠の4タイプ",
+        "description": "入眠困難(寝つきが悪い)・中途覚醒(夜間に何度も目が覚める)・早朝覚醒(予定より早く目が覚めて再入眠できない)・熟眠障害(睡眠時間は足りているのに熟眠感が得られない)の4つに分類される。どのタイプかによって注目すべき経過や薬剤選択の考え方が変わる。"
+      },
+      {
+        "title": "慢性不眠症の目安",
+        "description": "上記の症状が週3回以上・3か月以上持続し、日中の心身の不調(倦怠感・集中力低下等)を伴う場合に慢性不眠症と判断される。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "二次性不眠(身体疾患・薬剤性・せん妄)の可能性を除外する", "type": "assess" },
+      { "text": "不眠のタイプ(入眠困難・中途覚醒・早朝覚醒・熟眠障害)を確認する", "type": "assess" },
+      { "text": "非薬物療法(睡眠衛生指導)の実施状況を確認する", "type": "assess" },
+      {
+        "text": "高齢者・転倒リスクの有無を確認し、リスクの低い薬剤(オレキシン受容体拮抗薬・メラトニン受容体作動薬)を優先する",
+        "type": "decide"
+      },
+      { "text": "効果不十分な場合に非ベンゾジアゼピン系/ベンゾジアゼピン系を短期間・最小用量で検討する", "type": "treat" },
+      { "text": "漫然とした継続を避け、減薬・休薬のタイミングを定期的に検討する", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "スボレキサント",
+        "brandNames": ["ベルソムラ"],
+        "drugClass": "オレキシン受容体拮抗薬",
+        "target": "オレキシン受容体(OX1R/OX2R)",
+        "mechanismType": "antagonist",
+        "effect": "覚醒維持に関わるオレキシン神経系を阻害し、入眠・睡眠維持を助ける。",
+        "whenToChoose": "依存性が低く高齢者にも使用しやすいため、第一選択として検討されやすい。",
+        "cautions": ["悪夢", "翌朝への傾眠の持ち越し", "CYP3A4阻害薬との併用で作用増強"]
+      },
+      {
+        "name": "レンボレキサント",
+        "brandNames": ["デエビゴ"],
+        "drugClass": "オレキシン受容体拮抗薬",
+        "target": "オレキシン受容体(OX1R/OX2R)",
+        "mechanismType": "antagonist",
+        "effect": "スボレキサントと同様にオレキシン受容体を阻害し、入眠・睡眠維持を助ける。",
+        "whenToChoose": "半減期の違いによりスボレキサントと使い分けが検討される。",
+        "cautions": ["傾眠の持ち越し", "重度肝機能障害では減量を検討"]
+      },
+      {
+        "name": "ラメルテオン",
+        "brandNames": ["ロゼレム"],
+        "drugClass": "メラトニン受容体作動薬",
+        "target": "メラトニン受容体(MT1/MT2)",
+        "mechanismType": "agonist",
+        "effect": "体内時計(概日リズム)に作用し、自然な入眠を促す。",
+        "whenToChoose": "依存性がほとんどなく、高齢者やせん妄ハイリスク患者に使いやすい。",
+        "cautions": ["効果発現が緩徐", "フルボキサミン等CYP1A2阻害薬との併用は禁忌"]
+      },
+      {
+        "name": "ゾルピデム等の非ベンゾジアゼピン系睡眠薬",
+        "brandNames": ["マイスリー"],
+        "drugClass": "非ベンゾジアゼピン系(GABA-A受容体作動薬)",
+        "target": "GABA-A受容体(ω1サブユニット選択的)",
+        "mechanismType": "agonist",
+        "effect": "GABA-A受容体に選択的に作用し、入眠困難に効果を示す。",
+        "whenToChoose": "作用時間が短く翌朝への持ち越しが少ないため、入眠困難が主体の場合に検討される。",
+        "cautions": ["依存・耐性形成", "健忘", "高齢者での転倒リスク"]
+      },
+      {
+        "name": "ブロチゾラム等のベンゾジアゼピン系睡眠薬",
+        "brandNames": ["レンドルミン"],
+        "drugClass": "ベンゾジアゼピン系(GABA-A受容体作動薬)",
+        "target": "GABA-A受容体",
+        "mechanismType": "agonist",
+        "effect": "GABA-A受容体に作用し、入眠だけでなく中途覚醒・早朝覚醒にも効果を示す。",
+        "whenToChoose": "他剤で効果不十分な中途覚醒型不眠等で検討されるが、リスクを踏まえ優先度は低い。",
+        "cautions": ["依存・離脱症状", "筋弛緩作用による転倒", "せん妄の誘発・増悪"]
+      }
+    ],
+    "generalCautions": [
+      "高齢者では転倒・せん妄のリスクを常に考慮する",
+      "睡眠薬の多剤併用を避ける",
+      "長期漫然投与を避け、必要性を定期的に再評価する"
+    ],
+    "references": [
+      {
+        "title": "睡眠薬の適正な使用と休薬のための診療ガイドライン(日本睡眠学会)",
+        "url": "https://jssr.jp/files/guideline/suiminyaku-guideline.pdf"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "不眠症および日中の過度の眠気(MSDマニュアル プロフェッショナル版)",
+        "description": "不眠の原因・症状・診断の考え方を詳しく解説。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/07-%E7%A5%9E%E7%B5%8C%E7%96%BE%E6%82%A3/%E7%9D%A1%E7%9C%A0%E9%9A%9C%E5%AE%B3%E3%81%8A%E3%82%88%E3%81%B3%E8%A6%9A%E9%86%92%E9%9A%9C%E5%AE%B3/%E4%B8%8D%E7%9C%A0%E7%97%87%E3%81%8A%E3%82%88%E3%81%B3%E6%97%A5%E4%B8%AD%E3%81%AE%E9%81%8E%E5%BA%A6%E3%81%AE%E7%9C%A0%E6%B0%97-excessive-daytime-sleepiness-eds"
+      },
+      {
+        "title": "睡眠障害または覚醒障害を有する患者へのアプローチ(MSDマニュアル プロフェッショナル版)",
+        "description": "問診・身体診察でどのような点を確認していくかの進め方を学べる。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/07-%E7%A5%9E%E7%B5%8C%E7%96%BE%E6%82%A3/%E7%9D%A1%E7%9C%A0%E9%9A%9C%E5%AE%B3%E3%81%8A%E3%82%88%E3%81%B3%E8%A6%9A%E9%86%92%E9%9A%9C%E5%AE%B3/%E7%9D%A1%E7%9C%A0%E9%9A%9C%E5%AE%B3%E3%81%BE%E3%81%9F%E3%81%AF%E8%A6%9A%E9%86%92%E9%9A%9C%E5%AE%B3%E3%82%92%E6%9C%89%E3%81%99%E3%82%8B%E6%82%A3%E8%80%85%E3%81%B8%E3%81%AE%E3%82%A2%E3%83%97%E3%83%AD%E3%83%BC%E3%83%81"
+      },
+      {
+        "title": "睡眠衛生(MSDマニュアル プロフェッショナル版)",
+        "description": "睡眠衛生指導として説明する具体的な項目の一覧。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/multimedia/table/%E7%9D%A1%E7%9C%A0%E8%A1%9B%E7%94%9F?ruleredirectid=465"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "入眠困難",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/07-%E7%A5%9E%E7%B5%8C%E7%96%BE%E6%82%A3/%E7%9D%A1%E7%9C%A0%E9%9A%9C%E5%AE%B3%E3%81%8A%E3%82%88%E3%81%B3%E8%A6%9A%E9%86%92%E9%9A%9C%E5%AE%B3/%E4%B8%8D%E7%9C%A0%E7%97%87%E3%81%8A%E3%82%88%E3%81%B3%E6%97%A5%E4%B8%AD%E3%81%AE%E9%81%8E%E5%BA%A6%E3%81%AE%E7%9C%A0%E6%B0%97-excessive-daytime-sleepiness-eds"
+      },
+      {
+        "term": "中途覚醒",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/07-%E7%A5%9E%E7%B5%8C%E7%96%BE%E6%82%A3/%E7%9D%A1%E7%9C%A0%E9%9A%9C%E5%AE%B3%E3%81%8A%E3%82%88%E3%81%B3%E8%A6%9A%E9%86%92%E9%9A%9C%E5%AE%B3/%E4%B8%8D%E7%9C%A0%E7%97%87%E3%81%8A%E3%82%88%E3%81%B3%E6%97%A5%E4%B8%AD%E3%81%AE%E9%81%8E%E5%BA%A6%E3%81%AE%E7%9C%A0%E6%B0%97-excessive-daytime-sleepiness-eds"
+      },
+      {
+        "term": "早朝覚醒",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/07-%E7%A5%9E%E7%B5%8C%E7%96%BE%E6%82%A3/%E7%9D%A1%E7%9C%A0%E9%9A%9C%E5%AE%B3%E3%81%8A%E3%82%88%E3%81%B3%E8%A6%9A%E9%86%92%E9%9A%9C%E5%AE%B3/%E4%B8%8D%E7%9C%A0%E7%97%87%E3%81%8A%E3%82%88%E3%81%B3%E6%97%A5%E4%B8%AD%E3%81%AE%E9%81%8E%E5%BA%A6%E3%81%AE%E7%9C%A0%E6%B0%97-excessive-daytime-sleepiness-eds"
+      },
+      {
+        "term": "熟眠障害",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/07-%E7%A5%9E%E7%B5%8C%E7%96%BE%E6%82%A3/%E7%9D%A1%E7%9C%A0%E9%9A%9C%E5%AE%B3%E3%81%8A%E3%82%88%E3%81%B3%E8%A6%9A%E9%86%92%E9%9A%9C%E5%AE%B3/%E4%B8%8D%E7%9C%A0%E7%97%87%E3%81%8A%E3%82%88%E3%81%B3%E6%97%A5%E4%B8%AD%E3%81%AE%E9%81%8E%E5%BA%A6%E3%81%AE%E7%9C%A0%E6%B0%97-excessive-daytime-sleepiness-eds"
+      },
+      {
+        "term": "睡眠衛生指導",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/multimedia/table/%E7%9D%A1%E7%9C%A0%E8%A1%9B%E7%94%9F?ruleredirectid=465"
+      }
+    ]
+  },
+  {
+    "category": "constipation",
+    "categoryLabel": "便秘",
+    "group": "symptom",
+    "overview": "まず器質的疾患や薬剤性便秘(オピオイド等)の可能性を除外したうえで、非刺激性下剤(浸透圧性・上皮機能変容薬)を基本治療とし、効果不十分な場合に刺激性下剤を頓用・短期間で追加する。オピオイド誘発性便秘には専用の拮抗薬を検討する。",
+    "visualOverview": {
+      "kind": "steps",
+      "caption": "非刺激性の薬剤を基本とし、効果不十分な場合に刺激性下剤を頓用で追加する。",
+      "segments": [
+        { "label": "基本治療", "sublabel": "浸透圧性下剤・上皮機能変容薬", "colorClass": "bg-teal-300" },
+        { "label": "追加", "sublabel": "刺激性下剤(頓用)", "colorClass": "bg-teal-500" },
+        { "label": "特殊な状況", "sublabel": "オピオイド誘発時→PAMORA", "colorClass": "bg-teal-700" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "慢性便秘症の診断の目安(Rome IV基準)",
+        "description": "強くいきむ必要がある・兎糞状または硬便・残便感・直腸肛門の閉塞感や排便困難・用手的介助が必要・自発排便回数が週3回未満、の6項目のうち2項目以上を満たし、3か月以上持続(6か月以上前から発症)している場合に慢性便秘症と判断される。"
+      },
+      {
+        "title": "便の性状評価(Bristol便性状スケール)",
+        "description": "便の硬さ・形状を7段階(硬い兎糞状便〜水様便)で評価する指標。治療効果の判定や便秘・下痢の程度を客観的に共有する際に用いられる。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "器質的疾患(腸閉塞等)・薬剤性便秘の可能性を確認する", "type": "assess" },
+      { "text": "排便回数・便性状から病態(排出障害型か大腸通過遅延型か)を評価する", "type": "assess" },
+      { "text": "浸透圧性下剤や上皮機能変容薬を基本治療として開始する", "type": "treat" },
+      { "text": "効果不十分なら作用機序の異なる薬剤の追加を検討する", "type": "decide" },
+      { "text": "頓用として刺激性下剤の併用を検討する", "type": "treat" },
+      { "text": "オピオイド使用中の患者ではオピオイド誘発性便秘の可能性を考慮し専用薬を検討する", "type": "decide" }
+    ],
+    "drugChoices": [
+      {
+        "name": "酸化マグネシウム",
+        "brandNames": ["マグミット"],
+        "drugClass": "浸透圧性下剤(塩類下剤)",
+        "target": "腸管内浸透圧(受容体を介さない物理化学的作用)",
+        "mechanismType": "other",
+        "effect": "腸管内に水分を引き込み便を軟化させ、排便を促す。",
+        "whenToChoose": "習慣性が少なく、基本治療の第一選択として検討されやすい。",
+        "cautions": ["腎機能低下患者での高マグネシウム血症", "長期高用量投与での意識障害等"]
+      },
+      {
+        "name": "ラクツロース",
+        "brandNames": ["モニラック", "ラグノスNF経口ゼリー"],
+        "drugClass": "浸透圧性下剤(糖類下剤)",
+        "target": "腸管内浸透圧(腸内細菌による分解産物を介する)",
+        "mechanismType": "other",
+        "effect": "腸内細菌により分解され、浸透圧効果によって腸管内water contentを増加させる。",
+        "whenToChoose": "腎機能低下患者でも比較的使用しやすい浸透圧性下剤として検討される。",
+        "cautions": ["腹部膨満・鼓腸", "糖尿病患者での血糖への影響"]
+      },
+      {
+        "name": "ルビプロストン",
+        "brandNames": ["アミティーザ"],
+        "drugClass": "上皮機能変容薬(クロライドチャネルアクチベーター)",
+        "target": "小腸上皮クロライドチャネル(ClC-2)",
+        "mechanismType": "agonist",
+        "effect": "小腸上皮のクロライドチャネルを活性化し、腸液分泌を促進して便を軟化させる。",
+        "whenToChoose": "酸化マグネシウムが使いにくい腎機能低下例等で検討される。",
+        "cautions": ["悪心", "妊娠中(可能性のある女性)では使用を避ける"]
+      },
+      {
+        "name": "リナクロチド",
+        "brandNames": ["リンゼス"],
+        "drugClass": "上皮機能変容薬(グアニル酸シクラーゼC受容体アゴニスト)",
+        "target": "グアニル酸シクラーゼC受容体",
+        "mechanismType": "agonist",
+        "effect": "腸液分泌・腸管運動を促進するとともに、内臓知覚過敏を軽減し腹痛軽減効果も期待できる。",
+        "whenToChoose": "腹痛を伴う便秘症例で検討される。",
+        "cautions": ["下痢"]
+      },
+      {
+        "name": "センノシド等の刺激性下剤",
+        "brandNames": ["プルゼニド"],
+        "drugClass": "大腸刺激性下剤",
+        "target": "大腸粘膜(アントラキノン系による直接刺激)",
+        "mechanismType": "other",
+        "effect": "大腸粘膜を刺激し蠕動運動を促進する。速効性がある。",
+        "whenToChoose": "非刺激性下剤で効果不十分な場合に頓用として追加検討する。",
+        "cautions": ["連用による耐性・依存", "腹痛", "電解質異常"]
+      },
+      {
+        "name": "ナルデメジン",
+        "brandNames": ["スインプロイク"],
+        "drugClass": "末梢性μオピオイド受容体拮抗薬(PAMORA)",
+        "target": "末梢性μオピオイド受容体",
+        "mechanismType": "antagonist",
+        "effect": "消化管に限局してμオピオイド受容体を遮断し、中枢の鎮痛作用を妨げずに便秘を改善する。",
+        "whenToChoose": "オピオイド誘発性便秘に特化して検討する。",
+        "cautions": ["消化管穿孔リスクのある患者では禁忌", "下痢"]
+      }
+    ],
+    "generalCautions": [
+      "腎機能に応じて酸化マグネシウムの用量を調整する",
+      "オピオイド使用中は予防的な下剤併用を検討する"
+    ],
+    "references": [
+      {
+        "title": "便通異常症診療ガイドライン2023―慢性便秘症(Mindsガイドラインライブラリ)",
+        "url": "https://minds.jcqhc.or.jp/summary/c00812/"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "便秘(MSDマニュアル プロフェッショナル版)",
+        "description": "便秘の原因分類・評価の進め方を詳しく解説。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/01-%E6%B6%88%E5%8C%96%E7%AE%A1%E7%96%BE%E6%82%A3/%E6%B6%88%E5%8C%96%E7%AE%A1%E7%96%BE%E6%82%A3%E3%81%AE%E7%97%87%E7%8A%B6/%E4%BE%BF%E7%A7%98"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "Rome IV基準",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/01-%E6%B6%88%E5%8C%96%E7%AE%A1%E7%96%BE%E6%82%A3/%E6%B6%88%E5%8C%96%E7%AE%A1%E7%96%BE%E6%82%A3%E3%81%AE%E7%97%87%E7%8A%B6/%E4%BE%BF%E7%A7%98"
+      },
+      {
+        "term": "Bristol便性状スケール",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/01-%E6%B6%88%E5%8C%96%E7%AE%A1%E7%96%BE%E6%82%A3/%E6%B6%88%E5%8C%96%E7%AE%A1%E7%96%BE%E6%82%A3%E3%81%AE%E7%97%87%E7%8A%B6/%E4%BE%BF%E7%A7%98"
+      }
+    ]
+  },
+  {
+    "category": "pain",
+    "categoryLabel": "疼痛",
+    "group": "symptom",
+    "overview": "WHO方式がん疼痛治療法の考え方に基づき、痛みの強さに応じて非オピオイド鎮痛薬→弱オピオイド→強オピオイドの順に段階的に選択する(除痛ラダー)。もともとはがん疼痛を対象とした枠組みだが、疼痛管理全般の基本的な考え方としても広く用いられている。定時投与を基本とし、突出痛にはレスキュー薬を併用する。",
+    "visualOverview": {
+      "kind": "steps",
+      "caption": "WHO方式の除痛ラダー: 痛みが持続・増強する場合に段階的にステップアップする。",
+      "segments": [
+        { "label": "Step1", "sublabel": "非オピオイド鎮痛薬", "colorClass": "bg-amber-300" },
+        { "label": "Step2", "sublabel": "弱オピオイド", "colorClass": "bg-amber-500" },
+        { "label": "Step3", "sublabel": "強オピオイド", "colorClass": "bg-amber-700" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "痛みの評価",
+        "description": "痛みの強さ(NRS等の数値評価スケール)、性質(体性痛・内臓痛・神経障害性疼痛)、日常生活・気分・睡眠への影響を評価する。急性疼痛と慢性疼痛では評価の視点が異なる。"
+      },
+      {
+        "title": "WHOがん疼痛治療の基本原則",
+        "description": "「経口的に」「時間を決めて規則正しく」「除痛ラダーに沿って段階的に」「患者ごとに個別的な量で」「そのうえで細かい配慮を」という考え方が基本とされる。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "痛みの強さ(NRS等)と性質(体性痛・内臓痛・神経障害性疼痛)を評価する", "type": "assess" },
+      { "text": "軽度の痛みには非オピオイド鎮痛薬(アセトアミノフェン・NSAIDs)を検討する", "type": "treat" },
+      { "text": "軽度~中等度の痛みが持続する場合は弱オピオイドの追加を検討する", "type": "treat" },
+      { "text": "中等度~高度の痛みには強オピオイドへの変更を検討する", "type": "treat" },
+      { "text": "神経障害性疼痛の要素があれば鎮痛補助薬の併用を検討する", "type": "decide" },
+      { "text": "定時投与と突出痛用のレスキュー薬をあわせて設定する", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "アセトアミノフェン",
+        "brandNames": ["カロナール", "アセリオ(注射剤)"],
+        "drugClass": "非オピオイド鎮痛薬",
+        "target": "中枢神経系(詳細な機序は完全には解明されていない)",
+        "mechanismType": "other",
+        "effect": "中枢神経系に作用する解熱鎮痛薬。抗炎症作用は乏しい。",
+        "whenToChoose": "安全性が高く、軽度の痛みに対する第一選択として検討されやすい。",
+        "cautions": ["肝機能障害患者での減量が必要", "高用量投与での肝障害"]
+      },
+      {
+        "name": "ロキソプロフェン等のNSAIDs",
+        "brandNames": ["ロキソニン"],
+        "drugClass": "非ステロイド性抗炎症薬(NSAIDs)",
+        "target": "シクロオキシゲナーゼ(COX-1/COX-2)",
+        "mechanismType": "inhibitor",
+        "effect": "プロスタグランジン合成を阻害し、炎症・疼痛を抑える。",
+        "whenToChoose": "炎症を伴う体性痛に効果的だが、腎機能や消化管への影響を踏まえて選択する。",
+        "cautions": ["消化性潰瘍", "腎機能障害", "高齢者への長期投与"]
+      },
+      {
+        "name": "トラマドール",
+        "brandNames": ["トラマール", "ワントラム(徐放製剤)"],
+        "drugClass": "弱オピオイド",
+        "target": "μオピオイド受容体 + モノアミン(セロトニン・ノルアドレナリン)再取り込み",
+        "mechanismType": "agonist",
+        "effect": "オピオイド受容体作動作用とモノアミン再取り込み阻害作用をあわせ持つ。",
+        "whenToChoose": "非オピオイド鎮痛薬で効果不十分な軽度~中等度の痛みで検討する。",
+        "cautions": ["悪心・嘔吐", "めまい", "SSRI等併用時のセロトニン症候群"]
+      },
+      {
+        "name": "モルヒネ",
+        "brandNames": ["オプソ(速放性)", "MSコンチン(徐放性)"],
+        "drugClass": "強オピオイド",
+        "target": "μオピオイド受容体",
+        "mechanismType": "agonist",
+        "effect": "オピオイド受容体に作用し、強力な鎮痛効果を発揮する強オピオイドの代表薬。",
+        "whenToChoose": "中等度~高度の痛みや弱オピオイドで効果不十分な場合に、強オピオイドの第一選択としてしばしば用いられる。",
+        "cautions": ["便秘(予防的下剤併用が必要)", "悪心", "呼吸抑制", "腎機能低下患者では代謝物が蓄積しやすく慎重投与"]
+      },
+      {
+        "name": "オキシコドン",
+        "brandNames": ["オキノーム(速放性)", "オキシコンチンTR(徐放性)"],
+        "drugClass": "強オピオイド",
+        "target": "μオピオイド受容体",
+        "mechanismType": "agonist",
+        "effect": "モルヒネと同様にオピオイド受容体に作用し、強力な鎮痛効果を発揮する。",
+        "whenToChoose": "モルヒネに比べ腎機能低下患者でも比較的使用しやすいとされ、腎機能に応じて使い分けられる。",
+        "cautions": ["便秘(予防的下剤併用が必要)", "悪心", "呼吸抑制"]
+      },
+      {
+        "name": "プレガバリン等の鎮痛補助薬",
+        "brandNames": ["リリカ"],
+        "drugClass": "鎮痛補助薬(神経障害性疼痛治療薬)",
+        "target": "電位依存性カルシウムチャネル(α2δサブユニット)",
+        "mechanismType": "inhibitor",
+        "effect": "NSAIDs・オピオイドとは異なる機序で神経障害性疼痛を軽減する。",
+        "whenToChoose": "しびれ・灼熱感等、神経障害性疼痛の要素がある場合に併用検討する。",
+        "cautions": ["めまい・眠気", "腎機能に応じた用量調整が必要"]
+      }
+    ],
+    "generalCautions": [
+      "オピオイド開始時は便秘対策を同時に行う",
+      "腎機能・肝機能に応じて用量を調整する",
+      "痛みの再評価を定期的に行う"
+    ],
+    "references": [
+      {
+        "title": "がん疼痛の薬物療法に関するガイドライン2020年版(日本緩和医療学会)",
+        "url": "https://www.jspm.ne.jp/publication/guidelines/individual.html?entry_id=85"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "疼痛の概要(MSDマニュアル プロフェッショナル版)",
+        "description": "痛みの分類・機序の基礎知識を解説。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/07-%E7%A5%9E%E7%B5%8C%E7%96%BE%E6%82%A3/%E7%96%BC%E7%97%9B/%E7%96%BC%E7%97%9B%E3%81%AE%E6%A6%82%E8%A6%81"
+      },
+      {
+        "title": "疼痛の評価(MSDマニュアル プロフェッショナル版)",
+        "description": "問診・診察でどのように痛みを評価していくかの進め方を解説。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/07-%E7%A5%9E%E7%B5%8C%E7%96%BE%E6%82%A3/%E7%96%BC%E7%97%9B/%E7%96%BC%E7%97%9B%E3%81%AE%E8%A9%95%E4%BE%A1"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "NRS",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/07-%E7%A5%9E%E7%B5%8C%E7%96%BE%E6%82%A3/%E7%96%BC%E7%97%9B/%E7%96%BC%E7%97%9B%E3%81%AE%E8%A9%95%E4%BE%A1"
+      },
+      {
+        "term": "体性痛",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/07-%E7%A5%9E%E7%B5%8C%E7%96%BE%E6%82%A3/%E7%96%BC%E7%97%9B/%E7%96%BC%E7%97%9B%E3%81%AE%E6%A6%82%E8%A6%81"
+      },
+      {
+        "term": "内臓痛",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/07-%E7%A5%9E%E7%B5%8C%E7%96%BE%E6%82%A3/%E7%96%BC%E7%97%9B/%E7%96%BC%E7%97%9B%E3%81%AE%E6%A6%82%E8%A6%81"
+      },
+      {
+        "term": "神経障害性疼痛",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/07-%E7%A5%9E%E7%B5%8C%E7%96%BE%E6%82%A3/%E7%96%BC%E7%97%9B/%E7%96%BC%E7%97%9B%E3%81%AE%E6%A6%82%E8%A6%81"
+      }
+    ]
+  },
+  {
+    "category": "nausea",
+    "categoryLabel": "悪心・嘔吐",
+    "group": "symptom",
+    "overview": "悪心・嘔吐の原因(薬剤性・消化管性・中枢性・代謝性等)を評価したうえで、原因に応じた作用機序の制吐薬を選択する。化学療法に伴う悪心・嘔吐(CINV)では薬剤の催吐リスクに応じた予防的多剤併用が推奨されており、その考え方は化学療法以外の悪心・嘔吐にも応用される。",
+    "visualOverview": {
+      "kind": "scale",
+      "caption": "化学療法薬の催吐リスクを4段階で評価し、リスクに応じた予防的な制吐薬の組み合わせを計画する。",
+      "segments": [
+        { "label": "Minimal", "sublabel": "最小", "colorClass": "bg-green-300" },
+        { "label": "Low", "sublabel": "軽度", "colorClass": "bg-yellow-300" },
+        { "label": "Moderate", "sublabel": "中等度", "colorClass": "bg-orange-400" },
+        { "label": "High", "sublabel": "高度", "colorClass": "bg-red-500" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "原因のカテゴリ",
+        "description": "薬剤性(化学療法・オピオイド等)・消化管性(閉塞・便秘等)・中枢性(頭蓋内病変等)・前庭性・代謝性(電解質異常等)など、原因によって適した制吐薬の作用機序が異なる。"
+      },
+      {
+        "title": "化学療法に伴う悪心・嘔吐の催吐リスク分類",
+        "description": "使用する薬剤の催吐リスクをhighly(高度)・moderate(中等度)・low(軽度)・minimal(最小)の4段階で評価し、リスクに応じて予防的な制吐薬の組み合わせを計画する。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "悪心・嘔吐の原因(薬剤性・消化管性・中枢性・前庭性・代謝性等)を評価する", "type": "assess" },
+      { "text": "原因に応じた作用機序の制吐薬を選択する", "type": "decide" },
+      { "text": "化学療法関連の場合は薬剤の催吐リスク分類に応じて予防投与を計画する", "type": "treat" },
+      { "text": "効果不十分な場合は作用機序の異なる薬剤の追加・変更を検討する", "type": "decide" },
+      { "text": "錐体外路症状等の副作用の有無を評価する", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "メトクロプラミド",
+        "brandNames": ["プリンペラン"],
+        "drugClass": "ドパミンD2受容体拮抗薬",
+        "target": "ドパミンD2受容体",
+        "mechanismType": "antagonist",
+        "effect": "消化管運動を促進しつつ、中枢性の悪心にも効果を示す。",
+        "whenToChoose": "消化管運動低下による悪心が疑われる場合に検討する。",
+        "cautions": ["錐体外路症状", "高齢者・長期投与での遅発性ジスキネジア"]
+      },
+      {
+        "name": "プロクロルペラジン",
+        "brandNames": ["ノバミン"],
+        "drugClass": "ドパミンD2受容体拮抗薬(フェノチアジン系)",
+        "target": "ドパミンD2受容体",
+        "mechanismType": "antagonist",
+        "effect": "中枢の嘔吐中枢近傍に作用し、中枢性の悪心・嘔吐を抑える。",
+        "whenToChoose": "中枢性の悪心が疑われる場合に検討する。",
+        "cautions": ["錐体外路症状", "眠気"]
+      },
+      {
+        "name": "オンダンセトロン等の5-HT3受容体拮抗薬",
+        "brandNames": ["ゾフラン"],
+        "drugClass": "5-HT3受容体拮抗薬",
+        "target": "5-HT3受容体",
+        "mechanismType": "antagonist",
+        "effect": "消化管・中枢の5-HT3受容体を遮断し、急性の悪心・嘔吐を抑える。",
+        "whenToChoose": "化学療法・術後等に伴う急性の悪心・嘔吐に検討する。",
+        "cautions": ["便秘", "QT延長"]
+      },
+      {
+        "name": "アプレピタント等のNK1受容体拮抗薬",
+        "brandNames": ["イメンド"],
+        "drugClass": "NK1受容体拮抗薬",
+        "target": "NK1受容体(サブスタンスP受容体)",
+        "mechanismType": "antagonist",
+        "effect": "サブスタンスPのNK1受容体への結合を阻害し、遅発性の悪心・嘔吐を抑える。",
+        "whenToChoose": "遅発性の化学療法誘発性悪心・嘔吐に対し、他剤と併用して検討する。",
+        "cautions": ["CYP3A4を介した薬物相互作用", "食欲不振"]
+      },
+      {
+        "name": "デキサメタゾン",
+        "brandNames": ["デカドロン"],
+        "drugClass": "副腎皮質ステロイド",
+        "target": "糖質コルチコイド受容体(制吐効果の詳細な機序は未解明)",
+        "mechanismType": "other",
+        "effect": "機序は完全には解明されていないが、他の制吐薬と併用することで制吐効果を高める。",
+        "whenToChoose": "制吐補助として他剤との併用で検討する。",
+        "cautions": ["血糖上昇", "不眠", "長期使用での易感染性"]
+      }
+    ],
+    "generalCautions": [
+      "原因検索(腸閉塞・頭蓋内病変等の器質的疾患)を怠らない",
+      "錐体外路症状の出現に注意する"
+    ],
+    "references": [
+      {
+        "title": "制吐薬適正使用ガイドライン2023年10月改訂第3版(日本癌治療学会)",
+        "url": "https://minds.jcqhc.or.jp/summary/c00828/"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "悪心および嘔吐(MSDマニュアル プロフェッショナル版)",
+        "description": "原因の鑑別や評価の進め方を詳しく解説。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/01-%E6%B6%88%E5%8C%96%E7%AE%A1%E7%96%BE%E6%82%A3/%E6%B6%88%E5%8C%96%E7%AE%A1%E7%96%BE%E6%82%A3%E3%81%AE%E7%97%87%E7%8A%B6/%E6%82%AA%E5%BF%83%E3%81%8A%E3%82%88%E3%81%B3%E5%98%94%E5%90%90"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "催吐リスク分類",
+        "url": "https://minds.jcqhc.or.jp/summary/c00828/"
+      },
+      {
+        "term": "錐体外路症状",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/01-%E6%B6%88%E5%8C%96%E7%AE%A1%E7%96%BE%E6%82%A3/%E6%B6%88%E5%8C%96%E7%AE%A1%E7%96%BE%E6%82%A3%E3%81%AE%E7%97%87%E7%8A%B6/%E6%82%AA%E5%BF%83%E3%81%8A%E3%82%88%E3%81%B3%E5%98%94%E5%90%90"
+      }
+    ]
+  },
+  {
+    "category": "hypertension",
+    "categoryLabel": "高血圧",
+    "group": "chronic",
+    "overview": "降圧薬の作用機序ごとの特徴を踏まえ、合併症(心不全・腎機能障害・糖尿病等)や病態に応じて第一選択薬を検討する。急激な降圧は臓器灌流低下のリスクがあるため、高血圧緊急症でない限り数日かけて緩徐に降圧する。",
+    "visualOverview": {
+      "kind": "scale",
+      "caption": "診察室血圧による分類(JSH2025)。全年齢で130/80mmHg未満が降圧目標として統一された。",
+      "segments": [
+        { "label": "正常血圧", "sublabel": "<120/80", "colorClass": "bg-green-300" },
+        { "label": "正常高値血圧", "sublabel": "120-129/<80", "colorClass": "bg-yellow-300" },
+        { "label": "高値血圧", "sublabel": "130-139/80-89", "colorClass": "bg-orange-400" },
+        { "label": "高血圧", "sublabel": "≥140/90", "colorClass": "bg-red-500" }
+      ],
+      "marker": "降圧目標(JSH2025): 130/80mmHg未満"
+    },
+    "managementPoints": [
+      {
+        "title": "血圧分類(JSH2025)",
+        "description": "正常血圧は診察室血圧120/80mmHg未満、正常高値血圧は120〜129/80mmHg未満、高値血圧は130〜139/80〜89mmHg、高血圧は140/90mmHg以上と分類される。"
+      },
+      {
+        "title": "降圧目標(JSH2025)",
+        "description": "2025年版ガイドラインでは、年齢や合併症の有無にかかわらず診察室血圧130/80mmHg未満、家庭血圧125/75mmHg未満を目標とすることで統一された。"
+      },
+      {
+        "title": "家庭血圧測定の重要性",
+        "description": "診察室血圧だけでなく、朝晩の家庭血圧測定値を確認することが治療方針の判断において重視されている。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "血圧値と自覚症状・臓器障害の有無を評価する", "type": "assess" },
+      { "text": "合併症(心不全・腎機能障害・糖尿病等)の有無を確認する", "type": "assess" },
+      { "text": "合併症に応じた第一選択薬のクラスを検討する", "type": "decide" },
+      { "text": "効果不十分な場合は作用機序の異なる薬剤の併用を検討する", "type": "treat" },
+      { "text": "電解質・腎機能等の副作用モニタリング項目を確認する", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "アムロジピン等のカルシウム拮抗薬",
+        "brandNames": ["アムロジン", "ノルバスク"],
+        "drugClass": "カルシウム拮抗薬",
+        "target": "電位依存性カルシウムチャネル(L型、血管平滑筋)",
+        "mechanismType": "inhibitor",
+        "effect": "血管平滑筋のカルシウムチャネルを阻害し血管を拡張させる。",
+        "whenToChoose": "確実な降圧効果が得られやすく、合併症を問わず第一選択として検討されやすい。",
+        "cautions": ["浮腫", "歯肉増生", "グレープフルーツジュースとの相互作用"]
+      },
+      {
+        "name": "エナラプリル",
+        "brandNames": ["レニベース"],
+        "drugClass": "ACE阻害薬",
+        "target": "アンジオテンシン変換酵素(ACE)",
+        "mechanismType": "inhibitor",
+        "effect": "レニン-アンジオテンシン系を阻害して血管を拡張させ降圧する。",
+        "whenToChoose": "腎保護・心保護効果が期待でき、心不全・糖尿病・慢性腎臓病合併例で優先される。",
+        "cautions": ["高カリウム血症", "腎機能悪化", "空咳"]
+      },
+      {
+        "name": "カンデサルタン",
+        "brandNames": ["ブロプレス"],
+        "drugClass": "ARB(アンジオテンシンII受容体拮抗薬)",
+        "target": "アンジオテンシンII受容体(AT1受容体)",
+        "mechanismType": "antagonist",
+        "effect": "アンジオテンシンII受容体を選択的に阻害し血管を拡張させ降圧する。",
+        "whenToChoose": "ACE阻害薬と同様の腎保護・心保護効果が期待でき、空咳が少ないためACE阻害薬が使いにくい場合に優先される。",
+        "cautions": ["高カリウム血症", "腎機能悪化"]
+      },
+      {
+        "name": "サイアザイド系利尿薬",
+        "brandNames": ["フルイトラン(トリクロルメチアジド)"],
+        "drugClass": "利尿薬",
+        "target": "腎遠位尿細管Na-Cl共輸送体",
+        "mechanismType": "inhibitor",
+        "effect": "体液量を減少させることで降圧する。",
+        "whenToChoose": "高齢者や体液貯留のある病態で有用性が高い。",
+        "cautions": ["低ナトリウム血症", "低カリウム血症", "痛風の悪化"]
+      },
+      {
+        "name": "β遮断薬",
+        "brandNames": ["メインテート(ビソプロロール)"],
+        "drugClass": "交感神経β受容体遮断薬",
+        "target": "交感神経β1受容体",
+        "mechanismType": "antagonist",
+        "effect": "心拍数・心収縮力を抑制することで降圧する。",
+        "whenToChoose": "頻脈や虚血性心疾患を合併する例で有用性が高い。",
+        "cautions": ["徐脈", "気管支喘息では禁忌", "糖尿病患者での低血糖症状マスク"]
+      }
+    ],
+    "generalCautions": [
+      "急激な降圧による臓器灌流低下を避ける",
+      "電解質・腎機能を定期的に確認する"
+    ],
+    "references": [
+      {
+        "title": "高血圧管理・治療ガイドライン2025(日本高血圧学会)",
+        "url": "https://www.jpnsh.jp/guideline.html"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "高血圧(MSDマニュアル プロフェッショナル版)",
+        "description": "病態生理・評価の進め方を詳しく解説。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/04-%E5%BF%83%E8%A1%80%E7%AE%A1%E7%96%BE%E6%82%A3/%E9%AB%98%E8%A1%80%E5%9C%A7/%E9%AB%98%E8%A1%80%E5%9C%A7"
+      },
+      {
+        "title": "高血圧緊急症(MSDマニュアル プロフェッショナル版)",
+        "description": "急激な血圧上昇時に何を確認すべきかを詳しく解説。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/04-%E5%BF%83%E8%A1%80%E7%AE%A1%E7%96%BE%E6%82%A3/%E9%AB%98%E8%A1%80%E5%9C%A7/%E9%AB%98%E8%A1%80%E5%9C%A7%E7%B7%8A%E6%80%A5%E7%97%87"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "正常高値血圧",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/04-%E5%BF%83%E8%A1%80%E7%AE%A1%E7%96%BE%E6%82%A3/%E9%AB%98%E8%A1%80%E5%9C%A7/%E9%AB%98%E8%A1%80%E5%9C%A7"
+      },
+      {
+        "term": "高値血圧",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/04-%E5%BF%83%E8%A1%80%E7%AE%A1%E7%96%BE%E6%82%A3/%E9%AB%98%E8%A1%80%E5%9C%A7/%E9%AB%98%E8%A1%80%E5%9C%A7"
+      },
+      {
+        "term": "高血圧緊急症",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/04-%E5%BF%83%E8%A1%80%E7%AE%A1%E7%96%BE%E6%82%A3/%E9%AB%98%E8%A1%80%E5%9C%A7/%E9%AB%98%E8%A1%80%E5%9C%A7%E7%B7%8A%E6%80%A5%E7%97%87"
+      }
+    ]
+  },
+  {
+    "category": "diabetes",
+    "categoryLabel": "糖尿病",
+    "group": "chronic",
+    "overview": "病態(1型/2型)・腎機能・低血糖リスク・患者の状態(食事摂取状況等)に応じて血糖降下薬・インスリンを選択する。入院中は食事摂取が不安定なことが多く、低血糖リスクの高い薬剤の使用には特に注意する。",
+    "visualOverview": {
+      "kind": "scale",
+      "caption": "合併症予防の基本目標はHbA1c 7.0%未満(熊本宣言)。高齢者では低血糖リスク等に応じて目標を緩和する。",
+      "segments": [
+        { "label": "厳格", "sublabel": "<6.0%", "colorClass": "bg-green-300" },
+        { "label": "標準(熊本宣言)", "sublabel": "<7.0%", "colorClass": "bg-yellow-300" },
+        { "label": "緩やか", "sublabel": "<8.0%", "colorClass": "bg-orange-400" },
+        { "label": "高齢・多併存疾患", "sublabel": "<8.5%", "colorClass": "bg-red-400" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "血糖コントロール目標(熊本宣言)",
+        "description": "合併症予防のための血糖コントロール目標はHbA1c 7.0%未満とされる(いわゆる熊本宣言)。"
+      },
+      {
+        "title": "高齢者の血糖コントロール目標",
+        "description": "認知機能・ADL・低血糖リスクに応じて患者をカテゴリーI〜IIIに分類し、7.0%未満を基本としつつ、低血糖リスクの高い薬剤を使用する場合はより緩やかな目標(8.0%未満等)を個別に設定する。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "血糖コントロール状況とHbA1c・直近の血糖推移を確認する", "type": "assess" },
+      { "text": "食事摂取状況・腎機能・肝機能を確認する", "type": "assess" },
+      { "text": "経口血糖降下薬で管理可能か、インスリンが必要かを判断する", "type": "decide" },
+      { "text": "低血糖リスクの高い薬剤(SU薬・インスリン)使用時はモニタリング体制を確認する", "type": "monitor" },
+      { "text": "副作用・相互作用を確認し、必要に応じて薬剤を調整する", "type": "treat" }
+    ],
+    "drugChoices": [
+      {
+        "name": "メトホルミン",
+        "brandNames": ["メトグルコ"],
+        "drugClass": "ビグアナイド薬",
+        "target": "肝細胞内AMPK経路等(受容体を介さない代謝経路への作用)",
+        "mechanismType": "other",
+        "effect": "肝臓での糖新生を抑制し、インスリン抵抗性を改善する。",
+        "whenToChoose": "低血糖を起こしにくく、腎機能が保たれていれば第一選択として検討されやすい。",
+        "cautions": ["腎機能低下患者での乳酸アシドーシス", "ヨード造影剤検査前後の休薬が必要"]
+      },
+      {
+        "name": "エンパグリフロジン",
+        "brandNames": ["ジャディアンス"],
+        "drugClass": "SGLT2阻害薬",
+        "target": "SGLT2(腎近位尿細管)",
+        "mechanismType": "inhibitor",
+        "effect": "腎臓での糖再吸収を阻害し、尿中に糖を排泄させることで血糖を下げる。",
+        "whenToChoose": "心保護・腎保護効果のエビデンスがあり、心不全・腎症合併例で検討される代表的なSGLT2阻害薬。",
+        "cautions": ["尿路感染・性器感染", "シックデイでのケトアシドーシスリスク"]
+      },
+      {
+        "name": "シタグリプチン",
+        "brandNames": ["ジャヌビア", "グラクティブ"],
+        "drugClass": "DPP-4阻害薬",
+        "target": "DPP-4酵素",
+        "mechanismType": "inhibitor",
+        "effect": "インクレチンの分解を阻害し、血糖依存的にインスリン分泌を促進する。",
+        "whenToChoose": "単独では低血糖を起こしにくく、高齢者にも使いやすい代表的なDPP-4阻害薬。",
+        "cautions": ["SU薬等併用時の低血糖", "膵炎の報告"]
+      },
+      {
+        "name": "グリメピリド",
+        "brandNames": ["アマリール"],
+        "drugClass": "スルホニル尿素(SU)薬",
+        "target": "膵β細胞のSU受容体(ATP感受性カリウムチャネル)",
+        "mechanismType": "inhibitor",
+        "effect": "膵β細胞からのインスリン分泌を直接促進する。",
+        "whenToChoose": "効果は確実だが低血糖リスクが高く、食事摂取が不安定な入院患者では慎重に検討する代表的なSU薬。",
+        "cautions": ["低血糖(遷延しやすい)", "体重増加"]
+      },
+      {
+        "name": "インスリン製剤",
+        "brandNames": ["ランタス(持効型溶解の例)", "ノボラピッド(超速効型の例)"],
+        "drugClass": "インスリン製剤",
+        "target": "インスリン受容体",
+        "mechanismType": "agonist",
+        "effect": "血糖降下作用が最も確実で、用量調整の自由度が高い。",
+        "whenToChoose": "食事摂取が不安定な入院患者や重症例、経口薬で管理不十分な場合に選択される。",
+        "cautions": ["低血糖", "単位間違い等の医療安全上のリスク"]
+      }
+    ],
+    "generalCautions": [
+      "シックデイ・食事摂取不良時は低血糖リスクを踏まえて用量調整する",
+      "経口薬とインスリンの単位・投与タイミングの誤りに注意する"
+    ],
+    "references": [
+      {
+        "title": "糖尿病診療ガイドライン2024(Mindsガイドラインライブラリ)",
+        "url": "https://minds.jcqhc.or.jp/summary/c00864/"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "糖尿病(MSDマニュアル プロフェッショナル版)",
+        "description": "病態生理・診断・評価の進め方を詳しく解説。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/10-%E5%86%85%E5%88%86%E6%B3%8C%E7%96%BE%E6%82%A3%E3%81%A8%E4%BB%A3%E8%AC%9D%E6%80%A7%E7%96%BE%E6%82%A3/%E7%B3%96%E5%B0%BF%E7%97%85%E3%81%A8%E7%B3%96%E4%BB%A3%E8%AC%9D%E7%95%B0%E5%B8%B8%E7%97%87/%E7%B3%96%E5%B0%BF%E7%97%85"
+      },
+      {
+        "title": "高齢者糖尿病の血糖コントロール目標について(日本糖尿病学会)",
+        "description": "高齢者のカテゴリー分類・目標値設定の考え方を詳しく解説。",
+        "url": "https://www.jds.or.jp/modules/important/index.php?content_id=66"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "シックデイ",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/10-%E5%86%85%E5%88%86%E6%B3%8C%E7%96%BE%E6%82%A3%E3%81%A8%E4%BB%A3%E8%AC%9D%E6%80%A7%E7%96%BE%E6%82%A3/%E7%B3%96%E5%B0%BF%E7%97%85%E3%81%A8%E7%B3%96%E4%BB%A3%E8%AC%9D%E7%95%B0%E5%B8%B8%E7%97%87/%E7%B3%96%E5%B0%BF%E7%97%85"
+      },
+      {
+        "term": "カテゴリーI",
+        "url": "https://www.jds.or.jp/modules/important/index.php?content_id=66"
+      },
+      {
+        "term": "カテゴリーII",
+        "url": "https://www.jds.or.jp/modules/important/index.php?content_id=66"
+      },
+      {
+        "term": "カテゴリーIII",
+        "url": "https://www.jds.or.jp/modules/important/index.php?content_id=66"
+      }
+    ]
+  },
+  {
+    "category": "delirium",
+    "categoryLabel": "せん妄",
+    "group": "symptom",
+    "overview": "せん妄は身体疾患・薬剤・環境変化等を誘因として急性に出現する意識障害で、入院患者、特に高齢者で頻度が高い。まず可逆的な誘因(身体疾患・薬剤性・脱水・疼痛・便秘・尿閉等)を検索・是正することが最優先であり、非薬物的対応(環境調整・見当識の補助)を基本とする。薬物療法は不穏・興奮が強く安全確保が困難な場合等に限定して検討する。",
+    "visualOverview": {
+      "kind": "scale",
+      "caption": "せん妄は活動性の変化から3タイプに分類される。低活動型は見逃されやすい。",
+      "segments": [
+        { "label": "低活動型", "sublabel": "活動性低下・傾眠", "colorClass": "bg-blue-300" },
+        { "label": "混合型", "sublabel": "両者が混在", "colorClass": "bg-purple-400" },
+        { "label": "過活動型", "sublabel": "不穏・興奮", "colorClass": "bg-red-400" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "せん妄の3タイプ",
+        "description": "過活動型(不穏・興奮が目立つ)、低活動型(活動性低下・傾眠傾向で見逃されやすい)、混合型に分類される。低活動型は看過されやすいため注意が必要。"
+      },
+      {
+        "title": "CAM(Confusion Assessment Method)による評価の考え方",
+        "description": "①急性発症・変動性の経過、②注意力障害、③支離滅裂な思考、④意識レベルの変化、のうち①②に加え③④のいずれかを満たす場合にせん妄を疑う、という考え方が広く用いられる。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "誘因となりうる身体疾患・薬剤・脱水・疼痛・便秘・尿閉等を検索する", "type": "assess" },
+      { "text": "CAM等を用いてせん妄の有無・タイプ(過活動型/低活動型/混合型)を評価する", "type": "assess" },
+      {
+        "text": "可逆的な誘因があれば是正し、非薬物的対応(環境調整・見当識の補助・睡眠覚醒リズムの整備)を基本とする",
+        "type": "treat"
+      },
+      { "text": "安全確保が困難な不穏・興奮が強い場合に薬物療法の適応を検討する", "type": "decide" },
+      { "text": "抗精神病薬を最小用量・短期間で開始する", "type": "treat" },
+      { "text": "過鎮静・錐体外路症状等の副作用と、せん妄の遷延がないかを定期的に評価する", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "クエチアピン",
+        "brandNames": ["セロクエル"],
+        "drugClass": "非定型抗精神病薬",
+        "target": "ドパミンD2受容体・セロトニン5-HT2A受容体等",
+        "mechanismType": "antagonist",
+        "effect": "複数の受容体に拮抗し鎮静・抗精神病効果を示す。錐体外路症状は比較的少ない。",
+        "whenToChoose": "錐体外路症状のリスクを抑えたい場合や糖尿病がない患者で第一選択として検討されやすい。",
+        "cautions": ["過鎮静", "起立性低血圧", "血糖値上昇のため糖尿病患者では原則禁忌"]
+      },
+      {
+        "name": "リスペリドン",
+        "brandNames": ["リスパダール"],
+        "drugClass": "非定型抗精神病薬",
+        "target": "ドパミンD2受容体・セロトニン5-HT2A受容体",
+        "mechanismType": "antagonist",
+        "effect": "ドパミンD2受容体拮抗作用を中心に抗精神病効果を示す。液剤があり内服困難な患者にも対応しやすい。",
+        "whenToChoose": "錐体外路症状のリスクはクエチアピンよりやや高いが、糖尿病患者にも比較的使用しやすい。",
+        "cautions": ["錐体外路症状", "過鎮静", "高齢者での脳血管障害リスク上昇の報告"]
+      },
+      {
+        "name": "ハロペリドール",
+        "brandNames": ["セレネース"],
+        "drugClass": "定型抗精神病薬",
+        "target": "ドパミンD2受容体",
+        "mechanismType": "antagonist",
+        "effect": "強力なドパミンD2受容体遮断作用により鎮静・抗精神病効果を示す。注射剤があり緊急時にも使用できる。",
+        "whenToChoose": "経口摂取が困難で緊急に鎮静が必要な場合に注射剤として検討される。",
+        "cautions": ["錐体外路症状(頻度が高い)", "QT延長", "過鎮静"]
+      },
+      {
+        "name": "トラゾドン",
+        "brandNames": ["レスリン", "デジレル"],
+        "drugClass": "抗うつ薬(トリアゾロピリジン系)",
+        "target": "セロトニン5-HT2A受容体・α1受容体等",
+        "mechanismType": "antagonist",
+        "effect": "鎮静作用を有し、夜間の不眠・不穏に対して低用量で用いられることがある。",
+        "whenToChoose": "抗精神病薬の副作用リスクを避けたい軽症例や、夜間の睡眠覚醒リズム是正を優先したい場合に検討される。",
+        "cautions": ["過鎮静", "起立性低血圧"]
+      }
+    ],
+    "generalCautions": [
+      "身体拘束は最終手段とし、非薬物的対応を優先する",
+      "抗精神病薬は診断名によっては保険適用外である点に留意する",
+      "薬物療法開始後も誘因の是正を継続する"
+    ],
+    "references": [
+      {
+        "title": "がん患者におけるせん妄ガイドライン(日本サイコオンコロジー学会)",
+        "url": "https://jpos-society.org/guideline/delirium/"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "せん妄(MSDマニュアル プロフェッショナル版)",
+        "description": "せん妄の原因評価・診察の進め方を詳しく解説。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/07-%E7%A5%9E%E7%B5%8C%E7%96%BE%E6%82%A3/%E3%81%9B%E3%82%93%E5%A6%84%E3%81%8A%E3%82%88%E3%81%B3%E8%AA%8D%E7%9F%A5%E7%97%87/%E3%81%9B%E3%82%93%E5%A6%84"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "CAM",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/07-%E7%A5%9E%E7%B5%8C%E7%96%BE%E6%82%A3/%E3%81%9B%E3%82%93%E5%A6%84%E3%81%8A%E3%82%88%E3%81%B3%E8%AA%8D%E7%9F%A5%E7%97%87/%E3%81%9B%E3%82%93%E5%A6%84"
+      },
+      {
+        "term": "低活動型",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/07-%E7%A5%9E%E7%B5%8C%E7%96%BE%E6%82%A3/%E3%81%9B%E3%82%93%E5%A6%84%E3%81%8A%E3%82%88%E3%81%B3%E8%AA%8D%E7%9F%A5%E7%97%87/%E3%81%9B%E3%82%93%E5%A6%84"
+      }
+    ]
+  },
+  {
+    "category": "fever",
+    "categoryLabel": "発熱",
+    "group": "symptom",
+    "overview": "入院患者の発熱は感染症を中心に多岐にわたる原因で生じる。解熱薬はあくまで対症療法であり、まず原因検索(感染源の同定・重症度評価)を優先する。解熱薬の使用はアセトアミノフェンを基本とし、NSAIDsは腎機能や消化管への影響を踏まえて慎重に検討する。",
+    "visualOverview": {
+      "kind": "steps",
+      "caption": "解熱薬投与と並行して原因検索(感染源の同定・重症度評価)を進めることが優先される。",
+      "segments": [
+        { "label": "第一選択", "sublabel": "アセトアミノフェン", "colorClass": "bg-sky-400" },
+        { "label": "慎重投与", "sublabel": "NSAIDs(腎機能・消化管に注意)", "colorClass": "bg-orange-400" },
+        { "label": "並行して", "sublabel": "原因検索・感染源同定", "colorClass": "bg-red-500" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "発熱の目安",
+        "description": "一般に腋窩温37.5℃以上、口腔温38.0℃以上を発熱の目安とすることが多い。高齢者では平熱が低いことがあり、平時との差分にも注目する。"
+      },
+      {
+        "title": "解熱薬使用の考え方",
+        "description": "感染に伴う発熱を解熱薬で積極的に下げるべきかは議論があり、発熱自体が生体防御に働いている可能性も指摘される。解熱薬は主に患者の苦痛緩和を目的として、重症化のサインを覆い隠さない範囲で検討する。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "バイタルサイン(qSOFA等)で重症化・敗血症の可能性を評価する", "type": "assess" },
+      { "text": "感染源を示唆する症状・身体所見(発疹・項部硬直・咳嗽・排尿時痛等)を確認する", "type": "assess" },
+      { "text": "解熱薬投与の必要性(苦痛の程度・全身状態)を判断する", "type": "decide" },
+      { "text": "アセトアミノフェンを第一選択として投与する", "type": "treat" },
+      { "text": "NSAIDsの使用は腎機能・消化管出血リスク・脱水の有無を踏まえて慎重に判断する", "type": "decide" },
+      { "text": "解熱後も含めバイタルサイン・原因検索の結果を継続的に評価する", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "アセトアミノフェン",
+        "brandNames": ["カロナール", "アセリオ(注射剤)"],
+        "drugClass": "解熱鎮痛薬",
+        "target": "視床下部体温調節中枢(詳細な機序は完全には解明されていない)",
+        "mechanismType": "other",
+        "effect": "体温調節中枢に作用し、放熱を促すことで解熱効果を示す。抗炎症作用は乏しい。",
+        "whenToChoose": "安全性が高く、発熱に対する解熱薬の第一選択として広く用いられる。",
+        "cautions": ["肝機能障害患者での減量が必要", "高用量投与での肝障害"]
+      },
+      {
+        "name": "ロキソプロフェン等のNSAIDs",
+        "brandNames": ["ロキソニン"],
+        "drugClass": "非ステロイド性抗炎症薬(NSAIDs)",
+        "target": "シクロオキシゲナーゼ(COX-1/COX-2)",
+        "mechanismType": "inhibitor",
+        "effect": "プロスタグランジン合成を阻害し、解熱・鎮痛・抗炎症効果を示す。",
+        "whenToChoose": "アセトアミノフェンで効果不十分な場合に、腎機能・消化管リスクを評価したうえで検討する。",
+        "cautions": ["消化性潰瘍", "腎機能障害・脱水患者での急性腎障害", "解熱作用による重症感染症の症状マスク"]
+      }
+    ],
+    "generalCautions": [
+      "解熱薬投与により重症化のサイン(意識レベル低下等)が一時的に隠れる可能性に注意する",
+      "脱水を伴う場合はNSAIDsによる腎機能悪化に特に注意する",
+      "漫然とした解熱薬の反復投与を避け、原因検索を並行して進める"
+    ],
+    "references": [
+      {
+        "title": "日本版敗血症診療ガイドライン2024(J-SSCG2024)",
+        "url": "https://www.jsicm.org/pdf/cq/J-SSCG2024/J-SSCG2024_Main.pdf"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "発熱(MSDマニュアル プロフェッショナル版)",
+        "description": "発熱の原因評価・診察の進め方を詳しく解説。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/13-%E6%84%9F%E6%9F%93%E6%80%A7%E7%96%BE%E6%82%A3/%E6%84%9F%E6%9F%93%E7%97%87%E3%81%AE%E7%94%9F%E7%89%A9%E5%AD%A6/%E7%99%BA%E7%86%B1"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "qSOFA",
+        "url": "https://www.jsicm.org/pdf/cq/J-SSCG2024/J-SSCG2024_Main.pdf"
+      },
+      {
+        "term": "敗血症",
+        "url": "https://www.jsicm.org/pdf/cq/J-SSCG2024/J-SSCG2024_Main.pdf"
+      }
+    ]
+  },
+  {
+    "category": "cough",
+    "categoryLabel": "咳嗽・喀痰",
+    "group": "symptom",
+    "overview": "咳嗽は持続期間(急性・遷延性・慢性)と喀痰の有無(湿性咳嗽・乾性咳嗽)により原因疾患の見当をつけ、それに応じた薬剤を選択する。感染性咳嗽の多くは自然軽快するため、鎮咳薬・去痰薬はあくまで対症療法として位置づける。",
+    "visualOverview": {
+      "kind": "scale",
+      "caption": "持続期間によって急性・遷延性・慢性に分類し、想定すべき原因疾患を絞り込む。",
+      "segments": [
+        { "label": "急性咳嗽", "sublabel": "<3週間", "colorClass": "bg-sky-300" },
+        { "label": "遷延性咳嗽", "sublabel": "3〜8週間", "colorClass": "bg-sky-500" },
+        { "label": "慢性咳嗽", "sublabel": "≥8週間", "colorClass": "bg-sky-700" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "咳嗽の持続期間による分類",
+        "description": "3週間未満を急性咳嗽、3〜8週間を遷延性咳嗽、8週間以上を慢性咳嗽と分類する。持続期間により想定すべき原因疾患が異なる。"
+      },
+      {
+        "title": "湿性咳嗽と乾性咳嗽",
+        "description": "喀痰を伴う湿性咳嗽と、喀痰を伴わない乾性咳嗽に分けて考える。湿性咳嗽では去痰薬、乾性咳嗽が強い場合は鎮咳薬が中心となる。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "咳嗽の持続期間(急性・遷延性・慢性)を確認する", "type": "assess" },
+      { "text": "喀痰の有無・性状(湿性咳嗽か乾性咳嗽か)を確認する", "type": "assess" },
+      {
+        "text": "感染性咳嗽を示唆する所見(発熱・膿性痰等)や基礎疾患(COPD・喘息・GERD等)の有無を確認する",
+        "type": "assess"
+      },
+      { "text": "湿性咳嗽には去痰薬を中心に検討する", "type": "treat" },
+      { "text": "乾性咳嗽が強く生活に支障がある場合は鎮咳薬を検討する", "type": "treat" },
+      { "text": "遷延・慢性咳嗽や増悪時は基礎疾患の精査・専門科紹介を検討する", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "デキストロメトルファン",
+        "brandNames": ["メジコン"],
+        "drugClass": "非麻薬性中枢性鎮咳薬",
+        "target": "延髄咳中枢",
+        "mechanismType": "other",
+        "effect": "延髄の咳中枢に作用し咳反射を抑制する。依存性は低い。",
+        "whenToChoose": "乾性咳嗽が強く生活に支障がある場合に第一選択として検討されやすい。",
+        "cautions": ["眠気", "MAO阻害薬との併用禁忌"]
+      },
+      {
+        "name": "コデインリン酸塩",
+        "brandNames": ["コデインリン酸塩"],
+        "drugClass": "麻薬性中枢性鎮咳薬",
+        "target": "延髄咳中枢(μオピオイド受容体)",
+        "mechanismType": "agonist",
+        "effect": "オピオイド受容体を介して咳中枢を抑制し、強力な鎮咳効果を示す。",
+        "whenToChoose": "非麻薬性鎮咳薬で効果不十分な強い乾性咳嗽で検討する。",
+        "cautions": ["便秘", "眠気・呼吸抑制", "12歳未満は原則禁忌"]
+      },
+      {
+        "name": "カルボシステイン",
+        "brandNames": ["ムコダイン"],
+        "drugClass": "気道粘液調整薬",
+        "target": "気道分泌細胞(粘液の性状を調整)",
+        "mechanismType": "other",
+        "effect": "気道粘液の粘性成分を調整し、痰を出しやすくする。",
+        "whenToChoose": "湿性咳嗽・喀痰喀出困難で去痰薬の第一選択として広く用いられる。",
+        "cautions": ["過敏症状"]
+      },
+      {
+        "name": "アンブロキソール",
+        "brandNames": ["ムコソルバン"],
+        "drugClass": "気道粘液潤滑薬",
+        "target": "肺サーファクタント分泌促進",
+        "mechanismType": "other",
+        "effect": "気道粘膜の線毛運動を高め、肺サーファクタント分泌を促進して喀痰の排出を助ける。",
+        "whenToChoose": "喀痰の粘稠度が高く排出困難な場合に検討する。",
+        "cautions": ["過敏症状"]
+      }
+    ],
+    "generalCautions": [
+      "感染性咳嗽の多くは自然軽快するため、鎮咳薬・去痰薬はあくまで対症療法と位置づける",
+      "膿性痰・血痰・体重減少等を伴う場合は器質的疾患の精査を優先する",
+      "呼吸状態が不安定な患者への鎮咳薬投与は喀痰喀出を妨げる可能性に注意する"
+    ],
+    "references": [
+      {
+        "title": "咳嗽・喀痰の診療ガイドライン2019(日本呼吸器学会)",
+        "url": "https://www.jrs.or.jp/publication/jrs_guidelines/20190412145942.html"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "成人における咳嗽(MSDマニュアル プロフェッショナル版)",
+        "description": "咳嗽の原因評価・問診の進め方を詳しく解説。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/05-%E8%82%BA%E7%96%BE%E6%82%A3/%E8%82%BA%E7%96%BE%E6%82%A3%E3%81%AE%E7%97%87%E7%8A%B6/%E6%88%90%E4%BA%BA%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E5%92%B3%E5%97%BD"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "急性咳嗽",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/05-%E8%82%BA%E7%96%BE%E6%82%A3/%E8%82%BA%E7%96%BE%E6%82%A3%E3%81%AE%E7%97%87%E7%8A%B6/%E6%88%90%E4%BA%BA%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E5%92%B3%E5%97%BD"
+      },
+      {
+        "term": "遷延性咳嗽",
+        "url": "https://www.jrs.or.jp/publication/jrs_guidelines/20190412145942.html"
+      },
+      {
+        "term": "慢性咳嗽",
+        "url": "https://www.jrs.or.jp/publication/jrs_guidelines/20190412145942.html"
+      }
+    ]
+  },
+  {
+    "category": "pruritus",
+    "categoryLabel": "掻痒感",
+    "group": "symptom",
+    "overview": "掻痒感は皮疹を伴うもの(皮膚疾患)と皮疹を伴わないもの(全身性疾患・薬剤性等)に大別される。まず原因(腎不全・肝疾患・薬剤性等)を検索したうえで、保湿等のスキンケアを基本とし、必要に応じて抗ヒスタミン薬等の薬物療法を検討する。",
+    "visualOverview": {
+      "kind": "scale",
+      "caption": "掻痒感は皮疹の有無で大きく2つに分類し、背景疾患を検索する。",
+      "segments": [
+        { "label": "皮疹を伴う", "sublabel": "皮膚炎・乾皮症等", "colorClass": "bg-pink-300" },
+        { "label": "皮疹を伴わない", "sublabel": "腎不全・肝疾患・薬剤性等", "colorClass": "bg-pink-500" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "掻痒感の分類",
+        "description": "皮疹を伴う掻痒(皮膚炎・乾皮症等)と、皮疹を伴わない掻痒(腎不全・肝胆道系疾患・薬剤性・悪性腫瘍等の全身性疾患による)に大別される。"
+      },
+      {
+        "title": "背景疾患の確認",
+        "description": "腎不全(透析患者等)、肝胆道系疾患(胆汁うっ滞等)、薬剤性(オピオイド等)、皮膚乾燥(高齢者に多い)等、背景疾患によって治療方針が異なる。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "皮疹の有無を確認し、皮膚疾患による掻痒か全身性疾患による掻痒かを見分ける", "type": "assess" },
+      { "text": "背景疾患(腎不全・肝胆道系疾患・薬剤性・皮膚乾燥等)を検索する", "type": "assess" },
+      { "text": "保湿剤によるスキンケアを基本治療として行う", "type": "treat" },
+      { "text": "背景疾患が是正可能であれば、その治療を優先する", "type": "decide" },
+      { "text": "効果不十分な場合に抗ヒスタミン薬等の薬物療法を検討する", "type": "treat" },
+      { "text": "掻破による皮膚炎・二次感染の有無を確認する", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "ヒドロキシジン等の第一世代抗ヒスタミン薬",
+        "brandNames": ["アタラックス"],
+        "drugClass": "第一世代抗ヒスタミン薬",
+        "target": "ヒスタミンH1受容体",
+        "mechanismType": "antagonist",
+        "effect": "ヒスタミンH1受容体を遮断し、掻痒感を軽減する。中枢移行性があり鎮静効果もある。",
+        "whenToChoose": "夜間の掻痒感で睡眠が妨げられている場合等、鎮静効果も期待したい場合に検討される。",
+        "cautions": ["眠気・ふらつき(特に高齢者で転倒リスク)", "抗コリン作用(口渇・尿閉等)"]
+      },
+      {
+        "name": "フェキソフェナジン等の第二世代抗ヒスタミン薬",
+        "brandNames": ["アレグラ"],
+        "drugClass": "第二世代抗ヒスタミン薬",
+        "target": "ヒスタミンH1受容体",
+        "mechanismType": "antagonist",
+        "effect": "ヒスタミンH1受容体を選択的に遮断する。中枢移行性が低く眠気が少ない。",
+        "whenToChoose": "日中の眠気を避けたい場合や高齢者で第一選択として検討されやすい。",
+        "cautions": ["効果が第一世代に比べ弱いと感じられることがある"]
+      },
+      {
+        "name": "ナルフラフィン",
+        "brandNames": ["レミッチ"],
+        "drugClass": "選択的κオピオイド受容体作動薬",
+        "target": "κ(カッパ)オピオイド受容体",
+        "mechanismType": "agonist",
+        "effect": "中枢のκオピオイド受容体を刺激し、掻痒感の伝達を抑制する。抗ヒスタミン薬とは異なる機序を持つ。",
+        "whenToChoose": "透析患者・慢性肝疾患患者の掻痒感で、抗ヒスタミン薬が効きにくい場合に検討される。",
+        "cautions": ["不眠", "めまい"]
+      }
+    ],
+    "generalCautions": [
+      "保湿等のスキンケアを薬物療法と並行して継続する",
+      "高齢者では第一世代抗ヒスタミン薬の中枢神経系への影響(転倒・せん妄)に注意する",
+      "掻破による二次感染の有無を確認する"
+    ],
+    "references": [
+      {
+        "title": "皮膚瘙痒症診療ガイドライン2020(日本皮膚科学会)",
+        "url": "https://www.dermatol.or.jp/dermatol/wp-content/uploads/xoops/files/guideline/souyouGL2020.pdf"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "そう痒(MSDマニュアル プロフェッショナル版)",
+        "description": "掻痒感の原因評価・問診の進め方を詳しく解説。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/14-%E7%9A%AE%E8%86%9A%E7%96%BE%E6%82%A3/%E7%9A%AE%E8%86%9A%E7%97%87%E7%8A%B6%E3%82%92%E6%9C%89%E3%81%99%E3%82%8B%E6%82%A3%E8%80%85%E3%81%B8%E3%81%AE%E3%82%A2%E3%83%97%E3%83%AD%E3%83%BC%E3%83%81/%E3%81%9D%E3%81%86%E7%97%92"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "皮疹を伴わない掻痒",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/14-%E7%9A%AE%E8%86%9A%E7%96%BE%E6%82%A3/%E7%9A%AE%E8%86%9A%E7%97%87%E7%8A%B6%E3%82%92%E6%9C%89%E3%81%99%E3%82%8B%E6%82%A3%E8%80%85%E3%81%B8%E3%81%AE%E3%82%A2%E3%83%97%E3%83%AD%E3%83%BC%E3%83%81/%E3%81%9D%E3%81%86%E7%97%92"
+      }
+    ]
+  },
+  {
+    "category": "diarrhea",
+    "categoryLabel": "下痢",
+    "group": "symptom",
+    "overview": "下痢は急性(多くは感染性)と慢性(4週間以上持続)に分けて考える。入院患者では感染性腸炎に加え、抗菌薬関連下痢症(Clostridioides difficile感染症を含む)や経管栄養に伴う下痢が多い。止痢薬は感染性下痢症では原則として慎重投与とし、まず原因(特にC. difficile感染症の除外)を確認する。",
+    "visualOverview": {
+      "kind": "scale",
+      "caption": "持続期間で急性・慢性に分類し、特に入院患者では抗菌薬関連下痢症(CD感染症)の除外を優先する。",
+      "segments": [
+        { "label": "急性下痢", "sublabel": "<4週間・多くは感染性", "colorClass": "bg-teal-300" },
+        { "label": "慢性下痢", "sublabel": "≥4週間・器質的疾患の精査を", "colorClass": "bg-teal-600" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "急性下痢と慢性下痢",
+        "description": "4週間未満を急性下痢、4週間以上持続するものを慢性下痢と分類する。急性下痢の多くは感染性で自然軽快するが、慢性下痢は器質的疾患の精査を要する。"
+      },
+      {
+        "title": "入院患者に特有の原因",
+        "description": "抗菌薬関連下痢症(Clostridioides difficile感染症を含む)、経管栄養に伴う下痢、経腸栄養剤の浸透圧、便塞栓による奇異性下痢等、入院患者では特有の原因を念頭に置く。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "下痢の性状(水様性・血便の有無)・持続期間(急性/慢性)を確認する", "type": "assess" },
+      { "text": "抗菌薬投与歴の有無を確認し、Clostridioides difficile感染症の可能性を評価する", "type": "assess" },
+      { "text": "感染性が疑われる場合は止痢薬の使用を控え、まず原因検索・補液を優先する", "type": "decide" },
+      { "text": "脱水を伴う場合は経口補水液・輸液等による補正を行う", "type": "treat" },
+      { "text": "非感染性であることを確認したうえで、必要に応じて止痢薬を検討する", "type": "treat" },
+      { "text": "電解質異常・脱水の進行や症状の遷延がないかを継続的に評価する", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "ロペラミド",
+        "brandNames": ["ロペミン"],
+        "drugClass": "止痢薬",
+        "target": "腸管のμオピオイド受容体",
+        "mechanismType": "agonist",
+        "effect": "腸管運動を抑制し、水分の吸収時間を延長させることで下痢を改善する。",
+        "whenToChoose": "非感染性の下痢や、感染性が否定された場合の対症療法として検討する。",
+        "cautions": ["感染性腸炎(特に血便を伴う場合)では中毒性巨大結腸症のリスクがあり原則禁忌", "便秘・腹部膨満"]
+      },
+      {
+        "name": "ビフィズス菌等の整腸剤",
+        "brandNames": ["ビオフェルミン"],
+        "drugClass": "生菌製剤(整腸剤)",
+        "target": "腸内細菌叢",
+        "mechanismType": "other",
+        "effect": "腸内細菌叢のバランスを整えることで、下痢・便通異常を改善する。",
+        "whenToChoose": "抗菌薬関連下痢症の予防・軽度の下痢に対して広く用いられる。副作用が少なく併用しやすい。",
+        "cautions": ["重篤な副作用は少ないが、免疫抑制状態では菌血症の報告に留意"]
+      },
+      {
+        "name": "経口補水液(ORS)",
+        "brandNames": ["OS-1"],
+        "drugClass": "電解質・水分補給製剤",
+        "target": "腸管上皮のNa-グルコース共輸送体",
+        "mechanismType": "other",
+        "effect": "グルコースとナトリウムの共輸送を利用し、腸管からの水分・電解質吸収を促進する。",
+        "whenToChoose": "下痢による脱水の予防・補正の基本として、経口摂取可能な場合にまず検討する。",
+        "cautions": ["重度の脱水や経口摂取困難例では点滴による補液が必要"]
+      }
+    ],
+    "generalCautions": [
+      "血便・高熱を伴う感染性下痢症では止痢薬を安易に使用しない",
+      "Clostridioides difficile感染症を疑う場合は速やかに検査・接触予防策を行う",
+      "脱水・電解質異常の補正を優先する"
+    ],
+    "references": [
+      {
+        "title": "便通異常症診療ガイドライン2023―慢性下痢症(Mindsガイドラインライブラリ)",
+        "url": "https://minds.jcqhc.or.jp/summary/c00811/"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "下痢(MSDマニュアル プロフェッショナル版)",
+        "description": "下痢の原因評価・問診の進め方を詳しく解説。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/01-%E6%B6%88%E5%8C%96%E7%AE%A1%E7%96%BE%E6%82%A3/%E6%B6%88%E5%8C%96%E7%AE%A1%E7%96%BE%E6%82%A3%E3%81%AE%E7%97%87%E7%8A%B6/%E4%B8%8B%E7%97%A2"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "Clostridioides difficile感染症",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/01-%E6%B6%88%E5%8C%96%E7%AE%A1%E7%96%BE%E6%82%A3/%E6%B6%88%E5%8C%96%E7%AE%A1%E7%96%BE%E6%82%A3%E3%81%AE%E7%97%87%E7%8A%B6/%E4%B8%8B%E7%97%A2"
+      },
+      {
+        "term": "慢性下痢",
+        "url": "https://minds.jcqhc.or.jp/summary/c00811/"
+      }
+    ]
+  },
+  {
+    "category": "edema",
+    "categoryLabel": "浮腫",
+    "group": "symptom",
+    "overview": "浮腫は心不全・腎機能障害・低アルブミン血症(肝硬変・ネフローゼ症候群等)・静脈うっ滞・薬剤性等、多岐にわたる原因で生じる。原因に応じた治療が基本であり、利尿薬はうっ血・体液貯留を伴う病態(特に心不全)で中心的な役割を果たすが、原因を問わず一律に投与すべきではない。",
+    "visualOverview": {
+      "kind": "scale",
+      "caption": "左右差の有無等から全身性浮腫と局所性浮腫を鑑別し、原因に応じた治療を選択する。",
+      "segments": [
+        { "label": "全身性浮腫", "sublabel": "心不全・腎不全・低アルブミン血症等", "colorClass": "bg-cyan-300" },
+        { "label": "局所性浮腫", "sublabel": "静脈血栓症・リンパ浮腫等", "colorClass": "bg-cyan-600" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "浮腫の分類",
+        "description": "全身性浮腫(心不全・腎不全・低アルブミン血症等)と局所性浮腫(静脈血栓症・リンパ浮腫・炎症等)に大別される。左右差の有無が両者の鑑別に有用。"
+      },
+      {
+        "title": "うっ血の評価",
+        "description": "心不全による浮腫では、体重増加・頸静脈怒張・肺うっ血所見等、他のうっ血徴候とあわせて評価することが重要。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "浮腫の分布(左右差の有無・全身性か局所性か)を確認する", "type": "assess" },
+      { "text": "心不全・腎機能障害・低アルブミン血症・静脈血栓症等、背景疾患を検索する", "type": "assess" },
+      { "text": "心不全等のうっ血所見を伴う場合は利尿薬の適応を検討する", "type": "decide" },
+      { "text": "ループ利尿薬を中心に利尿薬を開始する", "type": "treat" },
+      { "text": "効果不十分な場合は作用機序の異なる利尿薬の併用を検討する", "type": "treat" },
+      { "text": "体重・尿量・電解質・腎機能を定期的にモニタリングする", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "フロセミド",
+        "brandNames": ["ラシックス"],
+        "drugClass": "ループ利尿薬",
+        "target": "腎ヘンレ係蹄のNa-K-2Cl共輸送体",
+        "mechanismType": "inhibitor",
+        "effect": "腎臓での水・ナトリウム再吸収を強力に阻害し、速やかな利尿効果を示す。",
+        "whenToChoose": "心不全等のうっ血を伴う浮腫で、速やかな体液量是正が必要な場合に第一選択として検討される。",
+        "cautions": ["低カリウム血症・低ナトリウム血症", "脱水・腎前性腎機能障害", "聴器毒性(高用量・急速静注時)"]
+      },
+      {
+        "name": "スピロノラクトン",
+        "brandNames": ["アルダクトンA"],
+        "drugClass": "抗アルドステロン薬(カリウム保持性利尿薬)",
+        "target": "アルドステロン受容体(鉱質コルチコイド受容体)",
+        "mechanismType": "antagonist",
+        "effect": "アルドステロンの作用を阻害し、ナトリウム排泄を促す一方でカリウムを保持する。",
+        "whenToChoose": "心不全の予後改善効果が示されており、ループ利尿薬と併用して検討されることが多い。",
+        "cautions": ["高カリウム血症", "女性化乳房等の内分泌系の副作用"]
+      },
+      {
+        "name": "トルバプタン",
+        "brandNames": ["サムスカ"],
+        "drugClass": "バソプレシンV2受容体拮抗薬",
+        "target": "バソプレシンV2受容体(腎集合管)",
+        "mechanismType": "antagonist",
+        "effect": "水の再吸収に関わるバソプレシンV2受容体を遮断し、電解質を排泄せずに水分のみを排泄する(水利尿)。",
+        "whenToChoose": "ループ利尿薬等で体液貯留の改善が不十分な場合に追加で検討される。",
+        "cautions": ["急速な血清ナトリウム上昇による浸透圧性脱髄症候群のリスク", "口渇・脱水", "肝機能障害"]
+      }
+    ],
+    "generalCautions": [
+      "利尿薬開始後は体重・尿量・電解質・腎機能を継続的にモニタリングする",
+      "低アルブミン血症が主体の浮腫では利尿薬の効果が限定的な場合がある",
+      "急速な利尿による脱水・腎前性腎機能障害に注意する"
+    ],
+    "references": [
+      {
+        "title": "循環器病ガイドラインシリーズ(心不全等)(日本循環器学会)",
+        "url": "https://www.j-circ.or.jp/guideline/"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "浮腫(MSDマニュアル プロフェッショナル版)",
+        "description": "浮腫の原因評価・診察の進め方を詳しく解説。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/04-%E5%BF%83%E8%A1%80%E7%AE%A1%E7%96%BE%E6%82%A3/%E5%BF%83%E8%A1%80%E7%AE%A1%E7%96%BE%E6%82%A3%E3%81%AE%E7%97%87%E7%8A%B6/%E6%B5%AE%E8%85%AB"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "うっ血",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/04-%E5%BF%83%E8%A1%80%E7%AE%A1%E7%96%BE%E6%82%A3/%E5%BF%83%E8%A1%80%E7%AE%A1%E7%96%BE%E6%82%A3%E3%81%AE%E7%97%87%E7%8A%B6/%E6%B5%AE%E8%85%AB"
+      },
+      {
+        "term": "局所性浮腫",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/04-%E5%BF%83%E8%A1%80%E7%AE%A1%E7%96%BE%E6%82%A3/%E5%BF%83%E8%A1%80%E7%AE%A1%E7%96%BE%E6%82%A3%E3%81%AE%E7%97%87%E7%8A%B6/%E6%B5%AE%E8%85%AB"
+      }
+    ]
+  },
+  {
+    "category": "anxiety",
+    "categoryLabel": "不安",
+    "group": "symptom",
+    "overview": "入院患者の不安には、身体疾患・入院環境によって引き起こされる状況的な不安と、既存の不安症が背景にある場合がある。まず身体的要因(疼痛・呼吸困難・せん妄等)を除外・是正したうえで、非薬物的対応(傾聴・環境調整)を基本とし、薬物療法は症状が強く生活に支障がある場合に検討する。なお、参考文献は社交不安症を対象としたガイドラインだが、ベンゾジアゼピン系薬剤の使用に関する基本的な考え方は不安症全般に広く適用される。",
+    "visualOverview": {
+      "kind": "steps",
+      "caption": "身体的要因の是正・非薬物的対応を基本とし、症状が強い場合に薬物療法を段階的に検討する。",
+      "segments": [
+        { "label": "基本", "sublabel": "身体的要因の是正・非薬物的対応", "colorClass": "bg-indigo-300" },
+        { "label": "頓用", "sublabel": "ベンゾジアゼピン系(短期間)", "colorClass": "bg-indigo-500" },
+        { "label": "持続する場合", "sublabel": "抗うつ薬(SSRI等)", "colorClass": "bg-indigo-700" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "不安の評価",
+        "description": "身体症状(疼痛・呼吸困難・低酸素等)や薬剤(ステロイド・気管支拡張薬等)が不安症状の原因・増悪因子となっていないかをまず確認する。"
+      },
+      {
+        "title": "ベンゾジアゼピン系薬剤使用の考え方",
+        "description": "急性の不安症状に有効だが、依存性・離脱症状・過鎮静・せん妄誘発のリスクがあるため、短期間・頓用を基本とし漫然とした継続は避ける。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "不安の原因となりうる身体症状(疼痛・呼吸困難・低酸素等)や薬剤性の要因を確認する", "type": "assess" },
+      { "text": "せん妄との鑑別(急性の意識変容・注意力障害の有無)を行う", "type": "assess" },
+      { "text": "非薬物的対応(傾聴・環境調整・情報提供)を基本とする", "type": "treat" },
+      { "text": "症状が強く生活に支障がある場合に薬物療法の適応を検討する", "type": "decide" },
+      { "text": "頓用でベンゾジアゼピン系抗不安薬を短期間・最小用量で使用する", "type": "treat" },
+      { "text": "持続する不安症状には抗うつ薬(SSRI等)の導入や精神科・心療内科への相談を検討する", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "ロラゼパム",
+        "brandNames": ["ワイパックス"],
+        "drugClass": "ベンゾジアゼピン系抗不安薬",
+        "target": "GABA-A受容体",
+        "mechanismType": "agonist",
+        "effect": "GABA-A受容体に作用し、速やかな抗不安・鎮静効果を示す。作用時間が中間型で肝代謝の影響を受けにくい。",
+        "whenToChoose": "急性の強い不安症状に対する頓用として、肝機能低下例でも比較的使用しやすい。",
+        "cautions": ["過鎮静・ふらつき(特に高齢者で転倒リスク)", "依存・離脱症状", "せん妄の誘発・増悪"]
+      },
+      {
+        "name": "エチゾラム",
+        "brandNames": ["デパス"],
+        "drugClass": "チエノジアゼピン系抗不安薬",
+        "target": "GABA-A受容体",
+        "mechanismType": "agonist",
+        "effect": "GABA-A受容体に作用し、抗不安・筋弛緩効果を示す。",
+        "whenToChoose": "筋緊張を伴う不安症状で検討されることがあるが、依存性のリスクを踏まえ短期間の使用にとどめる。",
+        "cautions": ["依存・離脱症状(特に注意が必要)", "過鎮静・筋弛緩作用による転倒"]
+      },
+      {
+        "name": "セルトラリン等のSSRI",
+        "brandNames": ["ジェイゾロフト"],
+        "drugClass": "選択的セロトニン再取り込み阻害薬(SSRI)",
+        "target": "セロトニントランスポーター(SERT)",
+        "mechanismType": "inhibitor",
+        "effect": "セロトニンの再取り込みを阻害し、シナプス間隙のセロトニン濃度を高めることで抗不安・抗うつ効果を示す。",
+        "whenToChoose": "持続する不安症状に対する第一選択薬として、ベンゾジアゼピン系の長期使用を避けたい場合に検討される。",
+        "cautions": ["効果発現まで数週間を要する", "悪心等の消化器症状(投与初期)", "急な中止による離脱症状"]
+      }
+    ],
+    "generalCautions": [
+      "ベンゾジアゼピン系薬剤は短期間・頓用を基本とし、漫然とした継続を避ける",
+      "高齢者では過鎮静・転倒・せん妄誘発のリスクに特に注意する",
+      "身体的要因(疼痛・呼吸困難等)の是正を並行して行う"
+    ],
+    "references": [
+      {
+        "title": "社交不安症の診療ガイドライン(日本不安症学会・日本神経精神薬理学会)",
+        "url": "https://www.jsnp-org.jp/news/img/20210510.pdf"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "全般不安症(MSDマニュアル プロフェッショナル版)",
+        "description": "不安症の評価・問診の進め方を詳しく解説。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/08-%E7%B2%BE%E7%A5%9E%E9%9A%9C%E5%AE%B3/%E4%B8%8D%E5%AE%89%E7%97%87%E7%BE%A4%E3%81%A8%E3%82%B9%E3%83%88%E3%83%AC%E3%82%B9%E5%9B%A0%E9%96%A2%E9%80%A3%E9%9A%9C%E5%AE%B3%E7%BE%A4/%E5%85%A8%E8%88%AC%E4%B8%8D%E5%AE%89%E7%97%87-gad?ruleredirectid=465"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "ベンゾジアゼピン系",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/08-%E7%B2%BE%E7%A5%9E%E9%9A%9C%E5%AE%B3/%E4%B8%8D%E5%AE%89%E7%97%87%E7%BE%A4%E3%81%A8%E3%82%B9%E3%83%88%E3%83%AC%E3%82%B9%E5%9B%A0%E9%96%A2%E9%80%A3%E9%9A%9C%E5%AE%B3%E7%BE%A4/%E5%85%A8%E8%88%AC%E4%B8%8D%E5%AE%89%E7%97%87-gad?ruleredirectid=465"
+      }
+    ]
+  },
+  {
+    "category": "dyslipidemia",
+    "categoryLabel": "脂質異常症",
+    "group": "chronic",
+    "overview": "LDLコレステロール値と動脈硬化性疾患の絶対リスク(既往疾患・危険因子の数等)に応じて管理目標値を設定し、生活習慣の改善とあわせて薬物療法を検討する。スタチンを基本治療とし、効果不十分な場合や高リスク例では非スタチン系薬剤の併用を検討する。",
+    "visualOverview": {
+      "kind": "scale",
+      "caption": "絶対リスク評価に基づきリスク区分を分類し、区分ごとに異なるLDL-C管理目標値を設定する(動脈硬化性疾患予防ガイドライン2022)。",
+      "segments": [
+        { "label": "低リスク", "sublabel": "一次予防", "colorClass": "bg-lime-300" },
+        { "label": "中リスク", "sublabel": "一次予防", "colorClass": "bg-yellow-300" },
+        { "label": "高リスク", "sublabel": "一次予防", "colorClass": "bg-orange-400" },
+        { "label": "二次予防", "sublabel": "既往あり(最も厳格)", "colorClass": "bg-red-500" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "リスク区分別のLDL-C管理目標値",
+        "description": "動脈硬化性疾患予防ガイドライン2022年版では、久山町研究のスコア等による絶対リスク評価に基づき、一次予防では低・中・高リスクの3区分、二次予防(既往あり)ではさらに厳格な管理目標値が設定される。"
+      },
+      {
+        "title": "糖尿病合併時の管理目標",
+        "description": "糖尿病がある場合、末梢動脈疾患や細小血管症合併時、または喫煙ありの場合はLDLコレステロール100mg/dL未満を目標とする、といった個別化が行われる。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "LDLコレステロール・HDLコレステロール・トリグリセライド等の脂質プロファイルを確認する", "type": "assess" },
+      { "text": "動脈硬化性疾患の既往・危険因子(糖尿病・喫煙・高血圧等)から絶対リスクを評価する", "type": "assess" },
+      { "text": "リスク区分に応じたLDL-C管理目標値を設定する", "type": "decide" },
+      { "text": "生活習慣の改善とあわせてスタチンを基本治療として開始する", "type": "treat" },
+      { "text": "効果不十分な場合や高リスク例では非スタチン系薬剤の併用を検討する", "type": "decide" },
+      { "text": "肝機能・CK(筋症状)等の副作用と脂質値の推移を定期的に確認する", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "ロスバスタチン等のスタチン",
+        "brandNames": ["クレストール"],
+        "drugClass": "HMG-CoA還元酵素阻害薬(スタチン)",
+        "target": "HMG-CoA還元酵素",
+        "mechanismType": "inhibitor",
+        "effect": "肝臓でのコレステロール合成を阻害し、LDLコレステロールを低下させる。",
+        "whenToChoose": "脂質異常症治療の基本薬として、リスク区分を問わず第一選択として検討される。",
+        "cautions": ["筋肉痛・横紋筋融解症(まれ)", "肝機能障害", "CYP3A4阻害薬との相互作用(薬剤による)"]
+      },
+      {
+        "name": "エゼチミブ",
+        "brandNames": ["ゼチーア"],
+        "drugClass": "小腸コレステロールトランスポーター阻害薬",
+        "target": "小腸コレステロールトランスポーター(NPC1L1)",
+        "mechanismType": "inhibitor",
+        "effect": "小腸からのコレステロール吸収を阻害し、LDLコレステロールを低下させる。",
+        "whenToChoose": "スタチン単独で目標値に達しない場合に併用として検討される。",
+        "cautions": ["消化器症状", "肝機能障害(スタチンとの併用時)"]
+      },
+      {
+        "name": "PCSK9阻害薬",
+        "brandNames": ["レパーサ(エボロクマブ)", "プラルエント(アリロクマブ)"],
+        "drugClass": "PCSK9阻害薬(抗体製剤)",
+        "target": "PCSK9(LDL受容体分解に関わる蛋白)",
+        "mechanismType": "inhibitor",
+        "effect": "PCSK9を阻害してLDL受容体の分解を防ぎ、肝臓でのLDL取り込みを促進することで強力にLDLコレステロールを低下させる。",
+        "whenToChoose": "家族性高コレステロール血症や、スタチン・エゼチミブでも管理目標に達しない高リスク例で検討される。",
+        "cautions": ["注射部位反応", "高価であり適応が限定される"]
+      },
+      {
+        "name": "イコサペント酸エチル",
+        "brandNames": ["エパデール"],
+        "drugClass": "高純度EPA製剤",
+        "target": "詳細な脂質低下機序は複合的(受容体を介さない)",
+        "mechanismType": "other",
+        "effect": "トリグリセライドを低下させ、抗炎症・抗血小板作用もあわせ持つとされる。",
+        "whenToChoose": "高トリグリセライド血症を伴う例でスタチンと併用検討される。",
+        "cautions": ["出血傾向(抗血小板薬併用時に注意)", "消化器症状"]
+      }
+    ],
+    "generalCautions": [
+      "スタチン開始前後で肝機能・CK値を確認する",
+      "筋肉痛・脱力等の症状出現時は横紋筋融解症を念頭に評価する",
+      "生活習慣の改善(食事・運動)を薬物療法と並行して継続する"
+    ],
+    "references": [
+      {
+        "title": "動脈硬化性疾患予防ガイドライン2022年版(日本動脈硬化学会)",
+        "url": "https://www.j-athero.org/jp/jas_gl2022/"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "脂質異常症(MSDマニュアル プロフェッショナル版)",
+        "description": "脂質異常症の病態生理・評価の進め方を詳しく解説。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/10-%E5%86%85%E5%88%86%E6%B3%8C%E7%96%BE%E6%82%A3%E3%81%A8%E4%BB%A3%E8%AC%9D%E6%80%A7%E7%96%BE%E6%82%A3/%E8%84%82%E8%B3%AA%E9%9A%9C%E5%AE%B3/%E8%84%82%E8%B3%AA%E7%95%B0%E5%B8%B8%E7%97%87"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "二次予防",
+        "url": "https://www.j-athero.org/jp/jas_gl2022/"
+      },
+      {
+        "term": "LDL-C管理目標値",
+        "url": "https://www.j-athero.org/jp/jas_gl2022/"
+      }
+    ]
+  }
+]

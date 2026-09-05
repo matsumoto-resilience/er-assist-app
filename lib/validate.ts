@@ -40,7 +40,7 @@ export function validateVitals(vitals: unknown): string | null {
 }
 
 export const VALID_SEX_VALUES = new Set(["male", "female", "unknown"]);
-export const VALID_USER_ROLES = new Set(["student", "doctor"]);
+export const VALID_USER_ROLES = new Set(["student", "doctor", "comedical"]);
 
 export function validatePatientInput(input: unknown): string | null {
   if (typeof input !== "object" || input === null) {

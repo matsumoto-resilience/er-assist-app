@@ -1,195 +1,199 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import PatientForm from "@/components/PatientForm";
-import ResultPanel from "@/components/ResultPanel";
-import DisclaimerBanner from "@/components/DisclaimerBanner";
-import RoleGate from "@/components/RoleGate";
-import HistoryPanel from "@/components/HistoryPanel";
+import Link from "next/link";
+import AiTopicResultPanel from "@/components/AiTopicResultPanel";
 import {
-  addCaseHistoryEntry,
-  clearCaseHistory,
-  loadCaseHistory,
-  removeCaseHistoryEntry,
-  type CaseHistoryEntry,
-} from "@/lib/case-history";
+  OUTPATIENT_CATEGORY_GROUP_LABELS,
+  OUTPATIENT_CATEGORY_LABELS,
+} from "@/lib/outpatient/types";
+import { getAllOutpatientSymptomGuides } from "@/lib/outpatient/retrieve";
+import {
+  addSearchHistory,
+  clearSearchHistory,
+  loadSearchHistory,
+} from "@/lib/outpatient/search-history";
 import type {
-  AssistOutput,
-  KnowledgeBaseEntry,
-  PatientInput,
-  UserRole,
-} from "@/lib/types";
+  OutpatientAiTopicResult,
+  OutpatientCategoryGroup,
+  OutpatientSymptomGuide,
+} from "@/lib/outpatient/types";
 
-const ROLE_STORAGE_KEY = "erAssistUserRole";
-const HISTORY_STORAGE_KEY = "erAssistOutpatientCaseHistory";
-
-type OutpatientHistoryEntry = CaseHistoryEntry<PatientInput, AssistOutput, KnowledgeBaseEntry>;
+const guides = getAllOutpatientSymptomGuides();
+const GROUP_ORDER: OutpatientCategoryGroup[] = ["symptom", "chronic"];
 
 export default function OutpatientPage() {
-  const [output, setOutput] = useState<AssistOutput | null>(null);
-  const [lastInput, setLastInput] = useState<PatientInput | null>(null);
-  const [knowledgeBase, setKnowledgeBase] = useState<KnowledgeBaseEntry[]>([]);
-  const [auditId, setAuditId] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [role, setRole] = useState<UserRole | null | undefined>(undefined);
-  const [history, setHistory] = useState<OutpatientHistoryEntry[]>([]);
-  const [showHistory, setShowHistory] = useState(false);
+  const [query, setQuery] = useState("");
+  const [history, setHistory] = useState<string[]>([]);
+  const [aiResult, setAiResult] = useState<OutpatientAiTopicResult | null>(null);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiError, setAiError] = useState<string | null>(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem(ROLE_STORAGE_KEY);
-    setRole(saved === "student" || saved === "doctor" ? saved : null);
-    setHistory(loadCaseHistory(HISTORY_STORAGE_KEY));
+    setHistory(loadSearchHistory());
   }, []);
 
-  function selectRole(next: UserRole) {
-    localStorage.setItem(ROLE_STORAGE_KEY, next);
-    setRole(next);
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredGuides = guides.filter((guide) =>
+    guide.categoryLabel.toLowerCase().includes(normalizedQuery)
+  );
+  const noMatch = normalizedQuery !== "" && filteredGuides.length === 0;
+
+  function handleSearchSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!query.trim()) return;
+    setHistory(addSearchHistory(query));
   }
 
-  async function handleSubmit(input: PatientInput) {
-    setLoading(true);
-    setError(null);
-    setOutput(null);
-    setKnowledgeBase([]);
-    setAuditId(null);
-    const inputWithRole = { ...input, userRole: role ?? undefined };
-    setLastInput(inputWithRole);
+  function selectHistoryItem(item: string) {
+    setQuery(item);
+    setAiResult(null);
+    setAiError(null);
+  }
+
+  async function handleGenerateTopic() {
+    const topic = query.trim();
+    if (!topic) return;
+    setAiLoading(true);
+    setAiError(null);
+    setAiResult(null);
+    setHistory(addSearchHistory(topic));
 
     try {
-      const res = await fetch("/api/outpatient/generate", {
+      const res = await fetch("/api/outpatient/generate-topic", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(inputWithRole),
+        body: JSON.stringify({ topic }),
       });
-
       const data = await res.json();
-
       if (!res.ok) {
-        setError(data.error ?? "生成に失敗しました。");
+        setAiError(data.error ?? "生成に失敗しました。");
         return;
       }
-
-      setOutput(data.output);
-      setKnowledgeBase(data.knowledgeBase ?? []);
-      setAuditId(data.auditId ?? null);
-      setHistory(
-        addCaseHistoryEntry<PatientInput, AssistOutput, KnowledgeBaseEntry>(
-          HISTORY_STORAGE_KEY,
-          {
-            input: inputWithRole,
-            output: data.output,
-            knowledgeBase: data.knowledgeBase ?? [],
-            auditId: data.auditId ?? null,
-          }
-        )
-      );
+      setAiResult(data.output);
     } catch {
-      setError("通信エラーが発生しました。ネットワーク接続を確認してください。");
+      setAiError("通信エラーが発生しました。ネットワーク接続を確認してください。");
     } finally {
-      setLoading(false);
+      setAiLoading(false);
     }
-  }
-
-  function viewHistoryEntry(entry: OutpatientHistoryEntry) {
-    setError(null);
-    setLastInput(entry.input);
-    setOutput(entry.output);
-    setKnowledgeBase(entry.knowledgeBase);
-    setAuditId(entry.auditId);
-    setShowHistory(false);
-  }
-
-  if (role === undefined) {
-    return null;
-  }
-
-  if (role === null) {
-    return <RoleGate onSelect={selectRole} />;
   }
 
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-6 lg:px-8">
-      <header className="mb-6 flex items-start justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">外来 臨床意思決定支援</h1>
-          <p className="mt-1 text-sm text-gray-600">
-            主訴と患者情報から、一般外来向けの診療方針・鑑別疾患・治療方針の参考情報を生成します。
-          </p>
-        </div>
-        <div className="shrink-0 text-right text-xs text-gray-500">
-          <span className="rounded-full bg-gray-100 px-2 py-1 font-medium text-gray-700">
-            {role === "student" ? "学生モード" : "医師モード"}
-          </span>
-          <button
-            type="button"
-            onClick={() => setRole(null)}
-            className="mt-1 block underline hover:text-gray-700"
-          >
-            切り替える
-          </button>
-          <button
-            type="button"
-            onClick={() => setShowHistory((prev) => !prev)}
-            className="mt-1 block underline hover:text-gray-700"
-          >
-            履歴を{showHistory ? "隠す" : "見る"}({history.length})
-          </button>
-        </div>
+      <header className="mb-6">
+        <h1 className="text-2xl font-bold text-gray-900">外来 薬剤選択ガイド</h1>
+        <p className="mt-1 text-sm text-gray-600">
+          一般外来でよく管理する症状・慢性疾患について、症状ごとに薬剤選択の考え方・各薬の効果・副作用をまとめた学習用リファレンスです。一覧から選ぶか、症状名で検索してください。
+        </p>
       </header>
 
-      {showHistory && (
-        <HistoryPanel
-          entries={history}
-          getLabel={(entry) => entry.input.chiefComplaint}
-          onSelect={viewHistoryEntry}
-          onRemove={(id) =>
-            setHistory(
-              removeCaseHistoryEntry<PatientInput, AssistOutput, KnowledgeBaseEntry>(
-                HISTORY_STORAGE_KEY,
-                id
-              )
-            )
-          }
-          onClear={() => setHistory(clearCaseHistory(HISTORY_STORAGE_KEY))}
-        />
+      <form onSubmit={handleSearchSubmit} className="mb-3">
+        <label className="block text-sm font-medium text-gray-700">症状を検索</label>
+        <div className="mt-1 flex gap-2">
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setAiResult(null);
+              setAiError(null);
+            }}
+            placeholder="例: 高血圧、感冒、不眠..."
+            className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+          <button
+            type="submit"
+            className="shrink-0 rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
+          >
+            検索
+          </button>
+        </div>
+      </form>
+
+      {history.length > 0 && (
+        <div className="mb-6 flex flex-wrap items-center gap-2 text-xs">
+          <span className="text-gray-500">最近の検索:</span>
+          {history.map((item) => (
+            <button
+              key={item}
+              type="button"
+              onClick={() => selectHistoryItem(item)}
+              className="rounded-full border border-gray-300 bg-white px-2.5 py-1 text-gray-700 hover:border-blue-300 hover:bg-blue-50"
+            >
+              {item}
+            </button>
+          ))}
+          <button
+            type="button"
+            onClick={() => setHistory(clearSearchHistory())}
+            className="text-gray-400 underline hover:text-gray-600"
+          >
+            履歴を消す
+          </button>
+        </div>
       )}
 
-      <div className="mb-6">
-        <DisclaimerBanner />
+      <div className="space-y-6">
+        {GROUP_ORDER.map((group) => {
+          const groupGuides = filteredGuides.filter((guide) => guide.group === group);
+          if (groupGuides.length === 0) return null;
+          return (
+            <div key={group}>
+              <h2 className="mb-2 text-sm font-bold text-gray-500">
+                {OUTPATIENT_CATEGORY_GROUP_LABELS[group]}
+              </h2>
+              <div className="divide-y divide-gray-200 overflow-hidden rounded-lg border border-gray-200 bg-white">
+                {groupGuides.map((guide) => (
+                  <CategoryListRow key={guide.category} guide={guide} />
+                ))}
+              </div>
+            </div>
+          );
+        })}
+
+        {noMatch && (
+          <div className="rounded-lg border border-dashed border-purple-300 bg-purple-50 p-4 text-center">
+            <p className="text-sm text-purple-900">
+              「{query.trim()}」は現在の一覧にありません。
+            </p>
+            <button
+              type="button"
+              onClick={handleGenerateTopic}
+              disabled={aiLoading}
+              className="mt-3 rounded-md bg-purple-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-purple-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+            >
+              {aiLoading ? "生成中..." : "AIに生成してもらう"}
+            </button>
+            {aiError && <p className="mt-2 text-xs text-red-700">{aiError}</p>}
+          </div>
+        )}
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
-          <PatientForm onSubmit={handleSubmit} loading={loading} />
+      {aiResult && (
+        <div className="mt-6">
+          <AiTopicResultPanel result={aiResult} />
         </div>
+      )}
 
-        <div>
-          {error && (
-            <div className="rounded-md border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800">
-              {error}
-            </div>
-          )}
-          {!error && !output && !loading && (
-            <div className="flex h-full items-center justify-center rounded-lg border border-dashed border-gray-300 p-8 text-center text-sm text-gray-400">
-              患者情報を入力し「診療方針を生成する」を押してください
-            </div>
-          )}
-          {loading && (
-            <div className="flex h-full items-center justify-center rounded-lg border border-dashed border-gray-300 p-8 text-center text-sm text-gray-500">
-              AIが診療方針・鑑別疾患・治療方針を検討しています...
-            </div>
-          )}
-          {output && lastInput && (
-            <ResultPanel
-              output={output}
-              input={lastInput}
-              knowledgeBase={knowledgeBase}
-              auditId={auditId}
-            />
-          )}
+      {!aiResult && !noMatch && (
+        <div className="mt-6 flex items-center justify-center rounded-lg border border-dashed border-gray-300 p-8 text-center text-sm text-gray-400">
+          症状をタップすると、詳細ページに移動します
         </div>
-      </div>
+      )}
     </main>
+  );
+}
+
+function CategoryListRow({ guide }: { guide: OutpatientSymptomGuide }) {
+  return (
+    <Link
+      href={`/outpatient/${guide.category}`}
+      className="flex w-full items-center justify-between px-4 py-3 text-left text-sm transition bg-white hover:bg-gray-50"
+    >
+      <span className="font-semibold text-gray-900">
+        {OUTPATIENT_CATEGORY_LABELS[guide.category]}
+      </span>
+      <span className="text-xs text-gray-400">詳しく見る →</span>
+    </Link>
   );
 }

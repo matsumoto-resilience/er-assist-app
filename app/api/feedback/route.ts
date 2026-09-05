@@ -1,12 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { appendFeedbackLog } from "@/lib/feedback-log";
 import { checkRateLimit, getClientKey } from "@/lib/rate-limit";
+import { requireUser } from "@/lib/require-auth";
 
 const MAX_BODY_BYTES = 5_000;
 const MAX_COMMENT_LENGTH = 1000;
 const VALID_RATINGS = new Set(["helpful", "not_helpful"]);
 
 export async function POST(req: NextRequest) {
+  const unauthorized = await requireUser();
+  if (unauthorized) return unauthorized;
+
   const rateLimitResult = checkRateLimit(`feedback:${getClientKey(req.headers)}`);
   if (!rateLimitResult.allowed) {
     return NextResponse.json(

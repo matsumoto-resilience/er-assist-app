@@ -1,69 +1,65 @@
-import type { GuidelineReference, IdentifiedRedFlag, UserRole } from "../types";
+import type { SymptomGuide, AiTopicResult } from "../symptom-guide/types";
 
-// 現時点で対応する科(循環器内科・呼吸器内科・消化器内科)のみ選択可能。
-// 他科は各科ガイドラインの調査・実在確認が完了するまで追加しない(ハルシネーション防止)。
-export type InpatientDepartment = "cardiology" | "pulmonology" | "gastroenterology";
+export type {
+  DrugChoice as InpatientDrugChoice,
+  ManagementPoint as InpatientManagementPoint,
+  LearnMoreLink as InpatientLearnMoreLink,
+  GlossaryTerm as InpatientGlossaryTerm,
+  VisualSegment as InpatientVisualSegment,
+  VisualOverview as InpatientVisualOverview,
+  SelectionStepType as InpatientSelectionStepType,
+  SelectionStep as InpatientSelectionStep,
+  MechanismType as InpatientMechanismType,
+} from "../symptom-guide/types";
 
-export const INPATIENT_DEPARTMENT_LABELS: Record<InpatientDepartment, string> = {
-  cardiology: "循環器内科",
-  pulmonology: "呼吸器内科",
-  gastroenterology: "消化器内科",
+// 現時点で対応する症状カテゴリ(入院中によく遭遇する症状管理+主要な慢性疾患管理)のみ選択可能。
+// 他カテゴリは各領域ガイドラインの調査・実在確認が完了するまで追加しない(ハルシネーション防止)。
+export type InpatientSymptomCategory =
+  | "insomnia"
+  | "constipation"
+  | "pain"
+  | "nausea"
+  | "hypertension"
+  | "diabetes"
+  | "delirium"
+  | "fever"
+  | "cough"
+  | "pruritus"
+  | "diarrhea"
+  | "edema"
+  | "anxiety"
+  | "dyslipidemia";
+
+export const INPATIENT_SYMPTOM_CATEGORY_LABELS: Record<InpatientSymptomCategory, string> = {
+  insomnia: "不眠",
+  constipation: "便秘",
+  pain: "疼痛",
+  nausea: "悪心・嘔吐",
+  hypertension: "高血圧",
+  diabetes: "糖尿病",
+  delirium: "せん妄",
+  fever: "発熱",
+  cough: "咳嗽・喀痰",
+  pruritus: "掻痒感",
+  diarrhea: "下痢",
+  edema: "浮腫",
+  anxiety: "不安",
+  dyslipidemia: "脂質異常症",
 };
 
-export interface InpatientInput {
-  department: InpatientDepartment;
-  admissionDiagnosis: string; // 入院時診断・主病名
-  hospitalDay?: number; // 入院病日
-  currentTreatment: string; // 現在の治療内容(点滴・内服・酸素等)
-  recentCourse: string; // 経過・直近の検査結果(フリーテキスト)
-  focusQuestion?: string; // 特に確認したいポイント
-  age?: number;
-  sex?: "male" | "female" | "unknown";
-  vitals: {
-    systolicBP?: number;
-    diastolicBP?: number;
-    heartRate?: number;
-    respiratoryRate?: number;
-    spo2?: number;
-    bodyTemp?: number;
-    gcs?: number;
-  };
-  userRole?: UserRole;
-}
+// カテゴリの大分類(一覧表示のグループ分けに用いる)
+export type InpatientCategoryGroup = "symptom" | "chronic";
 
-// 鑑別すべき合併症・増悪因子
-export interface ComplicationRisk {
-  name: string;
-  likelihood: "high" | "medium" | "low";
-  rationale: string;
-}
+export const INPATIENT_CATEGORY_GROUP_LABELS: Record<InpatientCategoryGroup, string> = {
+  symptom: "症状管理",
+  chronic: "慢性疾患管理",
+};
 
-export interface InpatientTreatmentPlan {
-  continueActions: string[]; // 継続すべき現行治療のポイント
-  adjustments: string[]; // 治療内容の調整案
-  workup: string[]; // 追加で検討すべき検査
-  monitoring: string[]; // モニタリング項目
-  dischargeCriteria: string; // 退院に向けた考え方・基準
-}
+// 症状カテゴリごとの薬剤選択学習ガイド(手動で実在確認済みの内容のみ登録、AIには生成させない)
+export type InpatientSymptomGuide = SymptomGuide<
+  InpatientSymptomCategory,
+  InpatientCategoryGroup
+>;
 
-export interface InpatientOutput {
-  keyActions: string[]; // 直ちに行うべきことの要点
-  keyWorkup: string[]; // 優先して確認すべき検査の要点
-  assessmentPlan: string; // 現状評価
-  complicationRisks: ComplicationRisk[]; // 鑑別すべき合併症・増悪因子
-  monitoringChecklist: string[]; // 身体所見・検査モニタリングの集約チェックリスト
-  treatmentPlan: InpatientTreatmentPlan;
-  redFlagsIdentified: IdentifiedRedFlag[];
-  confidenceNote: string;
-}
-
-// 科別知識ベースのエントリ(手動で実在確認済みの参考文献のみ登録)
-export interface InpatientKnowledgeBaseEntry {
-  department: InpatientDepartment;
-  departmentLabel: string;
-  topicKeywords: string[]; // 入院時診断・現病歴とのマッチング用キーワード
-  warningSigns: string[]; // 増悪・合併症を示唆する警告所見
-  guidelineNotes: string;
-  flowchartSteps: string[];
-  references: GuidelineReference[];
-}
+// 一覧にない症状を検索した際のAI生成結果(薬剤名・受容体・作用機序等の具体的な薬理情報は含めない)
+export type InpatientAiTopicResult = AiTopicResult;

@@ -1,0 +1,261 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+  <style>
+    *{box-sizing:border-box;}
+    body{margin:0;background:#0a5eb0;color:#fff;
+      font-family:'Geist',system-ui,-apple-system,'Hiragino Sans','Hiragino Kaku Gothic ProN',Meiryo,sans-serif;
+      -webkit-font-smoothing:antialiased;}
+    a{color:#fff;text-underline-offset:2px;}
+    .wrap{min-height:1650px;padding:0 16px 30px;}
+    .bar{display:flex;align-items:center;justify-content:space-between;
+      padding:12px 0 10px;border-bottom:1px solid rgba(255,255,255,0.14);margin-bottom:14px;}
+    .mark{display:flex;align-items:baseline;gap:7px;}
+    .mark b{font-weight:700;font-size:19px;letter-spacing:0.03em;}
+    .mark i{font-style:normal;font-weight:600;font-size:9.5px;letter-spacing:0.22em;color:rgba(255,255,255,0.68);}
+    .back{display:inline-block;margin-bottom:12px;font-size:12px;color:#fff;}
+    .stack{display:flex;flex-direction:column;gap:12px;}
+    .sheet{background:#fff;color:#0f172a;border-radius:14px;padding:15px;
+      box-shadow:0 12px 28px rgba(3,34,68,0.26);}
+    .sh{margin:0 0 9px;font-size:13px;font-weight:700;}
+    .h2{margin:0 0 10px;font-size:15px;font-weight:700;}
+    .scale{display:flex;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;margin-bottom:10px;}
+    .scale div{flex:1;padding:9px 4px;text-align:center;}
+    .scale .st{font-size:10px;font-weight:700;color:#0f172a;}
+    .scale .ss{font-size:8.5px;color:#475569;margin-top:2px;}
+    .prose{margin:0;font-size:12px;line-height:1.65;color:#334155;}
+    .tint-teal{background:#f0fdfa;border:1px solid #99f6e4;}
+    .tint-teal .sh{color:#115e59;}
+    .tint-teal dt{font-size:12px;font-weight:700;color:#115e59;}
+    .tint-teal dd{margin:2px 0 0;font-size:11.5px;color:#134e4a;line-height:1.55;}
+    .tint-red{background:#fef2f2;border:1px solid #fecaca;}
+    .tint-red .sh{color:#b91c1c;}
+    .tint-red li{color:#7f1d1d;}
+    .tint-blue{background:#eff6ff;border:1px solid #bfdbfe;}
+    .tint-blue .sh{color:#1e3a8a;}
+    .chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px;}
+    .chip{border-radius:999px;padding:2px 8px;font-size:9.5px;font-weight:700;}
+    .flow{position:relative;margin-top:10px;}
+    .fstep{position:relative;display:flex;gap:10px;padding-bottom:12px;}
+    .fstep:last-child{padding-bottom:0;}
+    .fline{position:absolute;left:12px;top:26px;bottom:0;width:1px;background:#bfdbfe;}
+    .fnum{position:relative;z-index:2;flex:0 0 auto;width:25px;height:25px;border-radius:50%;
+      color:#fff;font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center;}
+    .fbody{flex:1;border:1px solid #e2e8f0;background:#f8fafc;border-radius:9px;padding:8px 10px;}
+    .fbody .fc{display:inline-block;border-radius:999px;padding:1px 8px;font-size:9px;font-weight:700;margin-bottom:4px;}
+    .fbody p{margin:0;font-size:11.5px;line-height:1.5;color:#1e293b;}
+    table{width:100%;border-collapse:collapse;font-size:11px;}
+    th,td{text-align:left;padding:7px 8px;border-bottom:1px solid #eef2f7;vertical-align:top;}
+    th{font-size:9.5px;text-transform:uppercase;letter-spacing:0.03em;color:#64748b;}
+    td b{font-weight:700;color:#0f172a;}
+    .seg{display:inline-flex;border:1px solid #cbd5e1;border-radius:8px;overflow:hidden;margin-bottom:11px;}
+    .seg button{border:0;background:#fff;color:#475569;font:inherit;font-size:11px;font-weight:600;
+      padding:6px 13px;cursor:pointer;}
+    .seg button[data-on="true"]{background:#0a5eb0;color:#fff;}
+    .drug{border:1px solid #e2e8f0;border-radius:11px;padding:11px;margin-bottom:9px;}
+    .drug:last-child{margin-bottom:0;}
+    .drug .dn{font-weight:700;font-size:12.5px;color:#0f172a;}
+    .drug .dc{display:inline-block;background:#dbeafe;color:#1e40af;border-radius:999px;
+      padding:1px 8px;font-size:9.5px;font-weight:700;margin-left:6px;}
+    .mech{display:flex;gap:7px;align-items:flex-start;border:1px solid #fde68a;background:#fffbeb;
+      border-radius:8px;padding:6px 8px;margin:7px 0;}
+    .mech svg{flex:0 0 auto;width:16px;height:16px;color:#b45309;margin-top:1px;}
+    .mech p{margin:0;font-size:10.5px;color:#78350f;line-height:1.45;}
+    .drug .kvs p{margin:3px 0 0;font-size:11.5px;color:#334155;line-height:1.5;}
+    .drug .kvs span{font-size:9.5px;font-weight:700;color:#64748b;}
+    .caut{border:1px solid #fed7aa;background:#fff7ed;border-radius:8px;padding:7px 9px;margin-top:7px;}
+    .caut span{font-size:9.5px;font-weight:700;color:#9a3412;}
+    .caut ul{margin:3px 0 0;padding-left:15px;font-size:10.5px;color:#9a3412;line-height:1.5;}
+    ul.disc{margin:6px 0 0;padding-left:16px;line-height:1.6;font-size:11.5px;}
+    .learn a{display:block;background:#fff;border:1px solid #bfdbfe;border-radius:9px;
+      padding:9px 11px;margin-top:7px;text-decoration:none;}
+    .learn .lt{font-size:11.5px;font-weight:700;color:#1d4ed8;text-decoration:underline;}
+    .learn .ld{margin:2px 0 0;font-size:10px;color:#64748b;}
+    .foot{margin:16px 0 0;font-size:10px;line-height:1.6;color:rgba(255,255,255,0.62);text-align:center;}
+  </style>
+</helmet>
+
+<div class="wrap">
+  <div class="bar">
+    <div class="mark"><b>ER</b><i>ASSISTANT</i></div>
+  </div>
+
+  <a class="back" href="#" onClick="{{noop}}">← 一覧に戻る</a>
+
+  <div class="stack">
+    <div class="sheet">
+      <h2 class="h2">高血圧: 薬剤選択の考え方</h2>
+      <div class="scale">
+        <div style="background:#ecfdf5"><div class="st">生活習慣改善</div><div class="ss">～1か月</div></div>
+        <div style="background:#dbeafe"><div class="st">Ca拮抗薬 / ARB</div><div class="ss">第一選択</div></div>
+        <div style="background:#bfdbfe"><div class="st">2剤併用</div><div class="ss">効果不十分時</div></div>
+        <div style="background:#c7d2fe"><div class="st">専門医紹介</div><div class="ss">二次性・治療抵抗性</div></div>
+      </div>
+      <p style="margin:0 0 6px;font-size:11px;font-weight:700;color:#1e3a8a">▼ 診察室血圧 140/90 mmHg 以上が持続</p>
+      <p class="prose">
+        まず家庭血圧・仮面/白衣高血圧を評価する。合併症（CKD・糖尿病・心不全・冠動脈疾患）によって
+        第一選択薬が変わるため、降圧目標と併存疾患をセットで確認する。
+      </p>
+    </div>
+
+    <div class="sheet tint-teal">
+      <p class="sh">疾患管理のポイント</p>
+      <dl style="margin:0">
+        <div style="margin-bottom:9px">
+          <dt>降圧目標を先に決める</dt>
+          <dd>75歳未満・CKD（蛋白尿+）・糖尿病は 130/80 未満、75歳以上は 140/90 未満を目安に。</dd>
+        </div>
+        <div style="margin-bottom:9px">
+          <dt>単剤増量より早期併用</dt>
+          <dd>1剤を上限まで増やすより、作用機序の異なる2剤を低用量で併用する方が有効性・忍容性が高い。</dd>
+        </div>
+        <div>
+          <dt>家庭血圧で評価する</dt>
+          <dd>朝晩の家庭血圧を記録してもらい、診察室血圧だけで増減しない。</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="sheet">
+      <p class="sh">選択の進め方</p>
+      <div class="chips">
+        <span class="chip" style="background:#e0f2fe;color:#075985">評価・確認</span>
+        <span class="chip" style="background:#f3e8ff;color:#6b21a8">判断・使い分け</span>
+        <span class="chip" style="background:#dcfce7;color:#166534">薬剤・治療介入</span>
+        <span class="chip" style="background:#fef3c7;color:#92400e">経過観察・再評価</span>
+      </div>
+      <div class="flow">
+        <sc-for list="{{flow}}" as="s" hint-placeholder-count="4">
+          <div class="fstep">
+            <span class="fline" style="display: {{s.lineDisplay}}"></span>
+            <span class="fnum" style="background: {{s.color}}">{{s.n}}</span>
+            <div class="fbody">
+              <span class="fc" style="background: {{s.chipBg}}; color: {{s.chipFg}}">{{s.typeLabel}}</span>
+              <p>{{s.text}}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div class="sheet">
+      <p class="sh">薬剤の選択肢</p>
+      <div class="seg">
+        <button data-on="{{isList}}" onClick="{{showList}}">概要（一覧）</button>
+        <button data-on="{{isDetail}}" onClick="{{showDetail}}">詳細</button>
+      </div>
+
+      <sc-if value="{{isList}}" hint-placeholder-val="{{true}}">
+        <table>
+          <thead><tr><th>薬剤</th><th>分類</th><th>主な注意</th></tr></thead>
+          <tbody>
+            <tr><td><b>アムロジピン</b></td><td>Ca拮抗薬</td><td>下腿浮腫・歯肉肥厚</td></tr>
+            <tr><td><b>アジルサルタン</b></td><td>ARB</td><td>高K・腎機能悪化・妊娠禁忌</td></tr>
+            <tr><td><b>トリクロルメチアジド</b></td><td>サイアザイド</td><td>低K・高尿酸・耐糖能悪化</td></tr>
+          </tbody>
+        </table>
+      </sc-if>
+
+      <sc-if value="{{isDetail}}" hint-placeholder-val="{{false}}">
+        <div>
+          <div class="drug">
+            <div><span class="dn">アムロジピン</span><span class="dc">Ca拮抗薬</span></div>
+            <div class="mech">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/><path d="M8 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <p>阻害薬（L型Caチャネルを遮断）／ 標的: 血管平滑筋 L型Caチャネル</p>
+            </div>
+            <div class="kvs">
+              <p><span>効果: </span>末梢血管抵抗を下げ、24時間安定した降圧。左室肥大の退縮も期待。</p>
+              <p><span>どう選ぶか: </span>合併症のない高血圧・高齢者・狭心症合併例の第一選択。</p>
+            </div>
+            <div class="caut"><span>副作用・注意点</span>
+              <ul><li>用量依存の下腿浮腫（ARB併用で軽減）</li><li>歯肉増生、まれに動悸</li></ul>
+            </div>
+          </div>
+          <div class="drug">
+            <div><span class="dn">アジルサルタン</span><span class="dc">ARB</span></div>
+            <div class="mech">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/><path d="M6.5 17.5l11-11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <p>拮抗薬（AT1受容体を遮断）／ 標的: アンジオテンシンII AT1受容体</p>
+            </div>
+            <div class="kvs">
+              <p><span>効果: </span>RAA系を抑え臓器保護。CKD（蛋白尿）・糖尿病・心不全で予後改善。</p>
+              <p><span>どう選ぶか: </span>蛋白尿を伴うCKD・糖尿病・心不全合併例で優先。</p>
+            </div>
+            <div class="caut"><span>副作用・注意点</span>
+              <ul><li>投与初期の腎機能・血清Kチェック（両側腎動脈狭窄で禁忌）</li><li>妊娠・妊娠可能性のある女性には使用しない</li></ul>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+
+    <div class="sheet tint-red">
+      <p class="sh">全体を通しての注意点</p>
+      <ul class="disc">
+        <li>二次性高血圧（原発性アルドステロン症・腎血管性・睡眠時無呼吸）を治療開始前にスクリーニング。</li>
+        <li>ACE阻害薬／ARBとサイアザイド、NSAIDs併用時は脱水・シックデイでのAKIに注意。</li>
+        <li>降圧しすぎによるふらつき・転倒（特に高齢者・起立性低血圧）。</li>
+      </ul>
+    </div>
+
+    <div class="sheet tint-blue learn">
+      <p class="sh">さらに詳しく学ぶ</p>
+      <p style="margin:0 0 3px;font-size:10.5px;color:#1e40af">問診の進め方など、より実践的な内容はこちら。</p>
+      <a href="#" onClick="{{noop}}"><span class="lt">高血圧治療ガイドライン2019（JSH2019）要点</span><p class="ld">降圧目標・第一選択薬・併用の原則</p></a>
+      <a href="#" onClick="{{noop}}"><span class="lt">家庭血圧測定の指導ポイント</span><p class="ld">測定条件・記録のさせ方・評価の仕方</p></a>
+    </div>
+  </div>
+
+  <p class="foot">本アプリは医療従事者向けの臨床意思決定支援ツールです。最終判断は医療従事者ご自身の責任で行ってください。</p>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"$preview":{"width":390,"height":1650}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const view = st.view ?? "list";
+
+    const TYPE = {
+      assess: { label: "評価・確認", color: "#0284c7", chipBg: "#e0f2fe", chipFg: "#075985" },
+      decide: { label: "判断・使い分け", color: "#9333ea", chipBg: "#f3e8ff", chipFg: "#6b21a8" },
+      treat: { label: "薬剤・治療介入", color: "#16a34a", chipBg: "#dcfce7", chipFg: "#166534" },
+      monitor: { label: "経過観察・再評価", color: "#d97706", chipBg: "#fef3c7", chipFg: "#92400e" },
+    };
+    const rawFlow = [
+      { type: "assess", text: "家庭血圧・診察室血圧、標的臓器障害、併存疾患（CKD・DM・心不全・CAD）を評価する。" },
+      { type: "decide", text: "合併症なし → Ca拮抗薬 or ARB。蛋白尿CKD/DM/心不全 → ARB優先。浮腫傾向 → サイアザイド追加。" },
+      { type: "treat", text: "低用量で開始し、2〜4週で家庭血圧を確認。不十分なら作用機序の異なる薬を併用（増量より優先）。" },
+      { type: "monitor", text: "開始・増量後1〜2週で血清K・Cr、以後は3〜6か月ごと。目標到達後も家庭血圧記録を継続。" },
+    ];
+    const flow = rawFlow.map((s, i) => ({
+      n: i + 1,
+      text: s.text,
+      typeLabel: TYPE[s.type].label,
+      color: TYPE[s.type].color,
+      chipBg: TYPE[s.type].chipBg,
+      chipFg: TYPE[s.type].chipFg,
+      lineDisplay: i < rawFlow.length - 1 ? "block" : "none",
+    }));
+
+    return {
+      flow,
+      isList: view === "list",
+      isDetail: view === "detail",
+      showList: () => this.setState({ view: "list" }),
+      showDetail: () => this.setState({ view: "detail" }),
+      noop: (e) => { if (e && e.preventDefault) e.preventDefault(); },
+    };
+  }
+}
+</script>
+</body>
+</html>

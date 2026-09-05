@@ -1,0 +1,94 @@
+{
+  "identifier" : "FF342B19-F0B0-4B3B-9D66-FECE95B72C4C",
+  "nonRenewingSubscriptions" : [],
+  "products" : [],
+  "settings" : {
+    "_applicationInternalID" : "0",
+    "_developerTeamID" : "0",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 0,
+    "_locale" : "ja_JP",
+    "_storefront" : "JPN",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "063E6A5E-D8D1-409E-8147-ECBA1243BE9A",
+      "localizations" : [],
+      "name" : "ER Assist サブスクリプション",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "980",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "46AD5428-37EA-47CE-B2B3-25297CD77EF7",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "ER Assist 月額プラン",
+              "displayName" : "ER Assist 月額プラン",
+              "locale" : "ja"
+            }
+          ],
+          "productID" : "com.resij.erassist.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "ER Assist Monthly",
+          "subscriptionGroupID" : "063E6A5E-D8D1-409E-8147-ECBA1243BE9A",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

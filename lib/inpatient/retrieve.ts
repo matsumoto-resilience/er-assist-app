@@ -1,12 +1,14 @@
-import inpatientData from "../knowledge-base/inpatient.json";
-import type { InpatientDepartment, InpatientKnowledgeBaseEntry } from "./types";
+import inpatientGuideData from "../knowledge-base/inpatient-symptom-guides.json";
+import type { InpatientSymptomCategory, InpatientSymptomGuide } from "./types";
 
-const knowledgeBase = inpatientData as InpatientKnowledgeBaseEntry[];
+const guides = inpatientGuideData as InpatientSymptomGuide[];
 
-// 選択された科に対応する知識ベースエントリを返す。
-// 対応科が増えるまでは科ごとに1エントリのみ登録されている。
-export function retrieveInpatientEntries(
-  department: InpatientDepartment
-): InpatientKnowledgeBaseEntry[] {
-  return knowledgeBase.filter((entry) => entry.department === department);
+export function getAllInpatientSymptomGuides(): InpatientSymptomGuide[] {
+  return guides;
+}
+
+export function getInpatientSymptomGuide(
+  category: InpatientSymptomCategory
+): InpatientSymptomGuide | undefined {
+  return guides.find((guide) => guide.category === category);
 }

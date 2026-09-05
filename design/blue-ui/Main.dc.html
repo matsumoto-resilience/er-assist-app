@@ -1,0 +1,295 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+  <style>
+    *{box-sizing:border-box;}
+    body{margin:0;background:#0a5eb0;color:#fff;
+      font-family:'Geist',system-ui,-apple-system,'Hiragino Sans','Hiragino Kaku Gothic ProN',Meiryo,sans-serif;
+      -webkit-font-smoothing:antialiased;}
+    a{color:#fff;text-underline-offset:2px;}
+    a:hover{color:rgba(255,255,255,0.82);}
+    .wrap{min-height:844px;padding-bottom:26px;}
+    .bar{position:sticky;top:0;z-index:6;display:flex;align-items:center;justify-content:space-between;
+      padding:12px 16px 10px;background:#0a5eb0;border-bottom:1px solid rgba(255,255,255,0.14);}
+    .mark{display:flex;align-items:baseline;gap:7px;}
+    .mark b{font-weight:700;font-size:19px;letter-spacing:0.03em;}
+    .mark i{font-style:normal;font-weight:600;font-size:9.5px;letter-spacing:0.22em;color:rgba(255,255,255,0.68);}
+    .avatar{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.16);
+      border:1px solid rgba(255,255,255,0.42);}
+    .tabs{display:flex;gap:6px;padding:10px 12px 12px;background:#0a5eb0;overflow-x:auto;
+      position:sticky;top:47px;z-index:5;}
+    .tab{flex:0 0 auto;padding:7px 15px;border-radius:999px;font-size:13px;font-weight:600;
+      color:rgba(255,255,255,0.72);background:transparent;border:1px solid transparent;
+      cursor:pointer;white-space:nowrap;}
+    .tab[data-active="true"]{background:#fff;color:#0a5eb0;}
+    .page{padding:12px 16px 0;}
+    h1.title{margin:6px 0 4px;font-size:20px;font-weight:700;line-height:1.34;}
+    p.sub{margin:0 0 12px;font-size:12.5px;line-height:1.62;color:rgba(255,255,255,0.82);}
+    .meta{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:11.5px;}
+    .chip-role{background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.4);
+      border-radius:999px;padding:3px 10px;font-weight:600;}
+    .sheet{background:#fff;color:#0f172a;border-radius:14px;padding:16px;
+      box-shadow:0 12px 28px rgba(3,34,68,0.28);}
+    .frost{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.5);
+      border-radius:13px;padding:12px 14px;}
+    .stack{display:flex;flex-direction:column;}
+    .lbl{display:block;font-size:12px;font-weight:600;color:#334155;margin-bottom:5px;}
+    .req{color:#dc2626;}
+    .inp{width:100%;border:1px solid #cbd5e1;border-radius:9px;background:#fff;
+      padding:9px 11px;font:inherit;font-size:13px;color:#0f172a;}
+    .inp::placeholder{color:#94a3b8;}
+    .inp:focus{outline:none;border-color:#0a5eb0;box-shadow:0 0 0 3px rgba(10,94,176,0.16);}
+    .inp[data-bad="true"]{border-color:#f87171;box-shadow:0 0 0 3px rgba(248,113,113,0.18);}
+    .ex{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+    .ex button{border:1px solid #cbd5e1;background:#f8fafc;border-radius:999px;
+      padding:4px 10px;font:inherit;font-size:11.5px;color:#334155;cursor:pointer;}
+    .ex button:hover{border-color:#0a5eb0;color:#0a5eb0;}
+    .vitals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:6px;}
+    .vital{border:1px solid #e2e8f0;border-radius:9px;padding:7px 4px;text-align:center;background:#f8fafc;}
+    .vital .vv{font-weight:700;font-size:14px;color:#0f172a;}
+    .vital .vk{font-size:9px;color:#64748b;margin-top:2px;}
+    .btn-primary{width:100%;border:0;border-radius:9px;background:#0a5eb0;color:#fff;
+      font-weight:700;font-size:13.5px;padding:11px;cursor:pointer;}
+    .btn-primary:hover{background:#0a52a0;}
+    .btn-ghost{border:1px solid #cbd5e1;border-radius:9px;background:#fff;color:#334155;
+      font-weight:600;font-size:13px;padding:11px 15px;cursor:pointer;}
+    .err{margin-top:8px;font-size:11.5px;color:#dc2626;font-weight:600;}
+    .sh{font-size:13px;font-weight:700;margin:0 0 8px;}
+    .callout{border-radius:12px;padding:13px 14px;}
+    .kv{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .dx{border:1px solid #e2e8f0;border-radius:10px;padding:10px 11px;}
+    .dxhead{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+    .badge{flex:0 0 auto;border-radius:999px;padding:2px 9px;font-size:10.5px;font-weight:700;}
+    .flow{position:relative;padding-left:2px;}
+    .fstep{position:relative;display:flex;gap:11px;padding-bottom:14px;}
+    .fstep:last-child{padding-bottom:0;}
+    .fline{position:absolute;left:13px;top:28px;bottom:0;width:1px;background:#bfdbfe;}
+    .fnum{position:relative;z-index:2;flex:0 0 auto;width:27px;height:27px;border-radius:50%;
+      background:#0a5eb0;color:#fff;font-weight:700;font-size:12px;display:flex;
+      align-items:center;justify-content:center;}
+    .fbody{flex:1;border:1px solid #e2e8f0;background:#f8fafc;border-radius:10px;padding:9px 11px;}
+    .fbody h4{margin:0 0 3px;font-size:11px;font-weight:700;color:#475569;}
+    .fbody ul{margin:0;padding-left:16px;font-size:12px;color:#1e293b;line-height:1.55;}
+    ul.disc{margin:6px 0 0;padding-left:17px;line-height:1.6;}
+    ul.disc li{margin-bottom:3px;}
+    .foot{margin:16px 4px 0;font-size:10px;line-height:1.6;color:rgba(255,255,255,0.62);text-align:center;}
+  </style>
+</helmet>
+
+<div class="wrap">
+  <div class="bar">
+    <div class="mark"><b>ER</b><i>ASSISTANT</i></div>
+    <div class="avatar"></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab" data-active="true">救急外来</button>
+    <button class="tab" data-active="false">外来</button>
+    <button class="tab" data-active="false">入院</button>
+    <button class="tab" data-active="false">漢方</button>
+  </div>
+
+  <div class="page">
+    <h1 class="title">救急外来 臨床意思決定支援</h1>
+    <p class="sub">主訴と患者情報から、診療方針・鑑別疾患・治療方針の参考情報を生成します。</p>
+
+    <div class="meta">
+      <span class="chip-role">医師モード</span>
+      <a href="#" onClick="{{noop}}">履歴を見る (3)</a>
+    </div>
+
+    <div class="sheet stack" style="gap:16px">
+      <div>
+        <label class="lbl">主訴 <span class="req">*</span></label>
+        <input class="inp" data-bad="{{err}}" placeholder="例: 胸痛"
+          value="{{complaint}}" onInput="{{onComplaint}}">
+        <sc-if value="{{err}}" hint-placeholder-val="{{true}}">
+          <p class="err">主訴を入力してください。</p>
+        </sc-if>
+        <div class="ex">
+          <sc-for list="{{examples}}" as="ex" hint-placeholder-count="4">
+            <button onClick="{{ex.pick}}">{{ex.label}}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div class="kv">
+        <div><label class="lbl">年齢</label><input class="inp" value="68"></div>
+        <div><label class="lbl">性別</label><input class="inp" value="男性"></div>
+      </div>
+
+      <div>
+        <label class="lbl">現病歴・既往歴など</label>
+        <textarea class="inp" rows="3" placeholder="例: 3時間前から持続する前胸部の圧迫感。冷汗あり。高血圧・糖尿病の既往。喫煙歴あり。"></textarea>
+      </div>
+
+      <div>
+        <label class="lbl">特に確認したいポイント（任意）</label>
+        <input class="inp" placeholder="例: 帰宅可能か入院が必要か知りたい">
+      </div>
+
+      <div>
+        <label class="lbl">バイタルサイン（任意）</label>
+        <div class="vitals">
+          <div class="vital"><div class="vv">138/86</div><div class="vk">血圧 mmHg</div></div>
+          <div class="vital"><div class="vv">98</div><div class="vk">心拍 /分</div></div>
+          <div class="vital"><div class="vv">96</div><div class="vk">SpO₂ %</div></div>
+          <div class="vital"><div class="vv">36.8</div><div class="vk">体温 ℃</div></div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:9px">
+        <button class="btn-primary" onClick="{{generate}}">
+          <sc-if value="{{generated}}" hint-placeholder-val="{{false}}">再生成する</sc-if>
+          <sc-if value="{{notGenerated}}" hint-placeholder-val="{{true}}">診療方針を生成する</sc-if>
+        </button>
+        <button class="btn-ghost" onClick="{{reset}}">リセット</button>
+      </div>
+    </div>
+
+    <sc-if value="{{notGenerated}}" hint-placeholder-val="{{false}}">
+      <div class="frost" style="margin-top:14px;text-align:center;font-size:12px;color:rgba(255,255,255,0.86)">
+        患者情報を入力し「診療方針を生成する」を押してください
+      </div>
+    </sc-if>
+
+    <sc-if value="{{generated}}" hint-placeholder-val="{{true}}">
+      <div class="stack" style="gap:12px;margin-top:14px">
+        <div class="kv">
+          <div class="callout" style="background:#eff6ff;border:1.5px solid #bfdbfe">
+            <p class="sh" style="color:#1e3a8a">要点: 直ちに行うべきこと</p>
+            <ul class="disc" style="font-size:12px;color:#1e3a5f">
+              <li>12誘導心電図を10分以内に施行</li>
+              <li>静脈路確保・酸素投与（SpO₂&lt;94%時）</li>
+              <li>アスピリン162–325mg 咀嚼投与</li>
+            </ul>
+          </div>
+          <div class="callout" style="background:#f0fdfa;border:1.5px solid #99f6e4">
+            <p class="sh" style="color:#115e59">要点: 優先すべき検査</p>
+            <ul class="disc" style="font-size:12px;color:#134e4a">
+              <li>高感度トロポニン（0/1–2時間）</li>
+              <li>胸部X線・D-dimer（解離/PE鑑別）</li>
+              <li>採血一式・血糖</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout" style="background:#fef2f2;border:1px solid #fecaca">
+          <p class="sh" style="color:#b91c1c">⚠ 特定された Red Flag</p>
+          <div style="font-size:12px;color:#7f1d1d">
+            <div><b>持続する胸部圧迫感 + 冷汗</b>
+              <div style="font-size:10.5px;color:#b91c1c">示唆される疾患: 急性冠症候群、大動脈解離</div></div>
+          </div>
+        </div>
+
+        <div class="sheet">
+          <p class="sh">1. 診療方針</p>
+          <p style="margin:0;font-size:12.5px;line-height:1.65;color:#334155">
+            ACSを第一に想定し、心電図とトロポニンで迅速に層別化する。STEMI所見があれば直ちに再灌流療法へ。
+            非ST上昇型でもTIMI/GRACEリスクに応じて入院・循環器コンサルトを検討する。
+          </p>
+        </div>
+
+        <div class="sheet">
+          <p class="sh">2. 鑑別疾患</p>
+          <div class="stack" style="gap:8px">
+            <sc-for list="{{differentials}}" as="d" hint-placeholder-count="3">
+              <div class="dx">
+                <div class="dxhead">
+                  <span style="font-weight:700;font-size:12.5px">{{d.name}}</span>
+                  <span class="badge" style="background: {{d.badgeBg}}; color: {{d.badgeFg}}">{{d.badgeLabel}}</span>
+                </div>
+                <p style="margin:4px 0 0;font-size:11.5px;color:#475569;line-height:1.5">{{d.rationale}}</p>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div class="sheet">
+          <p class="sh">3. 治療方針</p>
+          <div class="flow">
+            <sc-for list="{{flowStages}}" as="s" hint-placeholder-count="4">
+              <div class="fstep">
+                <span class="fline" style="display: {{s.lineDisplay}}"></span>
+                <span class="fnum">{{s.n}}</span>
+                <div class="fbody">
+                  <h4>{{s.title}}</h4>
+                  <ul><sc-for list="{{s.items}}" as="it" hint-placeholder-count="2"><li>{{it}}</li></sc-for></ul>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div class="callout" style="background:#eff6ff;border:1px solid #bfdbfe">
+          <p class="sh" style="color:#1e3a8a">確信度・補足事項</p>
+          <p style="margin:0;font-size:11.5px;line-height:1.6;color:#1e3a5f">
+            心電図・トロポニン未確認のため確信度は中等度。初回トロポニン陰性でも再検で否定するまでACSは除外しない。
+          </p>
+        </div>
+      </div>
+    </sc-if>
+
+    <p class="foot">本アプリは医療従事者向けの臨床意思決定支援ツールです。最終判断は医療従事者ご自身の責任で行ってください。</p>
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const complaint = st.complaint ?? "";
+    const generated = !!st.generated;
+    const err = !!st.err;
+
+    const setC = (v) => this.setState({ complaint: v, err: false });
+    const examples = ["胸痛", "呼吸困難", "頭痛", "腹痛"].map((label) => ({
+      label,
+      pick: () => this.setState({ complaint: label, err: false }),
+    }));
+
+    const mkBadge = (lvl) => {
+      if (lvl === "high") return { badgeLabel: "可能性: 高", badgeBg: "#fee2e2", badgeFg: "#991b1b" };
+      if (lvl === "medium") return { badgeLabel: "可能性: 中", badgeBg: "#fef3c7", badgeFg: "#92400e" };
+      return { badgeLabel: "可能性: 低", badgeBg: "#f1f5f9", badgeFg: "#475569" };
+    };
+    const differentials = [
+      { name: "急性冠症候群（STEMI/NSTEMI）", lvl: "high", rationale: "持続する前胸部圧迫感、冷汗、複数の冠危険因子。" },
+      { name: "急性大動脈解離", lvl: "medium", rationale: "突然発症・移動する痛み・血圧左右差の有無を要確認。" },
+      { name: "肺血栓塞栓症", lvl: "low", rationale: "SpO₂低下と頻脈。長期臥床や下肢腫脹の病歴を確認。" },
+    ].map((d) => ({ ...d, ...mkBadge(d.lvl) }));
+
+    const stagesRaw = [
+      { title: "直ちに行うべき初期対応", items: ["MONA適応の評価", "モニター装着・除細動器準備"] },
+      { title: "必要な検査", items: ["心電図の経時的再検", "トロポニン 0/1時間プロトコル"] },
+      { title: "想定される薬剤", items: ["抗血小板薬2剤併用の適応評価", "硝酸薬（右室梗塞を除外後）"] },
+      { title: "収容先の考え方", items: ["循環器コンサルト／CCU入院を基本に検討"] },
+    ];
+    const flowStages = stagesRaw.map((s, i) => ({
+      ...s, n: i + 1, lineDisplay: i < stagesRaw.length - 1 ? "block" : "none",
+    }));
+
+    return {
+      complaint, generated, err, notGenerated: !generated,
+      examples, differentials, flowStages,
+      noop: (e) => { if (e && e.preventDefault) e.preventDefault(); },
+      onComplaint: (e) => setC(e.target.value),
+      generate: () => {
+        if (!complaint.trim()) { this.setState({ err: true }); return; }
+        this.setState({ generated: true, err: false });
+      },
+      reset: () => this.setState({ complaint: "", generated: false, err: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>

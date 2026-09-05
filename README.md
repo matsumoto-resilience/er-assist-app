@@ -33,17 +33,25 @@ ANTHROPIC_API_KEY=sk-ant-api03-...
 # LLM_PROVIDER=gemini のとき必要
 GEMINI_API_KEY=...
 
-# アプリ全体を保護する共通ユーザー名・パスワード(Basic認証)。未設定だと誰でもアクセスできてしまう。
-# パスワードは平文ではなくPBKDF2ハッシュを設定する(生成方法: npm run hash-password -- "パスワード")。
-APP_ACCESS_USERNAME=ユーザー名
-APP_ACCESS_PASSWORD_HASH=pbkdf2.210000....
+# Clerk 認証(アプリ全体をログイン必須にする)。
+# Vercel Marketplace で追加: vercel integration add clerk → vercel env pull .env.local
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+CLERK_SECRET_KEY=sk_test_...
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=/
+NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL=/
 ```
 
 ```bash
 npm run dev
 ```
 
-[http://localhost:3000](http://localhost:3000) を開き、`APP_ACCESS_USERNAME`と`APP_ACCESS_PASSWORD_HASH`で設定したユーザー名・パスワードを入力してください。
+[http://localhost:3000](http://localhost:3000) を開くと、未ログインの場合はサインアップ画面
+(`/sign-up`)へ誘導されます。メールアドレス・パスワード・区分(学生 / 医師 / コメディカル)で
+アカウントを作成すると全モジュールを利用できます。区分は AI 回答の詳しさ(学生=教育的に厚め、
+医師・コメディカル=簡潔)に反映され、ログイン後も変更できます。認証は
+[Clerk](https://clerk.com)(Vercel Marketplace ネイティブ連携)を使用しています。
 
 ### プロバイダーの違い
 
@@ -63,7 +71,7 @@ app/
 components/
   PatientForm.tsx              # 患者情報入力フォーム
   ResultPanel.tsx               # 生成結果表示
-  DisclaimerBanner.tsx          # 免責事項バナー
+  SplashScreen.tsx              # 起動スプラッシュ画面(ブランド表示+免責事項)
 lib/
   types.ts                      # 共通型定義
   anthropic.ts                   # Anthropicクライアント
@@ -79,7 +87,8 @@ lib/
     retrieve.ts                    # キーワードマッチによる簡易RAG
 data/
   audit-log.jsonl                # 実行時に生成される監査ログ(gitignore対象)
-proxy.ts                        # アプリ全体のBasic認証(Next.js Proxy)
+proxy.ts                        # Clerk認証によるアプリ全体のログインゲート(Next.js Proxy)
+app/sign-in/, app/sign-up/       # 青系デザインのログイン/新規登録画面(Clerkカスタムフロー)
 ```
 
 ## セキュリティ対策
@@ -88,26 +97,26 @@ proxy.ts                        # アプリ全体のBasic認証(Next.js Proxy)
 
 | 対策 | 内容 | 実装箇所 |
 | --- | --- | --- |
-| アクセス制限 | 共通パスワードによるBasic認証。全ページ・全APIが対象 | `proxy.ts` |
+| アクセス制限 | Clerkによる利用者ごとのアカウント認証。全ページ・全APIがログイン必須(`/sign-in` `/sign-up` `/privacy` のみ公開)。APIルートでも `requireUser()` で二重確認 | `proxy.ts` / `lib/require-auth.ts` |
 | レート制限 | IPごとに1分間あたり10リクエストまで(APIコスト濫用・DoS対策) | `lib/rate-limit.ts` |
 | 入力検証 | 主訴・フリーテキストの文字数上限、バイタルサインの数値範囲チェック | `lib/validate.ts` |
 | リクエストサイズ制限 | 20KBを超えるリクエストボディを拒否 | `app/api/generate/route.ts` |
-| セキュリティヘッダー | CSP・X-Frame-Options・Permissions-Policy等(本番時はより厳格) | `next.config.ts` |
+| セキュリティヘッダー | X-Frame-Options・Permissions-Policy・HSTS等は`next.config.ts`、CSPはClerk互換のものを`proxy.ts`で一括生成 | `next.config.ts` / `proxy.ts` |
 | プロンプトインジェクション対策 | ユーザー入力を`<patient_data>`タグで明示的に区切り、指示ではなく臨床データとして扱うようシステムプロンプトで指示 | `lib/prompt.ts` |
 | 秘密情報の管理 | APIキー・監査ログはサーバー側のみで扱い、`.gitignore`でリポジトリから除外 | `.gitignore` |
 
 ### 既知の制約・今後の課題
 
-- **パスワードは共通の1つ**であり、利用者ごとの個別アカウント・権限管理はない。人数が増える場合は個別認証(NextAuth等)への移行を推奨。
+- **利用者区分(学生/医師/コメディカル)は Clerk の `unsafeMetadata` に保存**しており、本人がクライアント側から変更できる表示上の設定。権限境界ではない。施設単位のアクセス制御や区分の改ざん防止が必要になった段階で `publicMetadata` + サーバーAPIへ移行する。
+- **`er-assist-app.vercel.app` はカスタムドメインを付けられない**ため、当面 Clerk は development instance で運用(利用上限あり)。本番運用時はカスタムドメイン取得 → Clerk production instance へ移行。
 - **レート制限はプロセス内メモリ実装**のため、Vercel等の複数インスタンスにスケールする環境では機能しない。本番運用時はUpstash Redis等の共有ストアに置き換えること。
 - **監査ログはローカルファイル**(`data/audit-log.jsonl`)。患者由来の情報を含むため、実運用時はアクセス制御されたデータベース・暗号化ストレージへの移行が必須。
-- Basic認証はパスワードを毎リクエスト送信するため、**本番環境では必ずHTTPSを使用**すること(HTTP環境での運用は認証情報の盗聴リスクがある)。
 
 ## 今後の拡張候補
 
 - 知識ベースの拡充・出典(ガイドライン等)の明示
 - 監査ログのDB化・改ざん耐性のあるストレージへの移行
-- ユーザー認証・施設ごとのアクセス制御
+- 施設ごとのアクセス制御・区分(ロール)の改ざん防止(Clerk `publicMetadata` 化)
 - モバイル対応の最適化
 - SaMD化を見据えたバリデーション・トレーサビリティ要件の整備
 - 2プロバイダーの出力比較・A/Bテスト機能

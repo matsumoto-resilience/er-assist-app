@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useUser } from "@clerk/nextjs";
 import PatientForm from "@/components/PatientForm";
 import ResultPanel from "@/components/ResultPanel";
-import DisclaimerBanner from "@/components/DisclaimerBanner";
-import RoleGate from "@/components/RoleGate";
+import RoleSwitcher from "@/components/RoleSwitcher";
 import HistoryPanel from "@/components/HistoryPanel";
+import { ROLE_LABELS, isUserRole } from "@/lib/roles";
 import {
   addCaseHistoryEntry,
   clearCaseHistory,
@@ -20,7 +21,6 @@ import type {
   UserRole,
 } from "@/lib/types";
 
-const ROLE_STORAGE_KEY = "erAssistUserRole";
 const HISTORY_STORAGE_KEY = "erAssistCaseHistory";
 
 type ErHistoryEntry = CaseHistoryEntry<PatientInput, AssistOutput, KnowledgeBaseEntry>;
@@ -32,20 +32,17 @@ export default function Home() {
   const [auditId, setAuditId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [role, setRole] = useState<UserRole | null | undefined>(undefined);
   const [history, setHistory] = useState<ErHistoryEntry[]>([]);
   const [showHistory, setShowHistory] = useState(false);
 
+  const { user, isLoaded } = useUser();
+  const role: UserRole = isUserRole(user?.unsafeMetadata?.role)
+    ? user.unsafeMetadata.role
+    : "doctor";
+
   useEffect(() => {
-    const saved = localStorage.getItem(ROLE_STORAGE_KEY);
-    setRole(saved === "student" || saved === "doctor" ? saved : null);
     setHistory(loadCaseHistory(HISTORY_STORAGE_KEY));
   }, []);
-
-  function selectRole(next: UserRole) {
-    localStorage.setItem(ROLE_STORAGE_KEY, next);
-    setRole(next);
-  }
 
   async function handleSubmit(input: PatientInput) {
     setLoading(true);
@@ -53,7 +50,7 @@ export default function Home() {
     setOutput(null);
     setKnowledgeBase([]);
     setAuditId(null);
-    const inputWithRole = { ...input, userRole: role ?? undefined };
+    const inputWithRole = { ...input, userRole: role };
     setLastInput(inputWithRole);
 
     try {
@@ -100,12 +97,8 @@ export default function Home() {
     setShowHistory(false);
   }
 
-  if (role === undefined) {
+  if (!isLoaded) {
     return null;
-  }
-
-  if (role === null) {
-    return <RoleGate onSelect={selectRole} />;
   }
 
   return (
@@ -121,15 +114,9 @@ export default function Home() {
         </div>
         <div className="shrink-0 text-right text-xs text-gray-500">
           <span className="rounded-full bg-gray-100 px-2 py-1 font-medium text-gray-700">
-            {role === "student" ? "学生モード" : "医師モード"}
+            {ROLE_LABELS[role]}モード
           </span>
-          <button
-            type="button"
-            onClick={() => setRole(null)}
-            className="mt-1 block underline hover:text-gray-700"
-          >
-            切り替える
-          </button>
+          <RoleSwitcher current={role} />
           <button
             type="button"
             onClick={() => setShowHistory((prev) => !prev)}
@@ -156,10 +143,6 @@ export default function Home() {
           onClear={() => setHistory(clearCaseHistory(HISTORY_STORAGE_KEY))}
         />
       )}
-
-      <div className="mb-6">
-        <DisclaimerBanner />
-      </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">

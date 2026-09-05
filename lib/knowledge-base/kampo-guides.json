@@ -1,0 +1,564 @@
+[
+  {
+    "category": "gi_weakness",
+    "categoryLabel": "胃腸虚弱・食欲不振",
+    "group": "general",
+    "overview": "慢性的な胃もたれ・食欲不振・腹部膨満感等の機能性ディスペプシア様症状に対しては、六君子湯を中心とした漢方治療が選択肢となる。体力・冷えの有無等の証を踏まえて処方を使い分ける。",
+    "visualOverview": {
+      "kind": "scale",
+      "caption": "体力・冷えの有無等の証によって処方を使い分ける。",
+      "segments": [
+        { "label": "虚証", "sublabel": "体力虚弱・冷えを伴う", "colorClass": "bg-blue-300" },
+        { "label": "中間証", "sublabel": "体力中等度", "colorClass": "bg-amber-300" },
+        { "label": "実証", "sublabel": "体力充実", "colorClass": "bg-red-300" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "機能性ディスペプシアにおける六君子湯の位置づけ",
+        "description": "機能性消化管疾患診療ガイドライン2021(日本消化器病学会)では、六君子湯は機能性ディスペプシアの治療薬として推奨度・エビデンスレベルともに高く位置づけられている。胃排出能異常・食後膨満感等に効果が期待される一方、心窩部痛・胸やけには効果が乏しいとされる。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "器質的疾患(消化性潰瘍・悪性腫瘍等)を除外する", "type": "assess" },
+      { "text": "症状のタイプ(食後膨満感・早期満腹感が主か、心窩部痛・胸やけが主か)を確認する", "type": "assess" },
+      { "text": "体力・冷えの有無等、証を評価する", "type": "assess" },
+      { "text": "食後膨満感・食欲不振が主体であれば六君子湯を基本処方として検討する", "type": "treat" },
+      { "text": "効果不十分な場合は他の処方への変更・併用を検討する", "type": "decide" },
+      { "text": "症状の変化を定期的に評価する", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "六君子湯",
+        "reading": "りっくんしとう",
+        "brandNames": ["ツムラ(43)"],
+        "shoType": "虚証",
+        "keyConstituents": ["人参", "白朮", "茯苓", "半夏", "陳皮", "大棗", "甘草", "生姜"],
+        "effect": "胃の運動機能を高め、食欲不振・胃もたれ・膨満感を改善するとされる。機能性ディスペプシアに対するエビデンスが蓄積されている代表的処方。",
+        "whenToChoose": "体力が虚弱で、食欲不振・胃もたれ・膨満感が主体の場合に第一選択として検討されやすい。",
+        "cautions": ["偽アルドステロン症(甘草含有製剤に共通)", "むくみ・血圧上昇"]
+      },
+      {
+        "name": "人参湯",
+        "reading": "にんじんとう",
+        "brandNames": ["ツムラ(32)"],
+        "shoType": "虚証",
+        "keyConstituents": ["人参", "白朮", "乾姜", "甘草"],
+        "effect": "胃腸を温めて機能を高め、冷えを伴う消化機能低下を改善するとされる。",
+        "whenToChoose": "冷えが強く、下痢傾向・水様の唾液分泌等を伴う虚弱例で検討される。",
+        "cautions": ["偽アルドステロン症", "のぼせ・発汗過多例では不向き"]
+      },
+      {
+        "name": "補中益気湯",
+        "reading": "ほちゅうえっきとう",
+        "brandNames": ["ツムラ(41)"],
+        "shoType": "虚証",
+        "keyConstituents": ["人参", "黄耆", "白朮", "当帰", "陳皮", "大棗", "柴胡", "甘草", "生姜", "升麻"],
+        "effect": "消化機能と全身の気力を補うとされ、食欲不振に加え全身倦怠感を伴う場合に用いられる。",
+        "whenToChoose": "食欲不振に全身倦怠感・術後の体力低下等を伴う場合に検討される。",
+        "cautions": ["偽アルドステロン症", "間質性肺炎(頻度は低いが報告あり)"]
+      }
+    ],
+    "generalCautions": [
+      "甘草含有製剤の併用・長期投与では偽アルドステロン症(低カリウム血症・血圧上昇等)に注意する",
+      "器質的疾患の除外を優先する",
+      "効果判定は数週間単位で行う"
+    ],
+    "references": [
+      {
+        "title": "機能性消化管疾患診療ガイドライン2021―機能性ディスペプシア(FD)改訂第2版(Mindsガイドラインライブラリ)",
+        "url": "https://minds.jcqhc.or.jp/summary/c00643/"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "漢方製剤の記載を含む診療ガイドライン(日本東洋医学会)",
+        "description": "各種診療ガイドラインにおける漢方製剤の位置づけを確認できる。",
+        "url": "http://www.jsom.or.jp/medical/ebm/cpg/index.html"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "機能性ディスペプシア",
+        "url": "https://minds.jcqhc.or.jp/summary/c00643/"
+      },
+      {
+        "term": "偽アルドステロン症",
+        "url": "http://www.jsom.or.jp/medical/ebm/cpg/index.html"
+      }
+    ]
+  },
+  {
+    "category": "constipation_kampo",
+    "categoryLabel": "便秘",
+    "group": "general",
+    "overview": "便秘に対する漢方治療は、大黄を含む処方(大黄甘草湯等)による腸管刺激と、麻子仁丸のように腸管を潤して自然な排便を促す処方に大別される。体力・便の性状に応じて使い分ける。",
+    "visualOverview": {
+      "kind": "scale",
+      "caption": "体力・便の性状(硬さ)に応じて処方を使い分ける。",
+      "segments": [
+        { "label": "虚証", "sublabel": "体力低下・高齢者向け", "colorClass": "bg-blue-300" },
+        { "label": "中間証〜実証", "sublabel": "体力中等度以上", "colorClass": "bg-red-300" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "便通異常症診療ガイドライン2023における位置づけ",
+        "description": "大黄甘草湯は大黄の蠕動促進作用により硬便にも対応しやすい基本処方の一つ、麻子仁丸は体力中等度以下でコロコロした乾燥便に用いられる処方として位置づけられている。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "器質的疾患(大腸癌等)・薬剤性便秘の可能性を除外する", "type": "assess" },
+      { "text": "便の性状(硬便かコロコロ便か)と体力を評価する", "type": "assess" },
+      { "text": "体力中等度以上で硬便が主体であれば大黄を含む処方を検討する", "type": "decide" },
+      { "text": "体力が低下し便が乾燥している場合は麻子仁丸を検討する", "type": "treat" },
+      { "text": "腹痛・下痢等の過剰な効果や電解質異常がないか確認する", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "大黄甘草湯",
+        "reading": "だいおうかんぞうとう",
+        "brandNames": ["ツムラ(84)"],
+        "shoType": "実証",
+        "keyConstituents": ["大黄", "甘草"],
+        "effect": "大黄の蠕動促進作用により排便を促す。作用は比較的速やかとされる。",
+        "whenToChoose": "体力中等度以上で、硬便により排便困難な場合に検討される基本処方。",
+        "cautions": ["長期連用による耐性・依存", "腹痛", "偽アルドステロン症(甘草)", "妊婦への投与は避ける"]
+      },
+      {
+        "name": "麻子仁丸",
+        "reading": "ましにんがん",
+        "brandNames": ["ツムラ(126)"],
+        "shoType": "虚証",
+        "keyConstituents": ["麻子仁", "大黄", "杏仁", "枳実", "厚朴", "芍薬"],
+        "effect": "腸管を潤し便を軟化させることで、大黄の刺激作用を穏やかにしつつ自然な排便を促すとされる。",
+        "whenToChoose": "高齢者や体力中等度以下で、便が乾燥してコロコロしている場合に検討される。",
+        "cautions": ["下痢・腹痛", "妊婦への投与は避ける"]
+      },
+      {
+        "name": "大建中湯",
+        "reading": "だいけんちゅうとう",
+        "brandNames": ["ツムラ(100)"],
+        "shoType": "虚証",
+        "keyConstituents": ["人参", "乾姜", "山椒", "膠飴"],
+        "effect": "腸管運動を促進し、冷えを伴う腹部膨満・便秘に用いられる。刺激性はなく比較的長期の使用がしやすいとされる。",
+        "whenToChoose": "腹部の冷え・膨満感を伴う便秘で、刺激性下剤を避けたい場合に検討される。",
+        "cautions": ["まれに肝機能障害の報告"]
+      }
+    ],
+    "generalCautions": [
+      "大黄・甘草含有製剤の長期・高用量使用時の副作用に注意する",
+      "妊婦・器質的疾患の可能性がある患者への投与は慎重に判断する",
+      "効果不十分な場合は西洋薬の便秘薬との併用も検討する"
+    ],
+    "references": [
+      {
+        "title": "便通異常症診療ガイドライン2023―慢性便秘症(Mindsガイドラインライブラリ)",
+        "url": "https://minds.jcqhc.or.jp/summary/c00812/"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "漢方製剤の記載を含む診療ガイドライン(日本東洋医学会)",
+        "description": "各種診療ガイドラインにおける漢方製剤の位置づけを確認できる。",
+        "url": "http://www.jsom.or.jp/medical/ebm/cpg/index.html"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "偽アルドステロン症",
+        "url": "http://www.jsom.or.jp/medical/ebm/cpg/index.html"
+      }
+    ]
+  },
+  {
+    "category": "cold_sensitivity",
+    "categoryLabel": "冷え症",
+    "group": "general",
+    "overview": "冷え症は西洋医学では治療対象となりにくい症候だが、漢方医学では「気血水」の乱れとして捉え、血の巡りを改善する処方(当帰芍薬散・加味逍遙散等)が用いられる。体力・随伴症状に応じて使い分ける。",
+    "visualOverview": {
+      "kind": "scale",
+      "caption": "随伴症状(むくみ・のぼせ・便秘等)と体力によって処方を使い分ける。",
+      "segments": [
+        { "label": "虚証", "sublabel": "貧血傾向・むくみやすい", "colorClass": "bg-blue-300" },
+        { "label": "中間証〜実証", "sublabel": "のぼせを伴う・便秘傾向", "colorClass": "bg-red-300" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "冷えに対する当帰芍薬散・加味逍遙散のエビデンス",
+        "description": "日本東洋医学雑誌に掲載された臨床研究では、当帰芍薬散・加味逍遙散が冷えを主訴とする患者に対して有効性を示したことが報告されている。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "冷えの部位・随伴症状(むくみ・のぼせ・便秘・月経異常等)を確認する", "type": "assess" },
+      { "text": "甲状腺機能低下症等、冷えを来す器質的疾患を除外する", "type": "assess" },
+      { "text": "体力・貧血傾向の有無等、証を評価する", "type": "assess" },
+      { "text": "むくみ・貧血傾向が主体か、のぼせ・便秘傾向が主体かで処方を使い分ける", "type": "decide" },
+      { "text": "証と随伴症状に応じた処方を開始する", "type": "treat" },
+      { "text": "数週間単位で症状の変化を評価する", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "当帰芍薬散",
+        "reading": "とうきしゃくやくさん",
+        "brandNames": ["ツムラ(23)"],
+        "shoType": "虚証",
+        "keyConstituents": ["当帰", "芍薬", "川芎", "茯苓", "白朮", "沢瀉"],
+        "effect": "血を補い巡りを改善するとともに、水分代謝を整えるとされる。",
+        "whenToChoose": "体力虚弱でむくみやすく、貧血傾向のある冷え症で第一選択として検討されやすい。",
+        "cautions": ["消化器症状(胃もたれ等)", "著明な体力低下例では注意"]
+      },
+      {
+        "name": "加味逍遙散",
+        "reading": "かみしょうようさん",
+        "brandNames": ["ツムラ(24)"],
+        "shoType": "虚証",
+        "keyConstituents": ["当帰", "芍薬", "柴胡", "白朮", "茯苓", "山梔子", "牡丹皮", "甘草", "生姜", "薄荷"],
+        "effect": "血の巡りを改善するとともに、精神的な不安定さ・不眠等にも配慮した構成とされる。",
+        "whenToChoose": "冷えに加えてイライラ・不眠等の精神症状を伴う場合に検討される。",
+        "cautions": ["偽アルドステロン症(甘草)", "消化器症状"]
+      },
+      {
+        "name": "桂枝茯苓丸",
+        "reading": "けいしぶくりょうがん",
+        "brandNames": ["ツムラ(25)"],
+        "shoType": "実証",
+        "keyConstituents": ["桂皮", "茯苓", "牡丹皮", "桃仁", "芍薬"],
+        "effect": "血の滞り(瘀血)を改善するとされ、下半身の冷えとのぼせが同時に見られる場合に用いられる。",
+        "whenToChoose": "比較的体力があり、便秘傾向・のぼせを伴う冷え症で検討される。",
+        "cautions": ["妊娠中の使用は慎重に判断", "消化器症状"]
+      }
+    ],
+    "generalCautions": [
+      "冷えの背景に甲状腺機能低下症等の器質的疾患がないか確認する",
+      "効果判定は数週間単位で行う",
+      "甘草含有製剤では偽アルドステロン症に注意する"
+    ],
+    "references": [
+      {
+        "title": "当帰芍薬散および加味逍遙散が有効な冷えについての検討(日本東洋医学雑誌)",
+        "url": "https://www.jstage.jst.go.jp/article/kampomed/64/4/64_205/_pdf/-char/ja"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "漢方製剤の記載を含む診療ガイドライン(日本東洋医学会)",
+        "description": "各種診療ガイドラインにおける漢方製剤の位置づけを確認できる。",
+        "url": "http://www.jsom.or.jp/medical/ebm/cpg/index.html"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "瘀血",
+        "url": "https://www.jstage.jst.go.jp/article/kampomed/64/4/64_205/_pdf/-char/ja"
+      }
+    ]
+  },
+  {
+    "category": "common_cold",
+    "categoryLabel": "かぜ症候群",
+    "group": "infection",
+    "overview": "かぜ症候群に対する漢方治療は、発症からの経過(悪寒期か回復期か)と体力・発汗の有無によって処方を選択する。多くは対症療法として位置づけられ、細菌感染合併が疑われる場合は抗菌薬の適応を別途検討する。",
+    "visualOverview": {
+      "kind": "scale",
+      "caption": "発症からの経過(病期)と体力によって処方を使い分ける「随証治療」の考え方。",
+      "segments": [
+        { "label": "実証・初期", "sublabel": "悪寒強く発汗なし", "colorClass": "bg-red-400" },
+        { "label": "虚証・初期", "sublabel": "発汗あり体力低下", "colorClass": "bg-blue-300" },
+        { "label": "こじれた時期", "sublabel": "微熱遷延・食欲不振", "colorClass": "bg-amber-400" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "発症時期による使い分けの考え方",
+        "description": "悪寒が強く発汗がない初期には麻黄剤(葛根湯・麻黄湯)、発汗があり体力が低下している場合は桂枝湯、こじれて微熱が続く場合は小柴胡湯といったように、経過に応じて処方を変える「随証治療」の考え方が用いられる。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "発症からの経過(初期か、こじれた時期か)を確認する", "type": "assess" },
+      { "text": "発汗の有無・体力・随伴症状(頭痛・関節痛・咳嗽等)を確認する", "type": "assess" },
+      { "text": "細菌感染合併(肺炎・溶連菌性咽頭炎等)を示唆する所見がないか確認する", "type": "assess" },
+      { "text": "経過・証に応じた処方を選択する", "type": "treat" },
+      { "text": "咳嗽が主体で長引く場合は麦門冬湯等への切り替えを検討する", "type": "decide" },
+      { "text": "数日で改善しない場合や症状増悪時は再評価する", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "葛根湯",
+        "reading": "かっこんとう",
+        "brandNames": ["ツムラ(1)"],
+        "shoType": "実証",
+        "keyConstituents": ["葛根", "麻黄", "桂皮", "芍薬", "甘草", "生姜", "大棗"],
+        "effect": "体を温め発汗を促すことで、悪寒・頭痛・肩こりを伴う初期のかぜ症状を改善するとされる。",
+        "whenToChoose": "体力があり、発汗がなく悪寒・頭痛・肩こりを伴う初期のかぜで第一選択として検討されやすい。",
+        "cautions": ["麻黄含有により高齢者・心疾患患者・高血圧患者では不眠・動悸等に注意", "胃腸虚弱な人では悪心に注意"]
+      },
+      {
+        "name": "麻黄湯",
+        "reading": "まおうとう",
+        "brandNames": ["ツムラ(27)"],
+        "shoType": "実証",
+        "keyConstituents": ["麻黄", "桂皮", "杏仁", "甘草"],
+        "effect": "葛根湯より強く体を温め発汗を促すとされ、悪寒・関節痛・体の痛みが強い場合に用いられる。",
+        "whenToChoose": "体力があり、発汗がなく悪寒・関節痛が強い場合に検討される。インフルエンザ様の症状にも用いられることがある。",
+        "cautions": ["麻黄含有により高齢者・心疾患患者・高血圧患者では不眠・動悸等に注意"]
+      },
+      {
+        "name": "桂枝湯",
+        "reading": "けいしとう",
+        "brandNames": ["ツムラ(45)"],
+        "shoType": "虚証",
+        "keyConstituents": ["桂皮", "芍薬", "甘草", "生姜", "大棗"],
+        "effect": "麻黄を含まず、体力が低下し自然に発汗があるような初期のかぜに穏やかに作用するとされる。",
+        "whenToChoose": "体力が低下しており、既に発汗がある、または麻黄剤が使いにくい場合に検討される。",
+        "cautions": ["偽アルドステロン症(甘草)"]
+      },
+      {
+        "name": "小柴胡湯",
+        "reading": "しょうさいことう",
+        "brandNames": ["ツムラ(9)"],
+        "shoType": "中間証",
+        "keyConstituents": ["柴胡", "黄芩", "半夏", "人参", "甘草", "生姜", "大棗"],
+        "effect": "かぜがこじれて微熱・食欲不振・胸脇部の張り等が続く時期に用いられる。",
+        "whenToChoose": "発症から数日経過し、症状がこじれて遷延している場合に検討される。",
+        "cautions": ["間質性肺炎(頻度は低いが報告あり、特にインターフェロン製剤との併用は禁忌)", "偽アルドステロン症"]
+      },
+      {
+        "name": "麦門冬湯",
+        "reading": "ばくもんどうとう",
+        "brandNames": ["ツムラ(29)"],
+        "shoType": "虚証",
+        "keyConstituents": ["麦門冬", "半夏", "人参", "甘草", "粳米", "大棗"],
+        "effect": "気道を潤すことで、乾いた咳が続く症状を改善するとされる。",
+        "whenToChoose": "かぜの後に空咳が長引く場合に検討される。",
+        "cautions": ["偽アルドステロン症(甘草)"]
+      }
+    ],
+    "generalCautions": [
+      "麻黄含有製剤は高齢者・心疾患・高血圧患者では慎重投与とする",
+      "細菌感染合併が疑われる場合は抗菌薬の適応を別途検討する",
+      "甘草含有製剤の重複投与に注意する"
+    ],
+    "references": [
+      {
+        "title": "風邪に対する漢方薬の考え方,使い方(日本プライマリ・ケア連合学会)",
+        "url": "https://www.primarycare-japan.com/news-detail.php?nid=33"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "漢方製剤の記載を含む診療ガイドライン(日本東洋医学会)",
+        "description": "各種診療ガイドラインにおける漢方製剤の位置づけを確認できる。",
+        "url": "http://www.jsom.or.jp/medical/ebm/cpg/index.html"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "随証治療",
+        "url": "https://www.primarycare-japan.com/news-detail.php?nid=33"
+      }
+    ]
+  },
+  {
+    "category": "menopause",
+    "categoryLabel": "更年期障害",
+    "group": "gynecology",
+    "overview": "更年期障害には多彩な不定愁訴が伴うことが多く、婦人科三大処方(当帰芍薬散・加味逍遙散・桂枝茯苓丸)を中心に、体力・随伴症状に応じて使い分ける。",
+    "visualOverview": {
+      "kind": "scale",
+      "caption": "体力・随伴症状によって婦人科三大処方を使い分ける。",
+      "segments": [
+        { "label": "虚証", "sublabel": "むくみ・貧血傾向", "colorClass": "bg-blue-300" },
+        { "label": "中間証", "sublabel": "精神症状が目立つ", "colorClass": "bg-amber-300" },
+        { "label": "実証", "sublabel": "のぼせ・便秘・瘀血症状", "colorClass": "bg-red-300" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "婦人科三大処方の使い分け",
+        "description": "体力虚弱でむくみ・貧血傾向があれば当帰芍薬散、精神症状(イライラ・不眠等)が目立てば加味逍遙散、比較的体力があり瘀血症状(のぼせ・便秘・肩こり等)が目立てば桂枝茯苓丸、という使い分けが一般的とされる。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "更年期に関連する症状(のぼせ・発汗・イライラ・不眠・肩こり等)を確認する", "type": "assess" },
+      { "text": "器質的疾患(甲状腺疾患等)による症状でないかを除外する", "type": "assess" },
+      { "text": "体力・随伴症状(むくみ・貧血傾向、精神症状、瘀血症状)から証を評価する", "type": "assess" },
+      { "text": "証と随伴症状に応じて婦人科三大処方の中から検討する", "type": "treat" },
+      { "text": "効果不十分な場合はホルモン補充療法等、他の治療選択肢とあわせて婦人科医と相談する", "type": "decide" },
+      { "text": "数週間〜数か月単位で症状の変化を評価する", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "当帰芍薬散",
+        "reading": "とうきしゃくやくさん",
+        "brandNames": ["ツムラ(23)"],
+        "shoType": "虚証",
+        "keyConstituents": ["当帰", "芍薬", "川芎", "茯苓", "白朮", "沢瀉"],
+        "effect": "血を補い巡りを改善し、水分代謝も整えるとされる。",
+        "whenToChoose": "体力虚弱でむくみやすく、貧血傾向のある更年期症状に検討される。",
+        "cautions": ["消化器症状"]
+      },
+      {
+        "name": "加味逍遙散",
+        "reading": "かみしょうようさん",
+        "brandNames": ["ツムラ(24)"],
+        "shoType": "虚証",
+        "keyConstituents": ["当帰", "芍薬", "柴胡", "白朮", "茯苓", "山梔子", "牡丹皮", "甘草", "生姜", "薄荷"],
+        "effect": "血の巡りを改善するとともに、精神的な不安定さに配慮した構成とされる。",
+        "whenToChoose": "イライラ・不眠・不安感等の精神症状が目立つ更年期症状に検討される。",
+        "cautions": ["偽アルドステロン症(甘草)", "消化器症状"]
+      },
+      {
+        "name": "桂枝茯苓丸",
+        "reading": "けいしぶくりょうがん",
+        "brandNames": ["ツムラ(25)"],
+        "shoType": "実証",
+        "keyConstituents": ["桂皮", "茯苓", "牡丹皮", "桃仁", "芍薬"],
+        "effect": "血の滞り(瘀血)を改善するとされ、のぼせ・肩こり・便秘傾向を伴う場合に用いられる。",
+        "whenToChoose": "比較的体力があり、のぼせ・便秘傾向・肩こり等の瘀血症状が目立つ更年期症状で検討される。",
+        "cautions": ["妊娠中の使用は慎重に判断", "消化器症状"]
+      }
+    ],
+    "generalCautions": [
+      "症状の背景に甲状腺疾患等がないか確認する",
+      "ホルモン補充療法等、他の治療選択肢と合わせて婦人科医と相談する",
+      "甘草含有製剤では偽アルドステロン症に注意する"
+    ],
+    "references": [
+      {
+        "title": "更年期障害に対する漢方療法(日本産科婦人科医会)",
+        "url": "https://www.jaog.or.jp/note/%EF%BC%883%EF%BC%89%E6%9B%B4%E5%B9%B4%E6%9C%9F%E9%9A%9C%E5%AE%B3%E3%81%AB%E5%AF%BE%E3%81%99%E3%82%8B%E6%BC%A2%E6%96%B9%E7%99%82%E6%B3%95/"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "漢方製剤の記載を含む診療ガイドライン(日本東洋医学会)",
+        "description": "各種診療ガイドラインにおける漢方製剤の位置づけを確認できる。",
+        "url": "http://www.jsom.or.jp/medical/ebm/cpg/index.html"
+      }
+    ],
+    "glossaryTerms": [
+      {
+        "term": "瘀血",
+        "url": "https://www.jaog.or.jp/note/%EF%BC%883%EF%BC%89%E6%9B%B4%E5%B9%B4%E6%9C%9F%E9%9A%9C%E5%AE%B3%E3%81%AB%E5%AF%BE%E3%81%99%E3%82%8B%E6%BC%A2%E6%96%B9%E7%99%82%E6%B3%95/"
+      }
+    ]
+  },
+  {
+    "category": "postop_ileus",
+    "categoryLabel": "術後腸管運動・イレウス予防",
+    "group": "inpatient_adjunct",
+    "overview": "大建中湯は消化管運動の促進・腸管血流増加等の作用が確認されており、術後腸管麻痺・癒着性イレウスの予防を目的に周術期で広く併用される代表的な漢方薬である。",
+    "visualOverview": {
+      "kind": "steps",
+      "caption": "周術期の腸管運動促進目的での予防投与と、症状出現時の対応をあわせて考える。",
+      "segments": [
+        { "label": "周術期", "sublabel": "腸管運動促進目的で開始", "colorClass": "bg-teal-300" },
+        { "label": "症状出現時", "sublabel": "腹部膨満・排ガス減少時に継続/追加", "colorClass": "bg-teal-600" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "大建中湯のエビデンス",
+        "description": "日本東洋医学会の漢方治療エビデンスレポートでは、大建中湯について腸管運動亢進作用・腸管血流増加作用等が報告されており、術後の腸管蠕動促進・癒着性イレウスの予防目的での使用が広く行われている。長期投与によるイレウス再発予防については明確なエビデンスが確立しているわけではない。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "手術部位・術式からイレウス・腸管麻痺のリスクを評価する", "type": "assess" },
+      { "text": "腹部症状(腹部膨満・排ガス排便の有無・腸蠕動音)を確認する", "type": "assess" },
+      { "text": "周術期の腸管運動促進目的で大建中湯の投与を検討する", "type": "decide" },
+      { "text": "内服(経管)可能なタイミングで大建中湯を開始する", "type": "treat" },
+      { "text": "腹部症状・排ガス排便の状況を継続的に評価する", "type": "monitor" },
+      { "text": "症状が改善しない場合は外科的評価・他の対応を検討する", "type": "decide" }
+    ],
+    "drugChoices": [
+      {
+        "name": "大建中湯",
+        "reading": "だいけんちゅうとう",
+        "brandNames": ["ツムラ(100)"],
+        "shoType": "虚証",
+        "keyConstituents": ["人参", "乾姜", "山椒", "膠飴"],
+        "effect": "腸管運動亢進作用・腸管血流増加作用・消化管ホルモン分泌促進作用等が報告されており、腹部を温めて腸管の動きを助けるとされる。",
+        "whenToChoose": "術後の腸管運動促進・癒着性イレウスの予防目的で、周術期に広く併用検討される。",
+        "cautions": ["まれに肝機能障害の報告"]
+      }
+    ],
+    "generalCautions": [
+      "長期投与によるイレウス再発予防効果については明確なエビデンスが確立しているわけではない点に留意する",
+      "腸閉塞が疑われる急性期には外科的評価を優先する",
+      "内服・経管投与のタイミングは手術・消化管の状態に応じて判断する"
+    ],
+    "references": [
+      {
+        "title": "漢方治療エビデンスレポート(EKAT)2022 Appendix 2023(日本東洋医学会)",
+        "url": "https://www.jsom.or.jp/medical/ebm/er/pdf/EKATJ_%20Appedix_2023.pdf"
+      }
+    ],
+    "learnMoreLinks": [
+      {
+        "title": "イレウス(MSDマニュアル プロフェッショナル版)",
+        "description": "イレウス・腸閉塞の病態・評価の進め方を詳しく解説。",
+        "url": "https://www.msdmanuals.com/ja-jp/professional/01-%E6%B6%88%E5%8C%96%E7%AE%A1%E7%96%BE%E6%82%A3/%E6%80%A5%E6%80%A7%E8%85%B9%E7%97%87%E3%81%A8%E6%B6%88%E5%8C%96%E5%99%A8%E5%A4%96%E7%A7%91/%E3%82%A4%E3%83%AC%E3%82%A6%E3%82%B9"
+      }
+    ],
+    "glossaryTerms": []
+  },
+  {
+    "category": "muscle_cramp",
+    "categoryLabel": "こむら返り(筋痙攣)",
+    "group": "inpatient_adjunct",
+    "overview": "こむら返り(有痛性筋痙攣)には芍薬甘草湯が即効性のある選択肢として広く用いられ、頓用での使用が中心となる。肝硬変や透析患者、周術期等でも比較的用いられやすいが、甘草含有量が多いため長期・頻回使用には注意を要する。",
+    "visualOverview": {
+      "kind": "scale",
+      "caption": "頓用での使用を基本とし、頻回・長期使用時は甘草含有量に注意する。",
+      "segments": [
+        { "label": "頓用", "sublabel": "症状出現時に単回投与", "colorClass": "bg-green-300" },
+        { "label": "頻回・長期使用時", "sublabel": "甘草量に注意", "colorClass": "bg-red-400" }
+      ]
+    },
+    "managementPoints": [
+      {
+        "title": "芍薬甘草湯のエビデンス",
+        "description": "筋痙攣に対する複数のランダム化比較試験のシステマティックレビューが報告されており、肝硬変患者や腰部脊柱管狭窄症患者のこむら返りに対して有効性を示す傾向が報告されている。効果発現は速やかとされる。"
+      }
+    ],
+    "selectionFlow": [
+      { "text": "筋痙攣の原因(電解質異常・薬剤性・脱水等)を確認する", "type": "assess" },
+      { "text": "頻度・持続時間・誘因(透析・運動後・夜間等)を確認する", "type": "assess" },
+      { "text": "頓用での使用か、頻回に生じる場合の予防的使用かを判断する", "type": "decide" },
+      { "text": "芍薬甘草湯を症状出現時に頓用で使用する", "type": "treat" },
+      { "text": "使用頻度が高い場合は甘草の総投与量・電解質(カリウム)を確認する", "type": "monitor" }
+    ],
+    "drugChoices": [
+      {
+        "name": "芍薬甘草湯",
+        "reading": "しゃくやくかんぞうとう",
+        "brandNames": ["ツムラ(68)"],
+        "shoType": "実証",
+        "keyConstituents": ["芍薬", "甘草"],
+        "effect": "芍薬・甘草の組み合わせによる筋弛緩作用により、有痛性筋痙攣を速やかに緩和するとされる。効果発現は数分程度とされる。",
+        "whenToChoose": "こむら返り等の有痛性筋痙攣が生じた際に、頓用で第一選択として検討されやすい。",
+        "cautions": ["甘草含有量が多く、頻回・長期使用で偽アルドステロン症(低カリウム血症・血圧上昇・浮腫)のリスクが高い", "うっ血性心不全患者では慎重投与"]
+      }
+    ],
+    "generalCautions": [
+      "甘草含有量が多い処方のため、頻回・長期の使用は避け頓用を基本とする",
+      "電解質異常等、筋痙攣の原因となる背景疾患の評価を並行して行う",
+      "うっ血性心不全患者・高齢者では偽アルドステロン症のリスクに特に注意する"
+    ],
+    "references": [
+      {
+        "title": "漢方治療エビデンスレポート(EKAT)2022 Appendix 2023(日本東洋医学会)",
+        "url": "https://www.jsom.or.jp/medical/ebm/er/pdf/EKATJ_%20Appedix_2023.pdf"
+      }
+    ],
+    "learnMoreLinks": [],
+    "glossaryTerms": [
+      {
+        "term": "偽アルドステロン症",
+        "url": "https://www.jsom.or.jp/medical/ebm/er/pdf/EKATJ_%20Appedix_2023.pdf"
+      }
+    ]
+  }
+]

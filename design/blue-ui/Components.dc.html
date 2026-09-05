@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+  <style>
+    *{box-sizing:border-box;}
+    body{margin:0;background:#0a5eb0;color:#fff;
+      font-family:'Geist',system-ui,-apple-system,'Hiragino Sans','Hiragino Kaku Gothic ProN',Meiryo,sans-serif;
+      -webkit-font-smoothing:antialiased;}
+    a{color:#fff;}
+    .wrap{padding:24px 26px 30px;min-height:1400px;}
+    .head{display:flex;align-items:baseline;gap:10px;border-bottom:1px solid rgba(255,255,255,0.16);
+      padding-bottom:14px;margin-bottom:20px;}
+    .head b{font-weight:700;font-size:26px;letter-spacing:0.04em;}
+    .head i{font-style:normal;font-weight:600;font-size:12px;letter-spacing:0.24em;color:rgba(255,255,255,0.7);}
+    .head span{margin-left:auto;font-size:11px;color:rgba(255,255,255,0.6);}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+    .card{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.28);
+      border-radius:14px;padding:16px;}
+    .card h3{margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:0.02em;
+      color:rgba(255,255,255,0.9);text-transform:uppercase;}
+    .swatches{display:flex;flex-wrap:wrap;gap:8px;}
+    .sw{width:96px;border-radius:9px;overflow:hidden;border:1px solid rgba(255,255,255,0.25);}
+    .sw .cap{background:rgba(0,0,0,0.18);font-size:9px;padding:3px 6px;color:#fff;}
+    .sw .box{height:40px;}
+    .row{display:flex;flex-wrap:wrap;gap:9px;align-items:center;}
+    .btn-w{border:0;border-radius:9px;background:#fff;color:#0a5eb0;font-weight:700;font-size:12.5px;padding:9px 16px;}
+    .btn-b{border:0;border-radius:9px;background:#0a5eb0;color:#fff;font-weight:700;font-size:12.5px;
+      padding:9px 16px;box-shadow:0 0 0 1px rgba(255,255,255,0.25);}
+    .btn-frost{border:1px solid rgba(255,255,255,0.55);border-radius:9px;background:rgba(255,255,255,0.12);
+      color:#fff;font-weight:600;font-size:12.5px;padding:9px 16px;}
+    .btn-dis{border:0;border-radius:9px;background:#cbd5e1;color:#fff;font-weight:700;font-size:12.5px;padding:9px 16px;}
+    .inp-sheet{width:100%;border:1px solid #cbd5e1;border-radius:9px;background:#fff;padding:9px 11px;
+      font:inherit;font-size:12.5px;color:#0f172a;}
+    .inp-frost{width:100%;border:1px solid rgba(255,255,255,0.45);border-radius:9px;
+      background:rgba(255,255,255,0.92);padding:9px 11px;font:inherit;font-size:12.5px;color:#0f172a;}
+    .tab{padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:600;}
+    .tab.on{background:#fff;color:#0a5eb0;}
+    .tab.off{color:rgba(255,255,255,0.7);border:1px solid transparent;}
+    .sheet{background:#fff;color:#0f172a;border-radius:12px;padding:13px;box-shadow:0 10px 22px rgba(3,34,68,0.3);}
+    .sheet .st{margin:0 0 6px;font-size:12px;font-weight:700;}
+    .sheet p{margin:0;font-size:11px;color:#475569;line-height:1.55;}
+    .frost-demo{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.55);
+      border-radius:12px;padding:13px;}
+    .frost-demo p{margin:0;font-size:11px;line-height:1.55;color:rgba(255,255,255,0.92);}
+    .badges{display:flex;flex-wrap:wrap;gap:7px;}
+    .b{border-radius:999px;padding:2px 10px;font-size:10.5px;font-weight:700;}
+    .listrow{background:#fff;border-radius:10px;overflow:hidden;}
+    .listrow div{display:flex;justify-content:space-between;padding:10px 12px;border-bottom:1px solid #eef2f7;
+      font-size:12px;color:#0f172a;font-weight:600;}
+    .listrow div:last-child{border-bottom:0;}
+    .listrow span{color:#94a3b8;font-weight:400;font-size:10px;}
+    .flow{position:relative;}
+    .fs{position:relative;display:flex;gap:9px;padding-bottom:10px;}
+    .fs:last-child{padding-bottom:0;}
+    .fl{position:absolute;left:12px;top:26px;bottom:0;width:1px;background:#bfdbfe;}
+    .fn{width:25px;height:25px;border-radius:50%;background:#0a5eb0;color:#fff;font-weight:700;
+      font-size:11px;display:flex;align-items:center;justify-content:center;position:relative;z-index:2;}
+    .fb{flex:1;border:1px solid #e2e8f0;background:#f8fafc;border-radius:8px;padding:7px 9px;
+      font-size:10.5px;color:#1e293b;}
+    .redflag{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:10px 12px;}
+    .redflag b{font-size:11.5px;color:#b91c1c;}
+    .redflag p{margin:3px 0 0;font-size:10px;color:#b91c1c;}
+    .note{margin-top:6px;font-size:10px;color:rgba(255,255,255,0.6);line-height:1.5;}
+  </style>
+</helmet>
+
+<div class="wrap">
+  <div class="head">
+    <b>ER</b><i>ASSISTANT</i>
+    <span>ブルー基調 UI — デザインシステム</span>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Surfaces & color</h3>
+      <div class="swatches">
+        <div class="sw"><div class="box" style="background:#0a5eb0"></div><div class="cap">#0a5eb0 背景</div></div>
+        <div class="sw"><div class="box" style="background:#0a52a0"></div><div class="cap">#0a52a0 押下</div></div>
+        <div class="sw"><div class="box" style="background:rgba(255,255,255,0.12)"></div><div class="cap">frost 12%</div></div>
+        <div class="sw"><div class="box" style="background:#ffffff"></div><div class="cap">#fff シート</div></div>
+      </div>
+      <div class="swatches" style="margin-top:8px">
+        <div class="sw"><div class="box" style="background:#dc2626"></div><div class="cap">red 危険</div></div>
+        <div class="sw"><div class="box" style="background:#d97706"></div><div class="cap">amber 注意</div></div>
+        <div class="sw"><div class="box" style="background:#0d9488"></div><div class="cap">teal 検査</div></div>
+        <div class="sw"><div class="box" style="background:#2563eb"></div><div class="cap">blue 要点</div></div>
+        <div class="sw"><div class="box" style="background:#9333ea"></div><div class="cap">purple AI</div></div>
+      </div>
+      <p class="note">臨床データ（表・鑑別・ドリルダウン）は #fff シート上に置き、コントラストと可読性を確保する。装飾・見出し・注意喚起はブルー面で行う。</p>
+    </div>
+
+    <div class="card">
+      <h3>App bar & tabs</h3>
+      <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.18);padding-bottom:10px;margin-bottom:11px">
+        <div style="display:flex;align-items:baseline;gap:7px"><b style="font-weight:700;font-size:17px;letter-spacing:0.03em">ER</b><i style="font-style:normal;font-weight:600;font-size:9px;letter-spacing:0.22em;color:rgba(255,255,255,0.68)">ASSISTANT</i></div>
+        <div style="width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.4)"></div>
+      </div>
+      <div class="row">
+        <span class="tab on">救急外来</span>
+        <span class="tab off">外来</span>
+        <span class="tab off">入院</span>
+        <span class="tab off">漢方</span>
+      </div>
+      <p class="note">選択中 = 白ピル + ブルー文字。未選択 = 白70%文字。バーは背景と同色 + 下1pxのヘアライン。</p>
+    </div>
+
+    <div class="card">
+      <h3>Buttons</h3>
+      <div class="row" style="margin-bottom:9px">
+        <button class="btn-w">生成する（青面）</button>
+        <button class="btn-frost">セカンダリ</button>
+      </div>
+      <div class="row">
+        <button class="btn-b">生成する（白シート上）</button>
+        <button class="btn-dis">無効</button>
+      </div>
+      <p class="note">青面ではプライマリ=白ベタ。白シート内フォームのプライマリ=#0a5eb0 ベタ。</p>
+    </div>
+
+    <div class="card">
+      <h3>Inputs</h3>
+      <label style="display:block;font-size:11px;font-weight:600;color:rgba(255,255,255,0.85);margin-bottom:4px">白シート上</label>
+      <input class="inp-sheet" placeholder="例: 胸痛" style="margin-bottom:10px">
+      <label style="display:block;font-size:11px;font-weight:600;color:rgba(255,255,255,0.85);margin-bottom:4px">青面上（検索など）</label>
+      <input class="inp-frost" placeholder="例: 高血圧、感冒、不眠...">
+      <p class="note">フォーカスリング: rgba(10,94,176,0.16) 3px（白シート）／ 白ボーダー（青面）。</p>
+    </div>
+
+    <div class="card">
+      <h3>Frost card ↔ White sheet</h3>
+      <div class="frost-demo" style="margin-bottom:10px">
+        <p><b>すりガラス</b>: 免責・補足・空状態・ロールなど「読むだけ」の要素。青面に溶ける。</p>
+      </div>
+      <div class="sheet">
+        <p class="st">白シート</p>
+        <p>フォーム・鑑別リスト・薬剤カード・表など、精読・操作する臨床コンテンツ。影で浮かせる。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Badges</h3>
+      <div class="badges" style="margin-bottom:8px">
+        <span class="b" style="background:#fee2e2;color:#991b1b">可能性: 高</span>
+        <span class="b" style="background:#fef3c7;color:#92400e">可能性: 中</span>
+        <span class="b" style="background:#f1f5f9;color:#475569">可能性: 低</span>
+      </div>
+      <div class="badges" style="margin-bottom:8px">
+        <span class="b" style="background:#9333ea;color:#fff">AI生成・未検証</span>
+        <span class="b" style="background:#dbeafe;color:#1e40af">Ca拮抗薬</span>
+      </div>
+      <div class="badges">
+        <span class="b" style="background:#fee2e2;color:#991b1b">証: 実証</span>
+        <span class="b" style="background:#fef3c7;color:#92400e">証: 中間証</span>
+        <span class="b" style="background:#dbeafe;color:#1e40af">証: 虚証</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>List row</h3>
+      <div class="listrow">
+        <div>高血圧 <span>詳しく見る →</span></div>
+        <div>2型糖尿病 <span>詳しく見る →</span></div>
+        <div>脂質異常症 <span>詳しく見る →</span></div>
+      </div>
+      <p class="note">白シートを角丸で切り抜き、行間は #eef2f7 のヘアライン。hover で #f5f8fc。</p>
+    </div>
+
+    <div class="card">
+      <h3>Numbered flow / Red flag</h3>
+      <div class="flow" style="margin-bottom:10px">
+        <div class="fs"><span class="fl"></span><span class="fn">1</span><div class="fb">初期対応 — MONA適応の評価、モニター装着</div></div>
+        <div class="fs"><span class="fn">2</span><div class="fb">必要な検査 — 心電図の経時的再検、トロポニン</div></div>
+      </div>
+      <div class="redflag">
+        <b>⚠ 持続する胸部圧迫感 + 冷汗</b>
+        <p>示唆される疾患: 急性冠症候群、大動脈解離</p>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"$preview":{"width":900,"height":1400}}'>
+class Component extends DCLogic {}
+</script>
+</body>
+</html>

@@ -9,6 +9,7 @@ import {
   getGenerateFn,
 } from "@/lib/providers";
 import { checkRateLimit, getClientKey } from "@/lib/rate-limit";
+import { requireUser } from "@/lib/require-auth";
 import { validatePatientInput } from "@/lib/validate";
 import type { AssistOutput, PatientInput } from "@/lib/types";
 
@@ -16,6 +17,9 @@ const MAX_BODY_BYTES = 20_000; // フォーム入力を大きく超える異常�
 
 export async function POST(req: NextRequest) {
   const startedAt = Date.now();
+
+  const unauthorized = await requireUser();
+  if (unauthorized) return unauthorized;
 
   // レート制限(APIコスト濫用・DoS対策)
   const clientKey = getClientKey(req.headers);

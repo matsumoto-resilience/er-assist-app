@@ -21,3 +21,107 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* --- 起動スプラッシュ画面のアニメーション --- */
+
+/* 文字が「光りながら現れる」: ぼやけた強い発光から、くっきりした淡い発光へ収束する */
+@keyframes splash-glow-in {
+  0% {
+    opacity: 0;
+    filter: blur(14px);
+    text-shadow:
+      0 0 26px rgba(255, 255, 255, 0.95),
+      0 0 52px rgba(255, 255, 255, 0.75);
+  }
+  55% {
+    opacity: 1;
+    filter: blur(0);
+    text-shadow:
+      0 0 20px rgba(255, 255, 255, 0.9),
+      0 0 40px rgba(255, 255, 255, 0.6);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  }
+}
+
+.splash-glow {
+  opacity: 0;
+  animation: splash-glow-in 1.7s ease-out forwards;
+}
+
+/* ロゴの上を白い光沢が一度キラッと流れる(スプラッシュの ER / ASSISTANT)。
+   下地の白文字はそのままに、::after で同じ文字を重ねて斜めのハイライト帯だけを
+   通過させる。数秒おきに繰り返す。 */
+.splash-shine {
+  position: relative;
+  display: inline-block;
+}
+
+.splash-shine::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: transparent;
+  text-shadow: none;
+  background-image: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(10, 94, 176, 0.55) 46%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(10, 94, 176, 0.55) 54%,
+    transparent 60%
+  );
+  background-repeat: no-repeat;
+  background-size: 260% 100%;
+  background-position: 190% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 9px rgba(255, 255, 255, 0.9));
+  animation: splash-shine-sweep 5s ease-in-out 2.4s infinite;
+}
+
+@keyframes splash-shine-sweep {
+  0% {
+    background-position: 190% 0;
+  }
+  22% {
+    background-position: -90% 0;
+  }
+  100% {
+    background-position: -90% 0;
+  }
+}
+
+@keyframes splash-frame-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.splash-frame {
+  opacity: 0;
+  animation: splash-frame-in 0.9s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-glow,
+  .splash-frame {
+    animation-duration: 0.01ms;
+    animation-delay: 0ms !important;
+    opacity: 1;
+  }
+
+  .splash-shine::after {
+    content: none;
+  }
+}
